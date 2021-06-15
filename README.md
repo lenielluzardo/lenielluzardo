@@ -13,7 +13,4 @@
 print('Hello PHP World');
 Console.WriteLine("Hello C# World");
 console.log("Hello  JS World"); 
-´´´´
-print('Hello PHP World');
-Console.WriteLine("Hello C# World");
-console.log("Hello  JS World");
+
