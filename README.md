@@ -32,7 +32,7 @@ Enjoy, take a look and reach me out if there's something in which I could help y
 
 ### Reach me on:
 <div>
-<a href="https://www.linkedin/in/lenielluzardo">
+<a href="https://www.linkedin.com/in/lenielluzardo">
 <img src="https://res.cloudinary.com/du3l28sfg/image/upload/v1624493883/dev/github-profile/linkedin2.png" />  
 </a>
  <a href="https://www.twitter.com/lenielluzardo">
