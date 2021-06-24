@@ -13,15 +13,20 @@ With a military background, I have experience on leadership, people management a
 - 😄 Pronouns: Él, Tú, Mi pana ...
 - ⚡ Fun fact: None to be honest, just another person looking for a better future ...
 
-# These are some of the technologies that I like to work with...
-## [HTML](https://res.cloudinary.com/du3l28sfg/image/upload/v1624493883/dev/github-profile/html_jhtvs6.png)
-## [CSS#](https://res.cloudinary.com/du3l28sfg/image/upload/v1624497115/dev/github-profile/css.png)
-## [JS](https://res.cloudinary.com/du3l28sfg/image/upload/v1624493882/dev/github-profile/js_mpmb6q.png)
-## [PHP](https://res.cloudinary.com/du3l28sfg/image/upload/v1624493882/dev/github-profile/php_ojnv9i.png)
-## [Docker](https://res.cloudinary.com/du3l28sfg/image/upload/v1624497115/dev/github-profile/docker.png)  
-## [Python](https://res.cloudinary.com/du3l28sfg/image/upload/v1624497115/dev/github-profile/python.png)  
+## These are some of the technologies that I like to work with...
+### HTML ![HTML](https://res.cloudinary.com/du3l28sfg/image/upload/v1624493883/dev/github-profile/html.png)
+### CSS ![CSS#](https://res.cloudinary.com/du3l28sfg/image/upload/v1624497115/dev/github-profile/css.png)
+### JavaScript ![JS](https://res.cloudinary.com/du3l28sfg/image/upload/v1624493882/dev/github-profile/javascript.png)
+### PHP![PHP](https://res.cloudinary.com/du3l28sfg/image/upload/v1624493882/dev/github-profile/php.png)
+### Docker![Docker](https://res.cloudinary.com/du3l28sfg/image/upload/v1624497115/dev/github-profile/docker.png)
+### Python![Python](https://res.cloudinary.com/du3l28sfg/image/upload/v1624497115/dev/github-profile/python.png)
+### Python![Python](https://res.cloudinary.com/du3l28sfg/image/upload/v1624497115/dev/github-profile/python.png)
+### Python![Python](https://res.cloudinary.com/du3l28sfg/image/upload/v1624497115/dev/github-profile/python.png)
+### Python![Python](https://res.cloudinary.com/du3l28sfg/image/upload/v1624497115/dev/github-profile/python.png)
+### Python![Python](https://res.cloudinary.com/du3l28sfg/image/upload/v1624497115/dev/github-profile/python.png)
 Always, I'll be working on something, maybe sometimes related to software and other times to art. 
 
 ### So, feel free to reach me out on other channels...
 ![Behance](https://res.cloudinary.com/du3l28sfg/image/upload/v1624497113/dev/github-profile/behance.png)
 ![]()
+https://github.com/lenielluzardo/lluzardocom
