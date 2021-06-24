@@ -1,32 +1,18 @@
+
 ## Hello there! 👋 / Hola tú 😉..
-Thank you for interesting in my profile. Here you will find information about my activity as a software developer (and other things too).  
-I started in IT on January, 2019 and since then, I'd have the opportunity to work on several projects, each of those with different technologies (e.g. from Dekstop Applications whit WPF to Web Api with Node.js).  
-With a military background, I have experience on leadership, people management and operations, whose I translate to the software development life cycle.
+Thank you for interesting in my profile. Here you will find information about my activity as a software developer (maybe as other things too).  
+Enjoy, take a look and reach me out if there's something in which I could help you.  
 
-### Something that I want to share with you...
-- 🔭 I’m permanently working on my own cms to see where it can take me.  But do other fun stuffs too...
-- 🌱 I’m currently learning cloud computing and cybersecurity...
-- 👯 I’m looking to collaborate on something exciting related to cybersecurity  ...
-- 🤔 I’m looking for help with a lot of things, just take a look ...
-- 💬 Ask me about anything, I'm always open, reach me out on social ...
-- 📫 How to reach me: contact@lenielluzardo.com ...
-- 😄 Pronouns: Él, Tú, Mi pana ...
-- ⚡ Fun fact: None to be honest, just another person looking for a better future ...
+#### Please, consider the following:
 
-## These are some of the technologies that I like to work with...
-### HTML ![HTML](https://res.cloudinary.com/du3l28sfg/image/upload/v1624493883/dev/github-profile/html.png)
-### CSS ![CSS#](https://res.cloudinary.com/du3l28sfg/image/upload/v1624497115/dev/github-profile/css.png)
-### JavaScript ![JS](https://res.cloudinary.com/du3l28sfg/image/upload/v1624493882/dev/github-profile/javascript.png)
-### PHP![PHP](https://res.cloudinary.com/du3l28sfg/image/upload/v1624493882/dev/github-profile/php.png)
-### Docker![Docker](https://res.cloudinary.com/du3l28sfg/image/upload/v1624497115/dev/github-profile/docker.png)
-### Python![Python](https://res.cloudinary.com/du3l28sfg/image/upload/v1624497115/dev/github-profile/python.png)
-### Python![Python](https://res.cloudinary.com/du3l28sfg/image/upload/v1624497115/dev/github-profile/python.png)
-### Python![Python](https://res.cloudinary.com/du3l28sfg/image/upload/v1624497115/dev/github-profile/python.png)
-### Python![Python](https://res.cloudinary.com/du3l28sfg/image/upload/v1624497115/dev/github-profile/python.png)
-### Python![Python](https://res.cloudinary.com/du3l28sfg/image/upload/v1624497115/dev/github-profile/python.png)
-Always, I'll be working on something, maybe sometimes related to software and other times to art. 
+- *I’m currently learning cloud computing and cybersecurity and looking to collaborate on something exciting.*
+- *I’m currently learning cloud computing and cybersecurity and looking to *
+---
+### Technology Stack:
+![HTML](https://res.cloudinary.com/du3l28sfg/image/upload/v1624493883/dev/github-profile/html.png)  ![CSS#](https://res.cloudinary.com/du3l28sfg/image/upload/v1624497115/dev/github-profile/css.png)  ![JS](https://res.cloudinary.com/du3l28sfg/image/upload/v1624493882/dev/github-profile/javascript.png) ![PHP](https://res.cloudinary.com/du3l28sfg/image/upload/v1624493882/dev/github-profile/php.png)  ![Docker](https://res.cloudinary.com/du3l28sfg/image/upload/v1624497115/dev/github-profile/docker.png)  ![Python](https://res.cloudinary.com/du3l28sfg/image/upload/v1624497115/dev/github-profile/python.png)  
 
-### So, feel free to reach me out on other channels...
+### Reach me on:
 ![Behance](https://res.cloudinary.com/du3l28sfg/image/upload/v1624497113/dev/github-profile/behance.png)
-![]()
-https://github.com/lenielluzardo/lluzardocom
+![twitter](https://res.cloudinary.com/du3l28sfg/image/upload/v1624497113/dev/github-profile/twitter.png)
+![instagram](https://res.cloudinary.com/du3l28sfg/image/upload/v1624497113/dev/github-profile/instragram.png)
+
