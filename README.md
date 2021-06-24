@@ -7,6 +7,7 @@ Enjoy, take a look and reach me out if there's something in which I could help y
 - **
 ---
 ### Technologies used:
+<div>
 <img src="https://res.cloudinary.com/du3l28sfg/image/upload/v1624493883/dev/github-profile/html.png" />
 <img src="https://res.cloudinary.com/du3l28sfg/image/upload/v1624493883/dev/github-profile/css.png" />
 <img src="https://res.cloudinary.com/du3l28sfg/image/upload/v1624493883/dev/github-profile/sass.png" />
@@ -20,7 +21,7 @@ Enjoy, take a look and reach me out if there's something in which I could help y
 <img src="https://res.cloudinary.com/du3l28sfg/image/upload/v1624493883/dev/github-profile/docker.png" />
 <img src="https://res.cloudinary.com/du3l28sfg/image/upload/v1624493883/dev/github-profile/nodejs.png" />
 <img src="https://res.cloudinary.com/du3l28sfg/image/upload/v1624493883/dev/github-profile/apache.png" />
-
+</div>
 * ![CSS](https://res.cloudinary.com/du3l28sfg/image/upload/v1624497115/dev/github-profile/css.png)![Sass](https://res.cloudinary.com/du3l28sfg/image/upload/v1624497115/dev/github-profile/sass.png)
 
 * ![JS](https://res.cloudinary.com/du3l28sfg/image/upload/v1624493882/dev/github-profile/javascript.png)![Jquery](https://res.cloudinary.com/du3l28sfg/image/upload/v1624497115/dev/github-profile/jquery.png)![Vuejs](https://res.cloudinary.com/du3l28sfg/image/upload/v1624497115/dev/github-profile/vuejs.png)![React](https://res.cloudinary.com/du3l28sfg/image/upload/v1624497115/dev/github-profile/react.png)
