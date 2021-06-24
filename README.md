@@ -1,21 +1,10 @@
-# Hello there! 👋 / Hola tú 😉..
+## Hello there! 👋 / Hola tú 😉..
 Thank you for interesting in my profile. Here you will find information about my activity as a software developer (and other things too).
-I started in IT in January 2019 and from since then, the path had everything you can imagine and from what I saw, there's still a long way to walk.
+I started in IT on January, 2019 and since then, I'd have the opportunity to work on several projects, each of those with different technologies (e.g. from Dekstop Applications whit WPF to Web Api with Node.js).  
 
-Always, I'll be working on something, maybe sometimes related to software and other times to art. 
+With a military background, I have experience on leadership, people management and operations, whose I translate to the software development life cycle.
 
-# So, feel free to reach me out on other channels...
-
-
-
-# These are some of the technologies that I like to work with...
-![HTML](https://res.cloudinary.com/du3l28sfg/image/upload/v1624493883/dev/github-profile/html_jhtvs6.png) # HTML5
-![CSS](https://res.cloudinary.com/du3l28sfg/image/upload/v1624493882/dev/github-profile/css_kxioof.png) # CSS3
-![JS](https://res.cloudinary.com/du3l28sfg/image/upload/v1624493882/dev/github-profile/js_mpmb6q.png) # Javascript
-![PHP](https://res.cloudinary.com/du3l28sfg/image/upload/v1624493882/dev/github-profile/php_ojnv9i.png) # PHP
-
-### Hi there 👋 / Hola tú 😉
-
+### Something that I want to share with you...
 - 🔭 I’m permanently working on my own cms to see where it can take me.  But do other fun stuffs too...
 - 🌱 I’m currently learning cloud computing and cybersecurity...
 - 👯 I’m looking to collaborate on something exciting related to cybersecurity  ...
@@ -25,8 +14,14 @@ Always, I'll be working on something, maybe sometimes related to software and ot
 - 😄 Pronouns: Él, Tú, Mi pana ...
 - ⚡ Fun fact: None to be honest, just another person looking for a better future ...
 
-```
-print('Hello PHP World');
-Console.WriteLine("Hello C# World");
-console.log("Hello  JS World"); 
 
+
+# These are some of the technologies that I like to work with...
+![HTML](https://res.cloudinary.com/du3l28sfg/image/upload/v1624493883/dev/github-profile/html_jhtvs6.png) # HTML5
+![CSS](https://res.cloudinary.com/du3l28sfg/image/upload/v1624493882/dev/github-profile/css_kxioof.png) # CSS3
+![JS](https://res.cloudinary.com/du3l28sfg/image/upload/v1624493882/dev/github-profile/js_mpmb6q.png) # Javascript
+![PHP](https://res.cloudinary.com/du3l28sfg/image/upload/v1624493882/dev/github-profile/php_ojnv9i.png) # PHP
+
+Always, I'll be working on something, maybe sometimes related to software and other times to art. 
+
+### So, feel free to reach me out on other channels...
