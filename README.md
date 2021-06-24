@@ -1,7 +1,6 @@
 ## Hello there! 👋 / Hola tú 😉..
-Thank you for interesting in my profile. Here you will find information about my activity as a software developer (and other things too).
+Thank you for interesting in my profile. Here you will find information about my activity as a software developer (and other things too).  
 I started in IT on January, 2019 and since then, I'd have the opportunity to work on several projects, each of those with different technologies (e.g. from Dekstop Applications whit WPF to Web Api with Node.js).  
-
 With a military background, I have experience on leadership, people management and operations, whose I translate to the software development life cycle.
 
 ### Something that I want to share with you...
@@ -14,14 +13,15 @@ With a military background, I have experience on leadership, people management a
 - 😄 Pronouns: Él, Tú, Mi pana ...
 - ⚡ Fun fact: None to be honest, just another person looking for a better future ...
 
-
-
 # These are some of the technologies that I like to work with...
-![HTML](https://res.cloudinary.com/du3l28sfg/image/upload/v1624493883/dev/github-profile/html_jhtvs6.png) # HTML5
-![CSS](https://res.cloudinary.com/du3l28sfg/image/upload/v1624493882/dev/github-profile/css_kxioof.png) # CSS3
-![JS](https://res.cloudinary.com/du3l28sfg/image/upload/v1624493882/dev/github-profile/js_mpmb6q.png) # Javascript
-![PHP](https://res.cloudinary.com/du3l28sfg/image/upload/v1624493882/dev/github-profile/php_ojnv9i.png) # PHP
-
+## [HTML](https://res.cloudinary.com/du3l28sfg/image/upload/v1624493883/dev/github-profile/html_jhtvs6.png)
+## [CSS#](https://res.cloudinary.com/du3l28sfg/image/upload/v1624497115/dev/github-profile/css.png)
+## [JS](https://res.cloudinary.com/du3l28sfg/image/upload/v1624493882/dev/github-profile/js_mpmb6q.png)
+## [PHP](https://res.cloudinary.com/du3l28sfg/image/upload/v1624493882/dev/github-profile/php_ojnv9i.png)
+## [Docker](https://res.cloudinary.com/du3l28sfg/image/upload/v1624497115/dev/github-profile/docker.png)  
+## [Python](https://res.cloudinary.com/du3l28sfg/image/upload/v1624497115/dev/github-profile/python.png)  
 Always, I'll be working on something, maybe sometimes related to software and other times to art. 
 
 ### So, feel free to reach me out on other channels...
+![Behance](https://res.cloudinary.com/du3l28sfg/image/upload/v1624497113/dev/github-profile/behance.png)
+![]()
