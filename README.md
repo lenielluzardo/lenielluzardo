@@ -4,8 +4,6 @@ Thank you for interesting in my profile. Here you will find information about my
 Enjoy, take a look and reach me out if there's something in which I could help you.  
 #### Please, consider the following:
 - *I’m currently learning cloud computing and cybersecurity and looking to collaborate on something exciting.*
-- **
----
 ### Technologies used:
 <div>
 <img src="https://res.cloudinary.com/du3l28sfg/image/upload/v1624493883/dev/github-profile/html.png" />  
@@ -26,7 +24,7 @@ Enjoy, take a look and reach me out if there's something in which I could help y
 <img src="https://res.cloudinary.com/du3l28sfg/image/upload/v1624493883/dev/github-profile/nodejs.png" />  
 <img src="https://res.cloudinary.com/du3l28sfg/image/upload/v1624493883/dev/github-profile/apache.png" />  
 </div>
----   
+
 #### *Want to learn next:*
 <div>
 <img src="https://res.cloudinary.com/du3l28sfg/image/upload/v1624493883/dev/github-profile/python.png" />  
