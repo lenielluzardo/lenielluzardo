@@ -1,3 +1,6 @@
+<script src="https://kit.fontawesome.com/722857224f.js" crossorigin="anonymous"></script>
+<i class="fas fa-camera"></i>
+<i class="fas fa-camera"></i> 
 ### Hi there 👋 / Hola tú 😉
 
 - 🔭 I’m permanently working on my own cms to see where it can take me.  But do other fun stuffs too...
