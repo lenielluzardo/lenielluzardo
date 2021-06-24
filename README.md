@@ -32,13 +32,13 @@ Enjoy, take a look and reach me out if there's something in which I could help y
 
 ### Reach me on:
 <div>
-<a href="https://www.instagram/lenielluzardo">
+<a href="https://www.linkedin/in/lenielluzardo">
 <img src="https://res.cloudinary.com/du3l28sfg/image/upload/v1624493883/dev/github-profile/linkedin2.png" />  
 </a>
  <a href="https://www.twitter.com/lenielluzardo">
 <img src="https://res.cloudinary.com/du3l28sfg/image/upload/v1624493883/dev/github-profile/twitter.png" />  
 </a>
-<a href="https://www.instagram/lenielluzardox">
+<a href="https://www.instagram/lenielluzardo">
 <img src="https://res.cloudinary.com/du3l28sfg/image/upload/v1624493883/dev/github-profile/instagram.png" />  
 </a>
 </div>
