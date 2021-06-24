@@ -7,8 +7,9 @@ Enjoy, take a look and reach me out if there's something in which I could help y
 - **
 ---
 ### Technologies used:
+<div style="border: 1px solid;">
 <img src="https://res.cloudinary.com/du3l28sfg/image/upload/v1624493883/dev/github-profile/html.png" />
-* ![HTML](https://res.cloudinary.com/du3l28sfg/image/upload/v1624493883/dev/github-profile/html.png)
+ </div>
 
 * ![CSS](https://res.cloudinary.com/du3l28sfg/image/upload/v1624497115/dev/github-profile/css.png)![Sass](https://res.cloudinary.com/du3l28sfg/image/upload/v1624497115/dev/github-profile/sass.png)
 
