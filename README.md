@@ -1,6 +1,4 @@
-<script src="https://kit.fontawesome.com/722857224f.js" crossorigin="anonymous"></script>
-<i class="fas fa-camera"></i>
-<i class="fas fa-camera"></i> 
+![HTML](https://res.cloudinary.com/du3l28sfg/image/upload/v1624493883/dev/github-profile/html_jhtvs6.png)
 ### Hi there 👋 / Hola tú 😉
 
 - 🔭 I’m permanently working on my own cms to see where it can take me.  But do other fun stuffs too...
