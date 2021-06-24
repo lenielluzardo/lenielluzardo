@@ -7,7 +7,7 @@ Enjoy, take a look and reach me out if there's something in which I could help y
 - **
 ---
 ### Technologies used:
-
+<img src="https://res.cloudinary.com/du3l28sfg/image/upload/v1624493883/dev/github-profile/html.png" />
 * ![HTML](https://res.cloudinary.com/du3l28sfg/image/upload/v1624493883/dev/github-profile/html.png)
 
 * ![CSS](https://res.cloudinary.com/du3l28sfg/image/upload/v1624497115/dev/github-profile/css.png)![Sass](https://res.cloudinary.com/du3l28sfg/image/upload/v1624497115/dev/github-profile/sass.png)
