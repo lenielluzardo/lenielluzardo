@@ -7,9 +7,19 @@ Enjoy, take a look and reach me out if there's something in which I could help y
 - **
 ---
 ### Technologies used:
-<div style="border: 1px solid;">
 <img src="https://res.cloudinary.com/du3l28sfg/image/upload/v1624493883/dev/github-profile/html.png" />
- </div>
+<img src="https://res.cloudinary.com/du3l28sfg/image/upload/v1624493883/dev/github-profile/css.png" />
+<img src="https://res.cloudinary.com/du3l28sfg/image/upload/v1624493883/dev/github-profile/sass.png" />
+<img src="https://res.cloudinary.com/du3l28sfg/image/upload/v1624493883/dev/github-profile/javascript.png" />
+<img src="https://res.cloudinary.com/du3l28sfg/image/upload/v1624493883/dev/github-profile/jquery.png" />
+<img src="https://res.cloudinary.com/du3l28sfg/image/upload/v1624493883/dev/github-profile/vuejs.png" />
+<img src="https://res.cloudinary.com/du3l28sfg/image/upload/v1624493883/dev/github-profile/react.png" />
+<img src="https://res.cloudinary.com/du3l28sfg/image/upload/v1624493883/dev/github-profile/php.png" />
+<img src="https://res.cloudinary.com/du3l28sfg/image/upload/v1624493883/dev/github-profile/laravel.png" />
+<img src="https://res.cloudinary.com/du3l28sfg/image/upload/v1624493883/dev/github-profile/csharp.png" />
+<img src="https://res.cloudinary.com/du3l28sfg/image/upload/v1624493883/dev/github-profile/docker.png" />
+<img src="https://res.cloudinary.com/du3l28sfg/image/upload/v1624493883/dev/github-profile/nodejs.png" />
+<img src="https://res.cloudinary.com/du3l28sfg/image/upload/v1624493883/dev/github-profile/apache.png" />
 
 * ![CSS](https://res.cloudinary.com/du3l28sfg/image/upload/v1624497115/dev/github-profile/css.png)![Sass](https://res.cloudinary.com/du3l28sfg/image/upload/v1624497115/dev/github-profile/sass.png)
 
