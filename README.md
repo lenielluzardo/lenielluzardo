@@ -26,7 +26,7 @@ Enjoy, take a look and reach me out if there's something in which I could help y
 <img src="https://res.cloudinary.com/du3l28sfg/image/upload/v1624493883/dev/github-profile/nodejs.png" />  
 <img src="https://res.cloudinary.com/du3l28sfg/image/upload/v1624493883/dev/github-profile/apache.png" />  
 </div>
----
+---   
 #### *Want to learn next:*
 <div>
 <img src="https://res.cloudinary.com/du3l28sfg/image/upload/v1624493883/dev/github-profile/python.png" />  
@@ -34,7 +34,7 @@ Enjoy, take a look and reach me out if there's something in which I could help y
 
 ### Reach me on:
 <div>
-<img src="https://res.cloudinary.com/du3l28sfg/image/upload/v1624493883/dev/github-profile/linkedin.png" />  
+<img src="https://res.cloudinary.com/du3l28sfg/image/upload/v1624493883/dev/github-profile/linkedin2.png" />  
 <img src="https://res.cloudinary.com/du3l28sfg/image/upload/v1624493883/dev/github-profile/twitter.png" />  
 <img src="https://res.cloudinary.com/du3l28sfg/image/upload/v1624493883/dev/github-profile/instagram.png" />  
 </div>
