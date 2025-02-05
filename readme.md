@@ -6,8 +6,7 @@
                 color: red;
                 animation: mymove 2s infinite;
             }
-
-            @keyframes mymove {
+           @keyframes mymove {
                 from {
                     color: red;
                 }
