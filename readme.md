@@ -1,5 +1,5 @@
 <div align="center">
-    <img src="capsule.svg" width="400" height="400" alt="css-in-readme">
+    <img src="capsule.svg" width="auto" height="400" alt="css-in-readme">
 </div>
 ## Hello there! 👋 / Hola tú 😉..
 Thank you for interesting in my profile. Here you will find information about my activity as a software developer (maybe as other things too).  
