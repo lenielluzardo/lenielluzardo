@@ -1,4 +1,12 @@
+<style>
+ .header {
+ background-color: lightblue;
+ }
+</style>
 
+<div class="header">
+ <p>This is my wonderful header</p>
+</div>
 ## Hello there! 👋 / Hola tú 😉..
 Thank you for interesting in my profile. Here you will find information about my activity as a software developer (maybe as other things too).  
 Enjoy, take a look and reach me out if there's something in which I could help you.  
