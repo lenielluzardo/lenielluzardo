@@ -1,6 +1,11 @@
 <div align="center">
     <img src="capsule.svg" width="auto" height="400" alt="css-in-readme">
 </div>
+
+<h1>Leniel Luzardo</h1>
+
+
+
 ## Hello there! 👋 / Hola tú 😉..
 Thank you for interesting in my profile. Here you will find information about my activity as a software developer (maybe as other things too).  
 Enjoy, take a look and reach me out if there's something in which I could help you.  
@@ -19,7 +24,7 @@ Enjoy, take a look and reach me out if there's something in which I could help y
 
 
 
-
+        
 
 <img src="https://res.cloudinary.com/du3l28sfg/image/upload/v1624493883/dev/github-profile/vuejs.png" />  
 <img src="https://res.cloudinary.com/du3l28sfg/image/upload/v1624493883/dev/github-profile/react.png" />  
