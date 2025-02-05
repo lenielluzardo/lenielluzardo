@@ -30,6 +30,14 @@
     </g>
                 
      
-    <text text-anchor="middle" alignment-baseline="middle" x="50%" y="50%" class="text" style="fill:#f7f5f5;" stroke="#none" stroke-width="1">Input text</text>
+    <p text-anchor="middle" 
+          alignment-baseline="middle"
+          x="50%" y="50%" 
+          class="text"
+          style="fill:#f7f5f5;"
+          stroke="#none" 
+          stroke-width="1">
+          Hello There,
+    </p>
                  
             </svg>

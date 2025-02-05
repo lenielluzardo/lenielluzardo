@@ -15,7 +15,12 @@ Enjoy, take a look and reach me out if there's something in which I could help y
 <img src="https://res.cloudinary.com/du3l28sfg/image/upload/v1624493883/dev/github-profile/javascript.png" />  
 <img src="https://res.cloudinary.com/du3l28sfg/image/upload/v1624493883/dev/github-profile/jquery.png" />  
 </div>
-<div>
+<div>   
+
+
+
+
+
 <img src="https://res.cloudinary.com/du3l28sfg/image/upload/v1624493883/dev/github-profile/vuejs.png" />  
 <img src="https://res.cloudinary.com/du3l28sfg/image/upload/v1624493883/dev/github-profile/react.png" />  
 <img src="https://res.cloudinary.com/du3l28sfg/image/upload/v1624493883/dev/github-profile/php.png" />  
