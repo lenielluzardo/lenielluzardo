@@ -1,4 +1,4 @@
-<div class="header" style="background-color:lightblue;">
+<div class="header" style="background-color:lightblue; border:1px solid #000;">
  <p>This is my wonderful header</p>
 </div>
 ## Hello there! 👋 / Hola tú 😉..
