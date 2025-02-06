@@ -1,3 +1,39 @@
 body {
-  background-color: darkblue;
+  display:flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 100vh;
+  overflow: hidden;
+  /* background-color: #001259; */
+  background: linear-gradient(#002770, #000d40);
+  font-family: 'Courier New', Courier, monospace;
+  color: rgb(255, 255, 255, .7);
+}
+
+.homebox {
+  background-color: rgb(255, 255, 255, .1);
+  padding: 2rem;
+  border-radius: .5rem;
+  border: 1px solid #fff8;
+  text-align: center;
+  width: 50%;
+  box-shadow: 0rem .4rem .9rem .1rem #00000060;
+}
+.greet{
+  margin: 3rem
+}
+
+.lnk-box{
+  display: flex;
+  justify-content: space-evenly;
+  list-style: none
+}
+.lnk-box a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.lnk-box {
+  display: flex;
 }
