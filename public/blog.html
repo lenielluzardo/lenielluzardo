@@ -33,27 +33,27 @@
           
       });
 
-      let ele = document.createElement('html');
+      // let ele = document.createElement('html');
 
-      fetch('/articles')
+      fetch('https://api.github.com/repos/lenielluzardo/lenielluzardo/contents/public/articles')
       .then(res => res.text())
       .then(result => {
         console.log(result);
 
       })
 
-      console.log(ele);
+      // console.log(ele);
 
-      let list = Array.from(html.getElementsByTagName('ul'));
-      console.log(list);
-      // list.getElementsByTagName('a');
-      let arr = [];
+      // let list = Array.from(html.getElementsByTagName('ul'));
+      // console.log(list);
+      // // list.getElementsByTagName('a');
+      // let arr = [];
 
-      for(let el of list) {
-        arr.push(el.innerHTML);
-      }
-      arr.shift();// get rid of the first element of the array which is "../ "directory reference
-      console.log(arr)
+      // for(let el of list) {
+      //   arr.push(el.innerHTML);
+      // }
+      // arr.shift();// get rid of the first element of the array which is "../ "directory reference
+      // console.log(arr)
 
     }
 
