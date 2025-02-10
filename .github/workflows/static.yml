@@ -42,6 +42,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
+          name: github-pages
           path: './public'
 
   deploy:
@@ -56,6 +57,11 @@ jobs:
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
+
+      - name: Download artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: github-pages
 
       - name: Deploy to GitHub Pages
         id: deployment
