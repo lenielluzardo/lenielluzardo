@@ -12,19 +12,39 @@ function registerTemplate(templateName) {
 }
 
 const inputDir = path.join(__dirname, 'content');
-const outputDir = path.join(__dirname, 'public/blog/');
+const homeOutputDir = path.join(__dirname, "public/");
+const blogOutputDir = path.join(__dirname, "public/blog/");
 
 const templatePath = path.join(__dirname, 'template/layout.hbs');
 
 registerTemplate('header');
 registerTemplate('footer');
-
-if (!fs.existsSync(outputDir)) {
-  fs.mkdirSync(outputDir);
-}
-
-const templateSource = fs.readFileSync(templatePath, 'utf-8');
+const templateSource = fs.readFileSync(templatePath, "utf-8");
 const template = Handlebars.compile(templateSource);
+
+const homeHtml = template({
+  // title: data.title,
+  main: "<h1> This is my home page<h1>",
+  stylePath: "style.css",
+  // date: data.date,
+});
+
+// const outputFileName = file.replace(".md", ".html");
+fs.writeFileSync(path.join(homeOutputDir, "index.html"), homeHtml);
+
+const blogHtml = template({
+  // title: data.title,
+  main: "<h1> This is my blog page<h1>",
+  stylePath: "style.css",
+  // date: data.date,
+});
+
+fs.writeFileSync(path.join('public/blog', "index.html"), blogHtml);
+
+
+if (!fs.existsSync(blogOutputDir)) {
+  fs.mkdirSync(blogOutputDir);
+}
 
 const files = fs.readdirSync(inputDir).filter(file => file.endsWith('.md'));
 
@@ -37,14 +57,16 @@ files.forEach(file => {
 
   const html = template({
     title: data.title,
-    content: htmlContent,
-    date: data.date
+    main: htmlContent,
+    date: data.date,
+    stylePath: '../style.css'
   });
 
   const outputFileName = file.replace('.md', '.html');
-  fs.writeFileSync(path.join(outputDir, outputFileName), html);
+  fs.writeFileSync(path.join(blogOutputDir, outputFileName), html);
 
   console.log(`Generated: ${outputFileName}`);
 });
+
 
 console.log('static site generator completed.')

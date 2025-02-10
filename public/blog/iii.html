@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../style.css">
+  <title>Leniel Luzardo - Blog</title>
+</head>
+<body>
+  <h1>This is the blog</h1>
+  <main>
+    <input id="get" type="button" name="selected" value="get html" title="get html">
+    This is a placeholder for main
+  </main>
+  <script>
+    const blog = document.querySelector('main');
+    const get = document.querySelector('input');
+
+    get.addEventListener('click', getHtml)
+
+    function getHtml () {
+      console.log('function hit');
+      fetch('blog/this-is-a-blog-article-example.html')
+      .then((res) => {
+        console.log('response section', res)
+        if(res.ok) return res.text()
+       })
+      .then(html => {
+        console.log()
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, "text/html");
+        blog.innerHTML = doc.querySelector('article').innerHTML;
+          
+      });
+
+      // let ele = document.createElement('html');
+
+      fetch('https://api.github.com/repos/lenielluzardo/lenielluzardo/contents/public/articles')
+      .then(res => res.text())
+      .then(result => {
+        console.log(result);
+
+      })
+
+      // console.log(ele);
+
+      // let list = Array.from(html.getElementsByTagName('ul'));
+      // console.log(list);
+      // // list.getElementsByTagName('a');
+      // let arr = [];
+
+      // for(let el of list) {
+      //   arr.push(el.innerHTML);
+      // }
+      // arr.shift();// get rid of the first element of the array which is "../ "directory reference
+      // console.log(arr)
+
+    }
+
+   
+
+  </script>
+</body>
+</html>
