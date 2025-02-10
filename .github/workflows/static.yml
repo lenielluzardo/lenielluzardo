@@ -2,8 +2,10 @@ name: Generate and Deploy Static Site
 
 on:
   push:
-    branches:
-      - main
+    paths:
+      - 'content/**'
+    #branches:
+    # - main
   workflow_dispatch:
 
 permissions:
