@@ -4,7 +4,10 @@
 ## A second-level heading
 ### A third-level heading
 
-<script> 
-alert('hello-world');
+# Example Title
 
-</script>
+This is an example article written in Markdown.
+
+![Example Image](https://placehold.co/600x400)
+
+More content goes here...
