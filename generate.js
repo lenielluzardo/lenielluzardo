@@ -11,16 +11,40 @@ function registerTemplate(templateName) {
   Handlebars.registerPartial(templateName, template);
 }
 
-const inputDir = path.join(__dirname, 'content');
-const homeOutputDir = path.join(__dirname, "public/");
-const blogOutputDir = path.join(__dirname, "public/blog/");
-
-const templatePath = path.join(__dirname, 'template/layout.hbs');
-
 registerTemplate('header');
 registerTemplate('footer');
+
+const inputDir = path.join(__dirname, 'content');
+const templatePath = path.join(__dirname, 'template/layout.hbs');
 const templateSource = fs.readFileSync(templatePath, "utf-8");
 const template = Handlebars.compile(templateSource);
+
+if (!fs.existsSync(blogOutputDir)) {
+  fs.mkdirSync(blogOutputDir);
+}
+
+const fileArg = process.argv.find((arg) => arg.startsWith("--file="));
+const fileName = fileArg ? fileArg.split("=")[1] : null;
+
+if (fileName) {
+  const content = fs.readFileSync(path.join(inputDir, filenName), "utf-8");
+
+  const { data, content: markdownContent } = matter(content);
+
+  const htmlContent = marked(markdownContent);
+  
+  const postHtml = template({
+    title: data.title,
+    main: htmlContent,
+    date: data.date,
+  });
+   const outputFileName = fileName.replace(".md", ".html");
+  fs.writeFileSync(path.join("public/blog/", outputFileName), postHtml);
+  return;
+}
+
+const homeOutputDir = path.join(__dirname, "public/");
+const blogOutputDir = path.join(__dirname, "public/blog/");
 
 const homeHtml = template({
   // title: data.title,
@@ -42,31 +66,7 @@ const blogHtml = template({
 fs.writeFileSync(path.join('public/blog', "index.html"), blogHtml);
 
 
-if (!fs.existsSync(blogOutputDir)) {
-  fs.mkdirSync(blogOutputDir);
-}
-
-const fileArg = process.argv.find(arg => arg.startsWith('--file='));
-const fileName = fileArg ? fileArg.split('=')[1] : null;
-
-if (fileName) {
-  const content = fs.readFileSync(path.join(inputDir, filenName), 'utf-8');
-
-  const { data, content: markdownContent } = matter(content);
-
-  const htmlContent = marked(markdownContent);
-  const html = template({
-    title: data.title,
-    main: htmlContent,
-    date: data.date,
-  });
-
-  return;
-}
-
-
 const files = fs.readdirSync(inputDir).filter(file => file.endsWith('.md'));
-
 files.forEach(file => {
   const content = fs.readFileSync(path.join(inputDir, file), 'utf-8');
 
