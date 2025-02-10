@@ -4,6 +4,11 @@ const marked = require('marked');
 const matter = require('gray-matter');
 const Handlebars = require('handlebars');
 
+const inputDir = path.join(__dirname, "content");
+const templatePath = path.join(__dirname, "template/layout.hbs");
+const templateSource = fs.readFileSync(templatePath, "utf-8");
+const template = Handlebars.compile(templateSource);
+
 function registerTemplate(templateName) {
   const templatePath = path.join(__dirname, `template/${templateName}.hbs`);
   const templateSource = fs.readFileSync(templatePath, "utf-8");
@@ -14,10 +19,23 @@ function registerTemplate(templateName) {
 registerTemplate('header');
 registerTemplate('footer');
 
-const inputDir = path.join(__dirname, 'content');
-const templatePath = path.join(__dirname, 'template/layout.hbs');
-const templateSource = fs.readFileSync(templatePath, "utf-8");
-const template = Handlebars.compile(templateSource);
+function findLatestPost() {
+  const files = fs.readdirSync(inputDir).filter(file => file.endsWith('.md'));
+  if (files.length === 0) {
+    return null
+  }
+
+  files.sort((a, b) => {
+    const aTime = fs.statSync(path.join(inputDir, a)).ctime;
+    const bTime = fs.statSync(path.join(inputDir, b)).ctime;
+
+    return bTime - aTime;
+  });
+
+  return files[0];
+}
+
+const latestPost = findLatestPost();
 
 const homeOutputDir = path.join(__dirname, "public/");
 const blogOutputDir = path.join(__dirname, "public/blog/");
@@ -26,15 +44,13 @@ if (!fs.existsSync(blogOutputDir)) {
   fs.mkdirSync(blogOutputDir);
 }
 
-const fileArg = process.argv.find((arg) => arg.startsWith("--file="));
-const fileName = fileArg ? fileArg.split("=")[1] : null;
-console.log(`arguments ${fileArg}`);
-console.log(`fileName from args ${fileName}`);
-if (fileName) {
+
+console.log(`Before start ${latestPost}`);
+
+if (latestPost) {
   
   console.log(`Processing file (inside if): ${fileName}`); // Log the file being processed
-  
-  const content = fs.readFileSync(path.join(inputDir, filenName), "utf-8");
+  const content = fs.readFileSync(path.join(inputDir, latestPost), "utf-8");
 
   const { data, content: markdownContent } = matter(content);
 
@@ -45,10 +61,12 @@ if (fileName) {
     main: htmlContent,
     date: data.date,
   });
+
   const outputFileName = fileName.replace(".md", ".html");
   fs.writeFileSync(path.join("public/blog/", outputFileName), postHtml);
   console.log(`Generated: ${outputFileName}`);
   process.exit(0);
+  
 } else {
   console.log('No new file to process.');
   process.exit(0);
