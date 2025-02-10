@@ -4,7 +4,9 @@ const marked = require('marked');
 const matter = require('gray-matter');
 const Handlebars = require('handlebars');
 const { execSync } = require("child_process");
-
+const buildHome = false;
+const buildBlogIndex = false;
+const buildPosts = false;
 const inputDir = path.join(__dirname, "content");
 const templatePath = path.join(__dirname, "template/layout.hbs");
 const templateSource = fs.readFileSync(templatePath, "utf-8");
@@ -36,35 +38,19 @@ function findLatestPost() {
   return files[0];
 }
 
-// const latestPost = findLatestPost();
+const publicDir = path.join(__dirname, "public");
+const blogDir = path.join(__dirname, "public/blog");
 
-const homeOutputDir = path.join(__dirname, "public");
-const blogOutputDir = path.join(__dirname, "public/blog");
-
-if (!fs.existsSync(blogOutputDir)) {
-  fs.mkdirSync(blogOutputDir);
+if (!fs.existsSync(blogDir)) {
+  fs.mkdirSync(blogDir);
 }
-
-// function findLatestPost() {
-//   try {
-//     const latestFile = execSync(
-//       `git log -1 --name-only --pretty=format: --diff-filter=A -- ${inputDir}`
-//     )
-//       .toString()
-//       .trim();
-//     return latestFile;
-//   } catch (error) {
-//     console.error("Error finding latest post:", error);
-//     return null;
-//   }
-// }
 
 const latestPost = findLatestPost();
 console.log(`Before start ${latestPost}`);
 
 if (latestPost) {
-  
   console.log(`Processing file (inside if): ${latestPost}`); // Log the file being processed
+  
   const content = fs.readFileSync(path.join(inputDir, latestPost), "utf-8");
 
   const { data, content: markdownContent } = matter(content);
@@ -78,52 +64,60 @@ if (latestPost) {
   });
 
   const outputFileName = latestPost.replace(".md", ".html");
-  fs.writeFileSync(path.join(blogOutputDir, outputFileName), postHtml);
+  fs.writeFileSync(path.join(blogDir, outputFileName), postHtml);
+  
   console.log(__dirname);
+  console.log(publicDir);
+  console.log(blogDir);
   console.log(`Generated: ${outputFileName}`);
+
 } else {
   console.log('No new file to process.');
 }
 
-const homeHtml = template({
-  // title: data.title,
-  main: "<h1> This is my home page<h1>",
-  stylePath: "style.css",
-  // date: data.date,
-});
-
-fs.writeFileSync(path.join(homeOutputDir, "index.html"), homeHtml);
-
-const blogHtml = template({
-  // title: data.title,
-  main: "<h1> This is my blog page<h1>",
-  stylePath: "style.css",
-  // date: data.date,
-});
-
-fs.writeFileSync(path.join(blogOutputDir, "index.html"), blogHtml);
-
-
-const files = fs.readdirSync(inputDir).filter(file => file.endsWith('.md'));
-files.forEach(file => {
-  const content = fs.readFileSync(path.join(inputDir, file), 'utf-8');
-
-  const { data, content: markdownContent } = matter(content);
-  
-  const htmlContent = marked.parse(markdownContent);
-
-  const html = template({
-    title: data.title,
-    main: htmlContent,
-    date: data.date,
-    stylePath: '../style.css'
+if (buildHome) {
+  const homeHtml = template({
+    // title: data.title,
+    main: "<h1> This is my home page<h1>",
+    stylePath: "style.css",
+    // date: data.date,
   });
 
-  const outputFileName = file.replace('.md', '.html');
-  fs.writeFileSync(path.join(blogOutputDir, outputFileName), html);
+  fs.writeFileSync(path.join(publicDir, "index.html"), homeHtml);
+}
 
-  console.log(`Generated: ${outputFileName}`);
-});
+if (buildBlogIndex) {
+  const blogHtml = template({
+    // title: data.title,
+    main: "<h1> This is my blog page<h1>",
+    stylePath: "style.css",
+    // date: data.date,
+  });
 
+  fs.writeFileSync(path.join(blogDir, "index.html"), blogHtml);
+}
+
+if (buildPosts) {
+  const files = fs.readdirSync(inputDir).filter((file) => file.endsWith(".md"));
+  files.forEach((file) => {
+    const content = fs.readFileSync(path.join(inputDir, file), "utf-8");
+
+    const { data, content: markdownContent } = matter(content);
+
+    const htmlContent = marked.parse(markdownContent);
+
+    const html = template({
+      title: data.title,
+      main: htmlContent,
+      date: data.date,
+      stylePath: "../style.css",
+    });
+
+    const outputFileName = file.replace(".md", ".html");
+    fs.writeFileSync(path.join(blogDir, outputFileName), html);
+
+    console.log(`Generated: ${outputFileName}`);
+  });
+}
 
 console.log('static site generator completed.')
