@@ -34,12 +34,12 @@ jobs:
         id: newfile
         run: |
           NEW_FILE=$(git log -1 --name-only --pretty=format:'' --diff-filter=A -- content/)
-          echo "NEW_FILE=${NEW_FILE}" >> $GITHUB_ENV
           if [ -z "$NEW_FILE" ]; then
             echo "No new file found."
             exit 0
           fi
-          
+          echo "NEW_FILE=\"$NEW_FILE\"" >> $GITHUB_ENV
+
       - name: Install dependencies
         run: npm install
 
