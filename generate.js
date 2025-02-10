@@ -4,13 +4,25 @@ const marked = require('marked');
 const matter = require('gray-matter');
 const Handlebars = require('handlebars');
 
+function registerTemplate(templateName) {
+  const templatePath = path.join(__dirname, `template/${templateName}.hbs`);
+  const templateSource = fs.readFileSync(templatePath, "utf-8");
+  const template = Handlebars.compile(templateSource);
+  Handlebars.registerPartial(templateName, template);
+}
+
 const inputDir = path.join(__dirname, 'content');
 const outputDir = path.join(__dirname, 'public/blog/');
-const templatePath = path.join(__dirname, 'template.hbs');
+
+const templatePath = path.join(__dirname, 'template/layout.hbs');
+
+registerTemplate('header');
+registerTemplate('footer');
 
 if (!fs.existsSync(outputDir)) {
   fs.mkdirSync(outputDir);
 }
+
 const templateSource = fs.readFileSync(templatePath, 'utf-8');
 const template = Handlebars.compile(templateSource);
 
@@ -25,10 +37,8 @@ files.forEach(file => {
 
   const html = template({
     title: data.title,
-    header: "This is the header",
     content: htmlContent,
-    date: data.date,
-    footer: "this is the footer",
+    date: data.date
   });
 
   const outputFileName = file.replace('.md', '.html');
