@@ -32,7 +32,8 @@ jobs:
 
       - name: Capture new file name
         id: newfile
-        run: echo "NEW_FILE=$(git diff --name-only HEAD^ HEAD | grep '^content/')" >> $GITHUB_ENV
+        run: |
+          NEW_FILE=$(git log -1 --name-only --pretty=format:'' --diff-filter=A -- content/) && echo "NEW_FILE=${NEW_FILE}" >> $GITHUB_ENV
 
       - name: Install dependencies
         run: npm install
