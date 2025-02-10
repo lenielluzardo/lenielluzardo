@@ -28,11 +28,15 @@ jobs:
         with:
           node-version: '20'
 
+      - name: Capture new file name
+        id: newfile
+        run: echo "NEW_FILE=$(git diff --name-only HEAD^ HEAD | grep '^content/')" >> $GITHUB_ENV
+
       - name: Install dependencies
         run: npm install
 
       - name: Generate static site
-        run: npm run generate
+        run: npm run generate --file ${{ env.NEW_FILE }}
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

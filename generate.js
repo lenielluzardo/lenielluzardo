@@ -46,6 +46,25 @@ if (!fs.existsSync(blogOutputDir)) {
   fs.mkdirSync(blogOutputDir);
 }
 
+const fileArg = process.argv.find(arg => arg.startsWith('--file='));
+const fileName = fileArg ? fileArg.split('=')[1] : null;
+
+if (fileName) {
+  const content = fs.readFileSync(path.join(inputDir, filenName), 'utf-8');
+
+  const { data, content: markdownContent } = matter(content);
+
+  const htmlContent = marked(markdownContent);
+  const html = template({
+    title: data.title,
+    main: htmlContent,
+    date: data.date,
+  });
+
+  return;
+}
+
+
 const files = fs.readdirSync(inputDir).filter(file => file.endsWith('.md'));
 
 files.forEach(file => {
