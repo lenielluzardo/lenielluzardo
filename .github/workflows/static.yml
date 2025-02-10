@@ -1,5 +1,5 @@
 # Simple workflow for deploying static content to GitHub Pages
-name: Deploy static content to Pages
+name: Generate and Deploy static content to Pages
 
 on:
   # Runs on pushes targeting the default branch
@@ -22,6 +22,24 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  generate:
+    runs-on: ubuntu-latest
+  
+  steps:
+    - name: Check out the repository
+      uses: actions/checkout@v4
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+    
+    - name: Install dependencies
+      run: npm install
+
+    - name: Generate static site
+      run: npm run generate
+
   # Single deploy job since we're just deploying
   deploy:
     environment:
