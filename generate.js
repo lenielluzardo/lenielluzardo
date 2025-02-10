@@ -77,7 +77,8 @@ if (latestPost) {
   });
 
   const outputFileName = latestPost.replace(".md", ".html");
-  fs.writeFileSync(path.join("public/blog/", outputFileName), postHtml);
+  fs.writeFileSync(path.join(blogOutputDir, outputFileName), postHtml);
+  console.log(__dirname);
   console.log(`Generated: ${outputFileName}`);
   process.exit(0);
 
@@ -103,7 +104,7 @@ const blogHtml = template({
   // date: data.date,
 });
 
-fs.writeFileSync(path.join('public/blog', "index.html"), blogHtml);
+fs.writeFileSync(path.join(blogOutputDir, "index.html"), blogHtml);
 
 
 const files = fs.readdirSync(inputDir).filter(file => file.endsWith('.md'));
