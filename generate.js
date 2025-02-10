@@ -28,22 +28,30 @@ if (!fs.existsSync(blogOutputDir)) {
 
 const fileArg = process.argv.find((arg) => arg.startsWith("--file="));
 const fileName = fileArg ? fileArg.split("=")[1] : null;
-
+console.log(`arguments ${fileArg}`);
+console.log(`fileName from args ${fileName}`);
 if (fileName) {
+  
+  console.log(`Processing file (inside if): ${fileName}`); // Log the file being processed
+  
   const content = fs.readFileSync(path.join(inputDir, filenName), "utf-8");
 
   const { data, content: markdownContent } = matter(content);
 
   const htmlContent = marked(markdownContent);
-  
+
   const postHtml = template({
     title: data.title,
     main: htmlContent,
     date: data.date,
   });
-   const outputFileName = fileName.replace(".md", ".html");
+  const outputFileName = fileName.replace(".md", ".html");
   fs.writeFileSync(path.join("public/blog/", outputFileName), postHtml);
-  return;
+  console.log(`Generated: ${outputFileName}`);
+  process.exit(0);
+} else {
+  console.log('No new file to process.');
+  process.exit(0);
 }
 
 const homeHtml = template({
