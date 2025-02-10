@@ -49,12 +49,12 @@ console.log(`Before start ${latestPost}`);
 
 if (latestPost) {
   
-  console.log(`Processing file (inside if): ${fileName}`); // Log the file being processed
+  console.log(`Processing file (inside if): ${latestPost}`); // Log the file being processed
   const content = fs.readFileSync(path.join(inputDir, latestPost), "utf-8");
 
   const { data, content: markdownContent } = matter(content);
 
-  const htmlContent = marked(markdownContent);
+  const htmlContent = marked.parse(markdownContent);
 
   const postHtml = template({
     title: data.title,
@@ -62,11 +62,11 @@ if (latestPost) {
     date: data.date,
   });
 
-  const outputFileName = fileName.replace(".md", ".html");
+  const outputFileName = latestPost.replace(".md", ".html");
   fs.writeFileSync(path.join("public/blog/", outputFileName), postHtml);
   console.log(`Generated: ${outputFileName}`);
   process.exit(0);
-  
+
 } else {
   console.log('No new file to process.');
   process.exit(0);
