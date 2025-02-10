@@ -19,6 +19,9 @@ const templatePath = path.join(__dirname, 'template/layout.hbs');
 const templateSource = fs.readFileSync(templatePath, "utf-8");
 const template = Handlebars.compile(templateSource);
 
+const homeOutputDir = path.join(__dirname, "public/");
+const blogOutputDir = path.join(__dirname, "public/blog/");
+
 if (!fs.existsSync(blogOutputDir)) {
   fs.mkdirSync(blogOutputDir);
 }
@@ -42,9 +45,6 @@ if (fileName) {
   fs.writeFileSync(path.join("public/blog/", outputFileName), postHtml);
   return;
 }
-
-const homeOutputDir = path.join(__dirname, "public/");
-const blogOutputDir = path.join(__dirname, "public/blog/");
 
 const homeHtml = template({
   // title: data.title,
