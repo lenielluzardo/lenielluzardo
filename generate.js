@@ -3,6 +3,7 @@ const path = require('path');
 const marked = require('marked');
 const matter = require('gray-matter');
 const Handlebars = require('handlebars');
+const { execSync } = require("child_process");
 
 const inputDir = path.join(__dirname, "content");
 const templatePath = path.join(__dirname, "template/layout.hbs");
@@ -35,7 +36,7 @@ function findLatestPost() {
   return files[0];
 }
 
-const latestPost = findLatestPost();
+// const latestPost = findLatestPost();
 
 const homeOutputDir = path.join(__dirname, "public/");
 const blogOutputDir = path.join(__dirname, "public/blog/");
@@ -44,9 +45,22 @@ if (!fs.existsSync(blogOutputDir)) {
   fs.mkdirSync(blogOutputDir);
 }
 
+// function findLatestPost() {
+//   try {
+//     const latestFile = execSync(
+//       `git log -1 --name-only --pretty=format: --diff-filter=A -- ${inputDir}`
+//     )
+//       .toString()
+//       .trim();
+//     return latestFile;
+//   } catch (error) {
+//     console.error("Error finding latest post:", error);
+//     return null;
+//   }
+// }
 
+const latestPost = findLatestPost();
 console.log(`Before start ${latestPost}`);
-
 if (latestPost) {
   
   console.log(`Processing file (inside if): ${latestPost}`); // Log the file being processed
