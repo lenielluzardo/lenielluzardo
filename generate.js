@@ -38,8 +38,8 @@ function findLatestPost() {
 
 // const latestPost = findLatestPost();
 
-const homeOutputDir = path.join(__dirname, "public/");
-const blogOutputDir = path.join(__dirname, "public/blog/");
+const homeOutputDir = path.join(__dirname, "public");
+const blogOutputDir = path.join(__dirname, "public/blog");
 
 if (!fs.existsSync(blogOutputDir)) {
   fs.mkdirSync(blogOutputDir);
@@ -61,6 +61,7 @@ if (!fs.existsSync(blogOutputDir)) {
 
 const latestPost = findLatestPost();
 console.log(`Before start ${latestPost}`);
+
 if (latestPost) {
   
   console.log(`Processing file (inside if): ${latestPost}`); // Log the file being processed
@@ -80,11 +81,8 @@ if (latestPost) {
   fs.writeFileSync(path.join(blogOutputDir, outputFileName), postHtml);
   console.log(__dirname);
   console.log(`Generated: ${outputFileName}`);
-  process.exit(0);
-
 } else {
   console.log('No new file to process.');
-  process.exit(0);
 }
 
 const homeHtml = template({
@@ -94,7 +92,6 @@ const homeHtml = template({
   // date: data.date,
 });
 
-// const outputFileName = file.replace(".md", ".html");
 fs.writeFileSync(path.join(homeOutputDir, "index.html"), homeHtml);
 
 const blogHtml = template({
