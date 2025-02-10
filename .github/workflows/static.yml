@@ -34,7 +34,7 @@ jobs:
         run: npm install
 
       - name: Generate static site
-        run: npm run generate --file ${{ env.NEW_FILE }}
+        run: npm run generate
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
