@@ -4,17 +4,17 @@ on:
   push:
     paths:
       - content/**
-  workflow_dispatch: null
+  workflow_dispatch: 
 jobs:
   build:
-    runs-on: ubuntu-lastest
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout the repository
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
       - name: Set up Node.js
-        uses: actions/seutp-node@v3
+        uses: actions/setup-node@v3
         with:
           node-version: "20"
       - name: Clear npm cache
