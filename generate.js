@@ -119,13 +119,18 @@ if (changedPosts) {
     // const files = fs.readdirSync(inputDir).filter((file) => file.endsWith(".md"));
   
   changedPosts.forEach((post) => {
-    console.log(`Processing file:  ${post}`);
+    console.log(`Start Processing file:  ${post}`);
+    console.log(`Read file:  ${post}`);
     const content = fs.readFileSync(path.join(inputDir, post), "utf-8");
 
+    console.log(`Get matter metada for:  ${post}`);
     const { data, content: markdownContent } = matter(content);
-
+   
+   
+    console.log(`Parse content to HTML for :  ${post}`);
     const htmlContent = marked.parse(markdownContent);
-
+   
+    console.log(`Set the HBS template for :  ${post}`);
     const html = template({
       title: data.title,
       main: htmlContent,
@@ -134,8 +139,13 @@ if (changedPosts) {
     });
 
     // const outputFileName = file.replace(".md", ".html");
+    console.log(`Build output file name (basename) for :  ${post}`);
     const outputFileName = path.basename(post).replace(".md", ".html");
+
+    console.log(`Build output path for :  ${post}`);
     const outputPath = path.join(blogDir, outputFileName);
+
+    console.log(`Writing to fs for :  ${post}`);
     fs.writeFileSync(outputPath, html);
 
     console.log(`Generated: ${outputPath}`);
