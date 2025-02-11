@@ -31,7 +31,7 @@ registerTemplate('footer');
 function findChangedPosts() {
   try {
     const changedFiles = execSync(`git diff --name-only HEAD^ HEAD -- ${inputDir}`).toString().trim().split('\n');
-    return changedFiles.filter(file => file.length.endsWith('.md'));
+    return changedFiles.filter(file => file.endsWith('.md'));
   } catch (error) {
     console.error('Error finding changed posts:', error);
     return [];
