@@ -140,7 +140,7 @@ if (changedPosts) {
       title: data.title,
       main: htmlContent,
       date: data.date,
-      stylePath: "../style.css",
+      stylePath: "~/style.css",
     });
 
     // const outputFileName = file.replace(".md", ".html");
