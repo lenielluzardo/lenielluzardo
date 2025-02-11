@@ -30,7 +30,12 @@ registerTemplate('footer');
 
 function findChangedPosts() {
   try {
-    const changedFiles = execSync(`git diff --name-only HEAD^ HEAD -- ${inputDir}`).toString().trim().split('\n');
+    const gitResult = execSync(`git diff --name-only HEAD^ HEAD -- ${inputDir}`)
+    console.log('Find changed posts git result: ', gitResult);  
+      
+    const changedFiles = gitResult.toString().trim().split("\n");
+    console.log('Changed posts:', changedFiles)
+
     return changedFiles.filter(file => file.endsWith('.md'));
   } catch (error) {
     console.error('Error finding changed posts:', error);
@@ -121,7 +126,7 @@ if (changedPosts) {
   changedPosts.forEach((post) => {
     console.log(`Start Processing file:  ${post}`);
     console.log(`Read file:  ${post}`);
-    const content = fs.readFileSync(path.join(inputDir, post), "utf-8");
+    const content = fs.readFileSync(path.join(inputDir, post.replace('content/', '')), "utf-8");
 
     console.log(`Get matter metada for:  ${post}`);
     const { data, content: markdownContent } = matter(content);
