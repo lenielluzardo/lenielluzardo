@@ -102,7 +102,7 @@ if (buildHome) {
   const homeHtml = template({
     // title: data.title,
     main: "<h1> This is my home page<h1>",
-    stylePath: "style.css",
+    stylePath: "~/style.css",
     // date: data.date,
   });
 
@@ -113,7 +113,7 @@ if (buildBlogIndex) {
   const blogHtml = template({
     // title: data.title,
     main: "<h1> This is my blog page<h1>",
-    stylePath: "style.css",
+    stylePath: "~/style.css",
     // date: data.date,
   });
 
