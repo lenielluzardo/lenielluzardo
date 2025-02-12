@@ -6,8 +6,8 @@ const Handlebars = require('handlebars');
 const { execSync } = require("child_process");
 
 /// variables & constants
-const buildHome = false;
-const buildBlogIndex = false;
+const buildHome = true;
+const buildBlogIndex = true;
 const buildPosts = false;
 
 // Input
@@ -18,30 +18,20 @@ const templatePath = path.join(__dirname, "template/layout.hbs");
 const publicDir = path.join(__dirname, "public");
 const blogDir = path.join(__dirname, "public/blog");
 
-function registerTemplate(templateName) {
-  const templatePath = path.join(__dirname, `template/${templateName}.hbs`);
-  const templateSource = fs.readFileSync(templatePath, "utf-8");
-  const template = Handlebars.compile(templateSource);
-  Handlebars.registerPartial(templateName, template);
-}
-
-registerTemplate('header');
-registerTemplate('footer');
-
-function findChangedPosts() {
-  try {
-    const gitResult = execSync(`git diff --name-only HEAD^ HEAD -- ${inputDir}`)
-    console.log('Find changed posts git result: ', gitResult);  
+// function findChangedPosts() {
+//   try {
+//     const gitResult = execSync(`git diff --name-only HEAD^ HEAD -- ${inputDir}`)
+//     console.log('Find changed posts git result: ', gitResult);  
       
-    const changedFiles = gitResult.toString().trim().split("\n");
-    console.log('Changed posts:', changedFiles)
+//     const changedFiles = gitResult.toString().trim().split("\n");
+//     console.log('Changed posts:', changedFiles)
 
-    return changedFiles.filter(file => file.endsWith('.md'));
-  } catch (error) {
-    console.error('Error finding changed posts:', error);
-    return [];
-  }
-}
+//     return changedFiles.filter(file => file.endsWith('.md'));
+//   } catch (error) {
+//     console.error('Error finding changed posts:', error);
+//     return [];
+//   }
+// }
 // function findLatestPost() {
 //   const files = fs.readdirSync(inputDir).filter(file => file.endsWith('.md'));
 //   if (files.length === 0) {
@@ -58,7 +48,7 @@ function findChangedPosts() {
 //   return files[0];
 // }
 
-// Ensure the oput directory existsts
+// Ensure the oput directory exists
 if (!fs.existsSync(blogDir)) {
   fs.mkdirSync(blogDir);
 }
@@ -69,7 +59,7 @@ const template = Handlebars.compile(templateSource);
 // const latestPost = findLatestPost();
 // console.log(`Before start ${latestPost}`);
 
-const changedPosts = findChangedPosts();
+// const changedPosts = findChangedPosts();
 
 // if (latestPost) {
 //   console.log(`Processing file (inside if): ${latestPost}`); // Log the file being processed
@@ -102,7 +92,7 @@ if (buildHome) {
   const homeHtml = template({
     // title: data.title,
     main: "<h1> This is my home page<h1>",
-    stylePath: "~/style.css",
+    stylePath: "/style.css",
     // date: data.date,
   });
 
@@ -113,52 +103,53 @@ if (buildBlogIndex) {
   const blogHtml = template({
     // title: data.title,
     main: "<h1> This is my blog page<h1>",
-    stylePath: "~/style.css",
+    stylePath: "/style.css",
     // date: data.date,
   });
 
   fs.writeFileSync(path.join(blogDir, "index.html"), blogHtml);
 }
 
-if (changedPosts) {
-    // const files = fs.readdirSync(inputDir).filter((file) => file.endsWith(".md"));
-  
-  changedPosts.forEach((post) => {
-    console.log(`Start Processing file:  ${post}`);
-    console.log(`Read file:  ${post}`);
-    const content = fs.readFileSync(path.join(inputDir, post.replace('content/', '')), "utf-8");
+// const files = fs.readdirSync(inputDir).filter((file) => file.endsWith(".md"));
+// if (files) {
+//   changedPosts.forEach((post) => {
+//     console.log(`Start Processing file:  ${post}`);
+//     console.log(`Read file:  ${post}`);
+//     const content = fs.readFileSync(
+//       path.join(inputDir, post.replace("content/", "")),
+//       "utf-8"
+//     );
 
-    console.log(`Get matter metada for:  ${post}`);
-    const { data, content: markdownContent } = matter(content);
-   
-   
-    console.log(`Parse content to HTML for :  ${post}`);
-    const htmlContent = marked.parse(markdownContent);
-   
-    console.log(`Set the HBS template for :  ${post}`);
-    const html = template({
-      title: data.title,
-      main: htmlContent,
-      date: data.date,
-      stylePath: "~/style.css",
-    });
+//     console.log(`Get matter metada for:  ${post}`);
+//     const { data, content: markdownContent } = matter(content);
 
-    // const outputFileName = file.replace(".md", ".html");
-    console.log(`Build output file name (basename) for :  ${post}`);
-    const outputFileName = path.basename(post).replace(".md", ".html");
+//     console.log(`Parse content to HTML for :  ${post}`);
+//     const htmlContent = marked.parse(markdownContent);
 
-    console.log(`Build output path for :  ${post}`);
-    const outputPath = path.join(blogDir, outputFileName);
+//     console.log(`Set the HBS template for :  ${post}`);
+//     const html = template({
+//       title: data.title,
+//       main: htmlContent,
+//       date: data.date,
+//       stylePath: "~/style.css",
+//     });
 
-    console.log(`Writing to fs for :  ${post}`);
-    fs.writeFileSync(outputPath, html);
+//     // const outputFileName = file.replace(".md", ".html");
+//     console.log(`Build output file name (basename) for :  ${post}`);
+//     const outputFileName = path.basename(post).replace(".md", ".html");
 
-    console.log(`Generated: ${outputPath}`);
-  });
-} else {
-  console.log('No new or updated files to process.');
-  process.exit(0);
-}
+//     console.log(`Build output path for :  ${post}`);
+//     const outputPath = path.join(blogDir, outputFileName);
+
+//     console.log(`Writing to fs for :  ${post}`);
+//     fs.writeFileSync(outputPath, html);
+
+//     console.log(`Generated: ${outputPath}`);
+//   });
+// } else {
+//   console.log("No new or updated files to process.");
+//   process.exit(0);
+// }
 
 console.log('Incremental build completed');
 // console.log('static site generator completed.')
