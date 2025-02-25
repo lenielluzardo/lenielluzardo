@@ -1,5 +1,5 @@
-console.log("-- ## Static website build process START. --\n");
-console.log("-- ## Loading dependencies. --\n");
+console.log("\n # START Static website build process. --\n");
+console.log("- # Loading dependencies. --\n");
 
 const fs = require("fs");
 const path = require("path");
@@ -8,7 +8,7 @@ const matter = require("gray-matter");
 const Handlebars = require("handlebars");
 const { execSync } = require("child_process");
 
-console.log("-- ## Declaring variables. --\n");
+console.log("- # Declaring variables. --\n");
 const templatePath = path.join(__dirname, "template");
 const contentPath = path.join(__dirname, "content");
 const publicPath = path.join(__dirname, "public");
@@ -18,30 +18,30 @@ const buildHomePg = true;
 const buildBlogPg = true;
 const buildPosts = false;
 
-console.log(`-- # Handlebars template process START. --\n`);
+console.log(`-- # START Handlebars template process. --\n`);
 let layoutTmpl = null;
 
 let tmplFiles = fs.readdirSync(templatePath);
-console.log(`Template files: ${tmplFiles} --\n`);
+console.log(`___ Template files: ${tmplFiles} --\n`);
 
 tmplFiles.forEach((fileName, index) => {
-  console.log(`${index} - Reading source template for: ${fileName} --\n`);
+  console.log(`___ ${index} - Reading source template for: ${fileName} --\n`);
   tmplSrc = fs.readFileSync(`${templatePath}/${fileName}`, "utf-8");
 
   // console.log(`Template source is:\n ${tmplSrc} \n`);
 
   if (fileName === "layout.hbs") {
-    console.log(`${index} - Compiling and saving ${fileName} template. --\n`);
+    console.log(`___ ${index} - Compiling and saving ${fileName} template. --\n`);
     layoutTmpl = Handlebars.compile(tmplSrc);
 
     // console.log(`${fileName} template value is:\n ${layoutTmpl} \n`);
   } else {
-    console.log(`${index} - Compiling ${fileName} template. --\n`);
+    console.log(`___ ${index} - Compiling ${fileName} template. --\n`);
     let partialName = fileName.replace(".hbs", "");
 
     let tmpl = Handlebars.compile(tmplSrc);
 
-    console.log(`${index} - Registering ${partialName} template. --\n`);
+    console.log(`___ ${index} - Registering ${partialName} template. --\n`);
     Handlebars.registerPartial(partialName, tmpl);
   }
 });
@@ -54,7 +54,7 @@ Handlebars.registerHelper("selectMain", (context, options) => {
       return "blog";
   }
 });
-console.log(`-- # Handlebars template process END. --\n`);
+console.log(`-- # END Handlebars template process. --\n`);
 
 // Output
 
@@ -128,7 +128,7 @@ if (!fs.existsSync(blogPath)) {
 //   console.log('No new file to process.');
 // }
 
-console.log(`-- # Home page html build START. --\n`);
+console.log(`-- # START Home page html build. --\n`);
 if (buildHomePg) {
   const homeHtml = layoutTmpl({
     route: "/",
@@ -137,9 +137,9 @@ if (buildHomePg) {
 
   fs.writeFileSync(path.join(publicPath, "index.html"), homeHtml);
 }
-console.log(`-- # Home page html build END. --\n`);
+console.log(`-- # END Home page html build. --\n`);
 
-console.log(`-- # Blog page html build START. --\n`);
+console.log(`-- # START Blog page html build. --\n`);
 if (buildBlogPg) {
   const blogHtml = layoutTmpl({
     route: "/blog",
@@ -148,7 +148,7 @@ if (buildBlogPg) {
 
   fs.writeFileSync(path.join(blogPath, "index.html"), blogHtml);
 }
-console.log(`-- # Blog page html build END. --\n`);
+console.log(`-- # END Blog page html build. --\n`);
 
 // const files = fs.readdirSync(inputDir).filter((file) => file.endsWith(".md"));
 // if (files) {
@@ -191,5 +191,5 @@ console.log(`-- # Blog page html build END. --\n`);
 //   process.exit(0);
 // }
 
-console.log("-- ## Static website build process END. --\n");
+console.log("# END Static website build process. --\n");
 // console.log('static site generator completed.')
