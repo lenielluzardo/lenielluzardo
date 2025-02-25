@@ -5,18 +5,61 @@ const matter = require('gray-matter');
 const Handlebars = require('handlebars');
 const { execSync } = require("child_process");
 
-/// variables & constants
+
+const templatePath = path.join(__dirname, 'template');
+const contentPath = path.join(__dirname, "content");
+const publicPath = path.join(__dirname, "public");
+const blogPath = path.join(__dirname, "public/blog");
+
 const buildHome = true;
 const buildBlogIndex = true;
 const buildPosts = false;
 
-// Input
-const inputDir = path.join(__dirname, "content");
-const templatePath = path.join(__dirname, "template/layout.hbs");
+/** HANDLEBAR TEMPLATE PROCESS */
+console.log(`-- # Handlebars template process started. --\n`)
+let layoutTmpl = null;
+
+let tmplFiles = fs.readdirSync(templatePath);
+console.log(`Template files: ${tmplFiles} --\n`);
+
+tmplFiles.forEach((fileName, index) => {
+      
+  console.log(`${index} - Reading source template for: ${fileName} --\n`);
+  tmplSrc = fs.readFileSync(`${templatePath}/${fileName}`, 'utf-8');
+  
+  // console.log(`Template source is:\n ${tmplSrc} \n`);
+  
+  if (fileName === 'layout.hbs') {
+    console.log(`${index} - Compiling and saving ${fileName} template. --\n`);
+    layoutTmpl = Handlebars.compile(tmplSrc);
+    
+    // console.log(`${fileName} template value is:\n ${layoutTmpl} \n`);
+    
+  } else {
+    console.log(`${index} - Compiling ${fileName} template. --\n`);
+    let partialName = fileName.replace('.hbs', '');
+    
+    let tmpl = Handlebars.compile(tmplSrc);
+
+    console.log(`${index} - Registering ${partialName} template. --\n`);
+    Handlebars.registerPartial(partialName, tmpl);
+  }
+});
+
+Handlebars.registerHelper('selectMain', (context, options) => {
+  switch (context) {
+    case '/':
+      return 'home';
+    case '/blog':
+      return 'blog';
+  }
+});
+console.log(`-- # Handlebars template process ended. --\n`);
+
+
 
 // Output
-const publicDir = path.join(__dirname, "public");
-const blogDir = path.join(__dirname, "public/blog");
+
 
 // function findChangedPosts() {
 //   try {
@@ -49,12 +92,12 @@ const blogDir = path.join(__dirname, "public/blog");
 // }
 
 // Ensure the oput directory exists
-if (!fs.existsSync(blogDir)) {
-  fs.mkdirSync(blogDir);
+if (!fs.existsSync(blogPath)) {
+  fs.mkdirSync(blogPath);
 }
 
-const templateSource = fs.readFileSync(templatePath, "utf-8");
-const template = Handlebars.compile(templateSource);
+// const templateSource = fs.readFileSync(`${templatePath}/layout.hbs`, "utf-8");
+// const template = Handlebars.compile(templateSource);
 
 // const latestPost = findLatestPost();
 // console.log(`Before start ${latestPost}`);
@@ -89,25 +132,27 @@ const template = Handlebars.compile(templateSource);
 // }
 
 if (buildHome) {
-  const homeHtml = template({
+  const homeHtml = layoutTmpl({
     // title: data.title,
-    main: "<h1> This is my home page<h1>",
+    route: '/',
     stylePath: "/style.css",
+    
     // date: data.date,
   });
 
-  fs.writeFileSync(path.join(publicDir, "index.html"), homeHtml);
+  fs.writeFileSync(path.join(publicPath, "index.html"), homeHtml);
 }
 
 if (buildBlogIndex) {
-  const blogHtml = template({
+  const blogHtml = layoutTmpl({
     // title: data.title,
+    route: '/blog',
     main: "<h1> This is my blog page<h1>",
     stylePath: "/style.css",
     // date: data.date,
   });
 
-  fs.writeFileSync(path.join(blogDir, "index.html"), blogHtml);
+  fs.writeFileSync(path.join(blogPath, "index.html"), blogHtml);
 }
 
 // const files = fs.readdirSync(inputDir).filter((file) => file.endsWith(".md"));
