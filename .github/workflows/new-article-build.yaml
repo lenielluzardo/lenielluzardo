@@ -39,9 +39,9 @@ jobs:
         run: find ./public -type f -links +1  # Check for hard links
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-pages-artifact@v4
         with:
-          name: new-article
+          name: github-pages
           path: ./public
   deploy:
     environment:
@@ -67,8 +67,8 @@ jobs:
           name: new-article
 
       - name: Verify contents of artifact directory
-        run: ls -la .  # Verify the downloaded artifact
-
+        run: ls -la ./github-pages  # Verify the downloaded artifact
+        
       - name: Deploy to Github Pages
         id: deployment
         uses: actions/deploy-pages@v4
