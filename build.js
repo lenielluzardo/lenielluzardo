@@ -1,4 +1,6 @@
 console.log("\n # START Static website build process. --\n");
+
+//#region Module imports.
 console.log("- # Loading dependencies. --\n");
 
 const fs = require("fs");
@@ -8,18 +10,24 @@ const matter = require("gray-matter");
 const Handlebars = require("handlebars");
 const { execSync } = require("child_process");
 
+//#endregion.
+
+//#region Variables declaration.
 console.log("- # Declaring variables. --\n");
 const templatePath = path.join(__dirname, "template");
 const contentPath = path.join(__dirname, "content");
 const publicPath = path.join(__dirname, "public");
 const blogPath = path.join(__dirname, "public/blog");
-
 const buildHomePg = true;
 const buildBlogPg = true;
 const buildPosts = false;
 
+//#endregion.
+
+//#region Handlebars configuration & tamplate build.
 console.log(`-- # START Handlebars template process. --\n`);
 let layoutTmpl = null;
+let articleTmpl = null;
 
 let tmplFiles = fs.readdirSync(templatePath);
 console.log(`___ Template files: ${tmplFiles} --\n`);
@@ -43,6 +51,10 @@ tmplFiles.forEach((fileName, index) => {
 
     console.log(`___ ${index} - Registering ${partialName} template. --\n`);
     Handlebars.registerPartial(partialName, tmpl);
+   
+    if (partialName === 'article') {
+      articleTmpl = tmpl;
+    }
   }
 });
 
@@ -55,40 +67,9 @@ Handlebars.registerHelper("selectMain", (context, options) => {
   }
 });
 console.log(`-- # END Handlebars template process. --\n`);
+//#endregion.
 
-// Output
-
-// function findChangedPosts() {
-//   try {
-//     const gitResult = execSync(`git diff --name-only HEAD^ HEAD -- ${inputDir}`)
-//     console.log('Find changed posts git result: ', gitResult);
-
-//     const changedFiles = gitResult.toString().trim().split("\n");
-//     console.log('Changed posts:', changedFiles)
-
-//     return changedFiles.filter(file => file.endsWith('.md'));
-//   } catch (error) {
-//     console.error('Error finding changed posts:', error);
-//     return [];
-//   }
-// }
-// function findLatestPost() {
-//   const files = fs.readdirSync(inputDir).filter(file => file.endsWith('.md'));
-//   if (files.length === 0) {
-//     return null
-//   }
-
-//   files.sort((a, b) => {
-//     const aTime = fs.statSync(path.join(inputDir, a)).ctime;
-//     const bTime = fs.statSync(path.join(inputDir, b)).ctime;
-
-//     return bTime - aTime;
-//   });
-
-//   return files[0];
-// }
-
-// Ensure the oput directory exists
+//- Ensure the oput directory exists
 if (!fs.existsSync(blogPath)) {
   fs.mkdirSync(blogPath);
 }
@@ -128,7 +109,8 @@ if (!fs.existsSync(blogPath)) {
 //   console.log('No new file to process.');
 // }
 
-console.log(`-- # START Home page html build. --\n`);
+//#region Home HTML page build.
+console.log(`-- # START BUILD: Home html page. --\n`);
 if (buildHomePg) {
   const homeHtml = layoutTmpl({
     route: "/",
@@ -137,9 +119,11 @@ if (buildHomePg) {
 
   fs.writeFileSync(path.join(publicPath, "index.html"), homeHtml);
 }
-console.log(`-- # END Home page html build. --\n`);
+console.log(`-- # END BUILD: Home html page. --\n`);
+//#endregion
 
-console.log(`-- # START Blog page html build. --\n`);
+//#region Blog HTML page build.
+console.log(`-- # START BUILD: Blog html page. --\n`);
 if (buildBlogPg) {
   const blogHtml = layoutTmpl({
     route: "/blog",
@@ -148,48 +132,50 @@ if (buildBlogPg) {
 
   fs.writeFileSync(path.join(blogPath, "index.html"), blogHtml);
 }
-console.log(`-- # END Blog page html build. --\n`);
+console.log(`-- # END BUILD: Blog html page. --\n`);
+//#endregion
 
-// const files = fs.readdirSync(inputDir).filter((file) => file.endsWith(".md"));
-// if (files) {
-//   changedPosts.forEach((post) => {
-//     console.log(`Start Processing file:  ${post}`);
-//     console.log(`Read file:  ${post}`);
-//     const content = fs.readFileSync(
-//       path.join(inputDir, post.replace("content/", "")),
-//       "utf-8"
-//     );
+//#region Articles HTML pages build.
+console.log(`-- # START BUILD: Blog Articles html pages`)
+const articles = fs.readdirSync(contentPath).filter((file) => file.endsWith(".md"));
 
-//     console.log(`Get matter metada for:  ${post}`);
-//     const { data, content: markdownContent } = matter(content);
+if (articles) {
+  articles.forEach((article, index) => {
+   
+    console.log(`___ ${index} - Reading content article from: ${article} --\n`);
+    const content = fs.readFileSync(path.join(contentPath, article),"utf-8");
 
-//     console.log(`Parse content to HTML for :  ${post}`);
-//     const htmlContent = marked.parse(markdownContent);
+    console.log(`___ ${index} - Getting matter metada from: ${article} --\n`);
+    const { data, content: markdownContent } = matter(content);
 
-//     console.log(`Set the HBS template for :  ${post}`);
-//     const html = template({
-//       title: data.title,
-//       main: htmlContent,
-//       date: data.date,
-//       stylePath: "~/style.css",
-//     });
+    console.log(`___ ${index} - Parsing content to HTML from: ${article} --\n`);
+    const htmlContent = marked.parse(markdownContent);
 
-//     // const outputFileName = file.replace(".md", ".html");
-//     console.log(`Build output file name (basename) for :  ${post}`);
-//     const outputFileName = path.basename(post).replace(".md", ".html");
+    console.log(`___ ${index} - Setting Handlebars template values from: ${article} --\n`);
+    
+    const html = articleTmpl({
+      title: data.title,
+      content: htmlContent,
+      date: data.date,
+    });
 
-//     console.log(`Build output path for :  ${post}`);
-//     const outputPath = path.join(blogDir, outputFileName);
+    // const outputFileName = file.replace(".md", ".html");
+    console.log(`___ ${index} - Build html page output file name for:  ${article} --\n`);
+    const outputFileName = path.basename(article).replace(".md", ".html");
 
-//     console.log(`Writing to fs for :  ${post}`);
-//     fs.writeFileSync(outputPath, html);
+    console.log(`___ ${index} - Building output path for:  ${article} --\n`);
+    const outputPath = path.join(blogPath, outputFileName);
 
-//     console.log(`Generated: ${outputPath}`);
-//   });
-// } else {
-//   console.log("No new or updated files to process.");
-//   process.exit(0);
-// }
+    console.log(`___ ${index} - Writing HTML page into file system for: ${article} --\n`);
+    fs.writeFileSync(outputPath, html);
+
+    console.log(`___ ${index} - HTML file generated: ${outputPath} --\n`);
+  });
+} else {
+  console.log("-- # INFO: No new or updated articles to process.");
+}
+console.log(`-- # END BUILD: Blog Articles html pages`);
+//#endregion.
 
 console.log("# END Static website build process. --\n");
 // console.log('static site generator completed.')
