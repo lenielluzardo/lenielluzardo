@@ -67,8 +67,8 @@ jobs:
           name: new-article
 
       - name: Verify contents of artifact directory
-        run: ls -la ./github-pages  # Verify the downloaded artifact
-        
+        run: ls -la ./new-article  # Verify the downloaded artifact
+
       - name: Deploy to Github Pages
         id: deployment
         uses: actions/deploy-pages@v4
