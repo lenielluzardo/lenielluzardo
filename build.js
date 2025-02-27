@@ -29,10 +29,20 @@ console.log(`-- # START Handlebars template process. --\n`);
 let layoutTmpl = null;
 let articleTmpl = null;
 
-let tmplFiles = fs.readdirSync(_templatepath);
-console.log(`___ Template files: ${tmplFiles} --\n`);
+let hbsTemplates = fs.readdirSync(_templatepath);
 
-tmplFiles.forEach((fileName, index) => {
+console.log(`___ Template files: ${hbsTemplates} --\n`);
+
+hbsTemplates.forEach((fileName, index) => {
+  
+  // switch (fileName) {
+  //   case fileName.includes('partial'):
+      
+  //     break;
+  //   case '':
+  //     break;
+  // }
+
   console.log(`___ ${index} - Reading source template for: ${fileName} --\n`);
   tmplSrc = fs.readFileSync(`${_templatepath}/${fileName}`, "utf-8");
 
@@ -159,13 +169,16 @@ if (articles) {
 
     console.log(`___ ${index} - Setting Handlebars template values from: ${article} --\n`);
     
-    const html = articleTmpl({
+    const articlehtml = articleTmpl({
       title: data.title,
       content: htmlContent,
       date: data.date,
       articles: articless
     });
 
+    const html = layoutTmpl({
+      selectMain: articlehtml
+    })
     // const outputFileName = file.replace(".md", ".html");
     console.log(`___ ${index} - Build html page output file name for:  ${article} --\n`);
     const outputFileName = path.basename(article).replace(".md", ".html");
