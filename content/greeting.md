@@ -1,10 +1,7 @@
 # Welcome!, I'm Leniel Luzardo, creating software since 2019.
 
 ## Experience
-* 
-*
-*
-*
+
 
 ## Skills
 

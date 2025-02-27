@@ -175,16 +175,16 @@ function buildArticles(articles) {
     
       const articlehtml = Handlebars.compile(articleTmpl)({
         title: data.title,
-        content: htmlContent,
         date: data.date,
+        content: htmlContent,
         articles: articless
       });
 
       const html = layoutTmpl({
         route: "/article",
         title: data.title,
-        // content: htmlContent,
         date: data.date,
+        content: htmlContent,
         articles: articless
       });
       // const outputFileName = file.replace(".md", ".html");
