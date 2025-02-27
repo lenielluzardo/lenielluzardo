@@ -63,18 +63,22 @@ hbsTemplates.forEach((fileName, index) => {
     Handlebars.registerPartial(partialName, tmplSrc);
    
     if (partialName === 'article') {
-      let tmpl = Handlebars.compile(tmplSrc);
-      articleTmpl = tmpl;
+      // let tmpl = Handlebars.compile(tmplSrc);
+      articleTmpl = tmplSrc;
     }
   }
 });
 
-Handlebars.registerHelper("selectMain", (context, options) => {
-  switch (context) {
+Handlebars.registerHelper("selectMain", (context) => {
+  console.log(context);
+
+  switch (context.data.root.route) {
     case "/":
       return "home";
     case "/blog":
       return "blog";
+    case "/article":
+      return "article";
   }
 });
 console.log(`-- # END Handlebars template process. --\n`);
@@ -143,7 +147,7 @@ console.log(`-- # END BUILD: Home html page. --\n`);
 
 const articles = fs.readdirSync(contentPath).filter((file) => file.endsWith(".md"));
 
-let articless = articles.map((article) => {
+const articless = articles.map((article) => {
   const outputFileName = path.basename(article).replace(".md", ".html");
 
   let articlee = {
@@ -154,48 +158,55 @@ let articless = articles.map((article) => {
   return articlee;
 });
 
-
-if (articles) {
-  articles.forEach((article, index) => {
+function buildArticles(articles) {
+  if (articles) {
+    articles.forEach((article, index) => {
    
-    console.log(`___ ${index} - Reading content article from: ${article} --\n`);
-    const content = fs.readFileSync(path.join(contentPath, article),"utf-8");
+      console.log(`___ ${index} - Reading content article from: ${article} --\n`);
+      const content = fs.readFileSync(path.join(contentPath, article), "utf-8");
 
-    console.log(`___ ${index} - Getting matter metada from: ${article} --\n`);
-    const { data, content: markdownContent } = matter(content);
+      console.log(`___ ${index} - Getting matter metada from: ${article} --\n`);
+      const { data, content: markdownContent } = matter(content);
 
-    console.log(`___ ${index} - Parsing content to HTML from: ${article} --\n`);
-    const htmlContent = marked.parse(markdownContent);
+      console.log(`___ ${index} - Parsing content to HTML from: ${article} --\n`);
+      const htmlContent = marked.parse(markdownContent);
 
-    console.log(`___ ${index} - Setting Handlebars template values from: ${article} --\n`);
+      console.log(`___ ${index} - Setting Handlebars template values from: ${article} --\n`);
     
-    const articlehtml = articleTmpl({
-      title: data.title,
-      content: htmlContent,
-      date: data.date,
-      articles: articless
+      const articlehtml = Handlebars.compile(articleTmpl)({
+        title: data.title,
+        content: htmlContent,
+        date: data.date,
+        articles: articless
+      });
+
+      const html = layoutTmpl({
+        route: "/article",
+        title: data.title,
+        content: htmlContent,
+        date: data.date,
+        articles: articless
+      });
+      // const outputFileName = file.replace(".md", ".html");
+      console.log(`___ ${index} - Build html page output file name for:  ${article} --\n`);
+      const outputFileName = path.basename(article).replace(".md", ".html");
+
+      console.log(`___ ${index} - Building output path for:  ${article} --\n`);
+      const outputPath = path.join(blogPath, outputFileName);
+
+      console.log(`___ ${index} - Writing HTML page into file system for: ${article} --\n`);
+      fs.writeFileSync(outputPath, html);
+
+    
+
+      console.log(`___ ${index} - HTML file generated: ${outputPath} --\n`);
     });
-
-    const html = layoutTmpl({
-      selectMain: articlehtml
-    })
-    // const outputFileName = file.replace(".md", ".html");
-    console.log(`___ ${index} - Build html page output file name for:  ${article} --\n`);
-    const outputFileName = path.basename(article).replace(".md", ".html");
-
-    console.log(`___ ${index} - Building output path for:  ${article} --\n`);
-    const outputPath = path.join(blogPath, outputFileName);
-
-    console.log(`___ ${index} - Writing HTML page into file system for: ${article} --\n`);
-    fs.writeFileSync(outputPath, html);
-
-    
-
-    console.log(`___ ${index} - HTML file generated: ${outputPath} --\n`);
-  });
-} else {
-  console.log("-- # INFO: No new or updated articles to process.");
+  } else {
+    console.log("-- # INFO: No new or updated articles to process.");
+  }
 }
+
+buildArticles(articles)
 console.log(`-- # END BUILD: Blog Articles html pages`);
 //#endregion.
 
