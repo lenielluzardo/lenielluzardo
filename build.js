@@ -183,7 +183,7 @@ function buildArticles(articles) {
       const html = layoutTmpl({
         route: "/article",
         title: data.title,
-        content: htmlContent,
+        // content: htmlContent,
         date: data.date,
         articles: articless
       });
