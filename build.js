@@ -14,10 +14,10 @@ const { execSync } = require("child_process");
 
 //#region Variables declaration.
 console.log("- # Declaring variables. --\n");
-const templatePath = path.join(__dirname, "template");
+const _templatepath = path.join(__dirname, "template");
 const contentPath = path.join(__dirname, "content");
-const publicPath = path.join(__dirname, "public");
-const blogPath = path.join(__dirname, "public/blog");
+const publicPath = path.join(__dirname, "docs");
+const blogPath = path.join(__dirname, "docs/blog");
 const buildHomePg = true;
 const buildBlogPg = true;
 const buildPosts = false;
@@ -29,12 +29,12 @@ console.log(`-- # START Handlebars template process. --\n`);
 let layoutTmpl = null;
 let articleTmpl = null;
 
-let tmplFiles = fs.readdirSync(templatePath);
+let tmplFiles = fs.readdirSync(_templatepath);
 console.log(`___ Template files: ${tmplFiles} --\n`);
 
 tmplFiles.forEach((fileName, index) => {
   console.log(`___ ${index} - Reading source template for: ${fileName} --\n`);
-  tmplSrc = fs.readFileSync(`${templatePath}/${fileName}`, "utf-8");
+  tmplSrc = fs.readFileSync(`${_templatepath}/${fileName}`, "utf-8");
 
   // console.log(`Template source is:\n ${tmplSrc} \n`);
 
@@ -47,12 +47,13 @@ tmplFiles.forEach((fileName, index) => {
     console.log(`___ ${index} - Compiling ${fileName} template. --\n`);
     let partialName = fileName.replace(".hbs", "");
 
-    let tmpl = Handlebars.compile(tmplSrc);
+    // let tmpl = Handlebars.compile(tmplSrc);
 
     console.log(`___ ${index} - Registering ${partialName} template. --\n`);
-    Handlebars.registerPartial(partialName, tmpl);
+    Handlebars.registerPartial(partialName, tmplSrc);
    
     if (partialName === 'article') {
+      let tmpl = Handlebars.compile(tmplSrc);
       articleTmpl = tmpl;
     }
   }
@@ -68,6 +69,10 @@ Handlebars.registerHelper("selectMain", (context, options) => {
 });
 console.log(`-- # END Handlebars template process. --\n`);
 //#endregion.
+// const articless = [
+//   { name: "this is my #1 article", url: "this-is-my-no1-article" },
+//   { name: "this is my #2 article", url: "this-is-my-no2-article" },
+// ];
 
 //- Ensure the oput directory exists
 if (!fs.existsSync(blogPath)) {
@@ -122,22 +127,23 @@ if (buildHomePg) {
 console.log(`-- # END BUILD: Home html page. --\n`);
 //#endregion
 
-//#region Blog HTML page build.
-console.log(`-- # START BUILD: Blog html page. --\n`);
-if (buildBlogPg) {
-  const blogHtml = layoutTmpl({
-    route: "/blog",
-    stylePath: "/style.css",
-  });
-
-  fs.writeFileSync(path.join(blogPath, "index.html"), blogHtml);
-}
-console.log(`-- # END BUILD: Blog html page. --\n`);
-//#endregion
-
 //#region Articles HTML pages build.
-console.log(`-- # START BUILD: Blog Articles html pages`)
+
+
+
 const articles = fs.readdirSync(contentPath).filter((file) => file.endsWith(".md"));
+
+let articless = articles.map((article) => {
+  const outputFileName = path.basename(article).replace(".md", ".html");
+
+  let articlee = {
+    title: outputFileName,
+    path: outputFileName,
+  };
+
+  return articlee;
+});
+
 
 if (articles) {
   articles.forEach((article, index) => {
@@ -157,6 +163,7 @@ if (articles) {
       title: data.title,
       content: htmlContent,
       date: data.date,
+      articles: articless
     });
 
     // const outputFileName = file.replace(".md", ".html");
@@ -169,6 +176,8 @@ if (articles) {
     console.log(`___ ${index} - Writing HTML page into file system for: ${article} --\n`);
     fs.writeFileSync(outputPath, html);
 
+    
+
     console.log(`___ ${index} - HTML file generated: ${outputPath} --\n`);
   });
 } else {
@@ -177,5 +186,20 @@ if (articles) {
 console.log(`-- # END BUILD: Blog Articles html pages`);
 //#endregion.
 
+
+
+//#region Blog HTML page build.
+console.log(`-- # START BUILD: Blog html page. --\n`);
+if (buildBlogPg) {
+  const blogHtml = layoutTmpl({
+    route: "/blog",
+    stylePath: "/style.css",
+    articles: articless,
+  });
+
+  fs.writeFileSync(path.join(blogPath, "index.html"), blogHtml);
+}
+console.log(`-- # END BUILD: Blog html page. --\n`);
+//#endregion
 console.log("# END Static website build process. --\n");
 // console.log('static site generator completed.')
