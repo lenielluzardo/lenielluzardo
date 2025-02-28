@@ -197,8 +197,6 @@ function buildArticles(articles) {
       console.log(`___ ${index} - Writing HTML page into file system for: ${article} --\n`);
       fs.writeFileSync(outputPath, html);
 
-    
-
       console.log(`___ ${index} - HTML file generated: ${outputPath} --\n`);
     });
   } else {
