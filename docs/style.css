@@ -2,12 +2,9 @@
 body {
   font-family: 'Istok Web', sans-serif;
   display: grid;
-  grid-template-columns: 1fr auto;
-  grid-template-rows:  auto 1fr auto;
+  grid-template-columns: auto 1fr;
   grid-template-areas: 
-   "header"
-   "main"
-   "footer";
+   "nav main";
   height: 100vh;
   color:#2a2a2a;
   background: radial-gradient(ellipse,  #fffffe 80%, #ebebeb);
@@ -20,17 +17,21 @@ body, ul, a {
   text-decoration: none;
 }
 header{
-  grid-area: header;
+  grid-area: nav;
   padding: 1rem;
   background: radial-gradient(rgb(12, 0, 72), rgb(16, 0, 57));
   box-shadow: 0 1px .3rem .1rem #a5a5a5;
   font-weight: bolder;
+  
 }
-#head-nav-list {
- display: flex;
- justify-content: space-evenly;
+header nav {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: space-between;
+  height: 100%;
 }
-#head-nav-list > li > a {
+header a {
   text-decoration: none;
   color: #dbdbdb;
 }
