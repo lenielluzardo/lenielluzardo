@@ -9,7 +9,8 @@ body {
    "main"
    "footer";
   height: 100vh;
-  background: radial-gradient(rgb(12, 0, 72), rgb(16, 0, 57));
+  color:#2a2a2a;
+  background: radial-gradient(ellipse,  #fffffe 80%, #ebebeb);
 }
 
 body, ul, a {
@@ -17,11 +18,13 @@ body, ul, a {
   margin: 0;
   padding: 0;
   text-decoration: none;
-  color: #dbdbdb;
 }
 header{
   grid-area: header;
   padding: 1rem;
+  background: radial-gradient(rgb(12, 0, 72), rgb(16, 0, 57));
+  box-shadow: 0 1px .3rem .1rem #a5a5a5;
+  font-weight: bolder;
 }
 #head-nav-list {
  display: flex;
@@ -29,6 +32,7 @@ header{
 }
 #head-nav-list > li > a {
   text-decoration: none;
+  color: #dbdbdb;
 }
 main{
   grid-area: main;
@@ -37,10 +41,14 @@ main{
 }
 footer {
   grid-area: footer;
-  text-align: center;
   padding: 1rem;
+  background: radial-gradient(rgb(12, 0, 72), rgb(16, 0, 57));
 }
 footer > nav {
-  display: flex;
+  display: flex;  
   justify-content: space-evenly;
+  width: 100%;
+}
+footer, footer a {
+  color: #dbdbdb;
 }
