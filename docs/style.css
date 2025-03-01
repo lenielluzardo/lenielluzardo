@@ -21,8 +21,8 @@ body, ul, a {
 }
 /*#endregion*/
 
-/*#region Header / Navigation*/
-header{
+/*#region Website Header / Navigation*/
+#website-header{
   grid-area: nav;
   padding: 1rem;
   background: radial-gradient(rgb(12, 0, 72), rgb(16, 0, 57));
@@ -33,13 +33,13 @@ header{
   text-align: center;
   color: #dbdbdb;
 }
-header li{
+#website-header li{
   transition: all .1s ease-out;
 }
-header li:hover {
+#website-header li:hover {
   transform: scale(1.1);
 }
-header a {
+#website-header a {
   color: #dbdbdb;
 }
 #site-nav li{
@@ -95,7 +95,7 @@ main{
   height: 100%;
   overflow-y: scroll;
 }
-main section {
+#blog {
   width: 80%;
 }
 /*#endregion*/
@@ -110,12 +110,12 @@ main section {
 #article{
   padding: 2rem;
   margin: 2rem 0;
-  border:1px solid #000;
-  border-radius: 1rem;
   text-align: justify;
 }
+.img-container{
+  text-align: center;
+}
 /*#endregion*/
-
 
 /*#region Articles Latest*/
 #articles-latest{
@@ -129,12 +129,16 @@ main section {
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-evenly;
-  background: linear-gradient(#f3f3f3, #fff);
   padding: 1rem;
-  border: 1px solid #c9c9c9;
-  border-radius: 1rem;
   /* box-shadow: 0 3px 3px 0px #ebebeb; */
 }
+
+.roundbox{
+  background: linear-gradient(#f3f3f3, #fff ,#f3f3f3);
+  border: 1px solid #c9c9c9;
+  border-radius: 1rem;
+}
+
 #articles-latest ul li {
   margin: .5rem;
 }
