@@ -90,7 +90,7 @@ main{
   height: 100%;
   overflow-y: scroll;
 }
-.blog {
+main section {
   display: flex;
   flex-direction: column;
   align-items: center;
