@@ -1,6 +1,7 @@
 /*#region Initial Config*/
 :root{
---body-font-color:#2a2a2a;
+  --navheader-font-color: #fff;
+  --body-font-color:#2a2a2a;
 }
 body {
   font-family: 'Istok Web', sans-serif;
@@ -31,7 +32,7 @@ body, ul, a {
   flex-direction: column;
   justify-content: space-between;
   text-align: center;
-  color: #dbdbdb;
+  color: var(--navheader-font-color);
 }
 #website-header li{
   transition: all .1s ease-out;
@@ -40,7 +41,7 @@ body, ul, a {
   transform: scale(1.1);
 }
 #website-header a {
-  color: #dbdbdb;
+  color: var(--navheader-font-color);
 }
 #site-nav li{
   margin: 0 0 .5rem 0;
@@ -64,9 +65,6 @@ body, ul, a {
   grid-auto-flow: row;
   grid-gap: .5rem;
   padding:.5rem 0;
-}
-#site-externals li {
-  /* margin: .25rem 0; */
 }
 #site-externals a[alt]:hover::after{
   content:attr(alt);
@@ -121,18 +119,14 @@ main{
 #articles-latest{
   width: 100%;
 }
-#articles-latest h3{
-  margin: 0;
-}
 #articles-latest ul{
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: space-evenly;
+  justify-content: space-between;
   padding: 1rem;
   /* box-shadow: 0 3px 3px 0px #ebebeb; */
 }
-
 .roundbox{
   background: linear-gradient(#f3f3f3, #fff ,#f3f3f3);
   border: 1px solid #c9c9c9;
