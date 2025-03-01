@@ -1,3 +1,4 @@
+/*#region Initial Config*/
 :root{
 --body-font-color:#2a2a2a;
 }
@@ -11,15 +12,16 @@ body {
   color:var(--body-font-color);
   background: radial-gradient(ellipse,  #fffffe 80%, #ebebeb);
   overflow: hidden;
-  cursor:
 }
-
 body, ul, a {
   list-style: none;
   margin: 0;
   padding: 0;
   text-decoration: none;
 }
+/*#endregion*/
+
+/*#region Header / Navigation*/
 header{
   grid-area: nav;
   padding: 1rem;
@@ -80,6 +82,9 @@ header a {
   padding: 2px 5px;
   width: 5rem;
 }
+/*#endregion*/
+
+/*#region Main Content Container*/
 main{
   grid-area: main;
   display: flex;
@@ -93,9 +98,26 @@ main{
 main section {
   width: 80%;
 }
+/*#endregion*/
+
+/*#region Blog*/
 #blog-desc {
  text-align: center;
 }
+/*#endregion*/
+
+/*#region Article (single)*/
+#article{
+  padding: 2rem;
+  margin: 2rem 0;
+  border:1px solid #000;
+  border-radius: 1rem;
+  text-align: justify;
+}
+/*#endregion*/
+
+
+/*#region Articles Latest*/
 #articles-latest{
   width: 100%;
 }
@@ -122,6 +144,9 @@ main section {
 #articles-latest a:visited{
   color:var(--body-font-color);
 }
+/*#endregion*/
+
+/*#region Card */
 .card-container {
   border: solid 1px rgb(208, 204, 204);
   border-radius: .5rem;
@@ -137,8 +162,6 @@ main section {
 .card-container:hover {
   transform: scale(1.1);
 }
-
-
 .card-img {
   width: 100%;
   height: 60%; 
@@ -159,5 +182,6 @@ main section {
   margin: 0;
   font-size: .7rem;
 }
+/*#endregion*/
 
 
