@@ -1,20 +1,27 @@
-<section id="articles-latest">
+<aside id="articles-latest">
   <h3>Latest articles:</h3>
   <ul>
+   
     {{#each articles }}
+     
       <li>
         <a href="{{this.title}}">
           <div class="card-container">
+    
             <div class="card-img">
               {{!-- <img src="{{img-src}}" alt="{{img-alt}}"> --}}
               <img src="https://placehold.co/500" alt="{{img-alt}}">
             </div>
+    
             <div class="card-content">
               <h4 class="card-title">{{this.title}} - title placeholder</h4>
             </div>
+    
           </div>
         </a>
       </li>
+    
     {{/each}}
+  
   </ul>
-</section>
+</aside>

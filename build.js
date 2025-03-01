@@ -69,7 +69,7 @@ hbsTemplates.forEach((fileName, index) => {
   }
 });
 
-Handlebars.registerHelper("selectMain", (context) => {
+Handlebars.registerHelper("main", (context) => {
   console.log(context);
 
   switch (context.data.root.route) {
