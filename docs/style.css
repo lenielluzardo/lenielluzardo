@@ -52,10 +52,10 @@ header a {
  padding: 0;
  font-size: .9rem;
 }
-#site-externals a[alt]:hover::after{
+header a[alt]:hover::after{
   content:attr(alt);
   position: absolute;
-  top:-110%;
+  top:0%;
   left: 70%;
   font-size: .8rem;
   font-weight: bold;
