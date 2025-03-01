@@ -117,22 +117,16 @@ main{
 
 /*#region Articles Latest*/
 #articles-latest{
-  width: 100%;
+  /* width: 100%; */
 }
 #articles-latest ul{
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: center;
+  align-content: center;
   padding: 1rem;
-  /* box-shadow: 0 3px 3px 0px #ebebeb; */
 }
-.roundbox{
-  background: linear-gradient(#f3f3f3, #fff ,#f3f3f3);
-  border: 1px solid #c9c9c9;
-  border-radius: 1rem;
-}
-
 #articles-latest ul li {
   margin: .5rem;
 }
@@ -182,4 +176,10 @@ main{
 }
 /*#endregion*/
 
-
+/*#region Components / Utils */
+.roundbox{
+  background: linear-gradient(#f3f3f3, #fff ,#f3f3f3);
+  border: 1px solid #c9c9c9;
+  border-radius: 1rem;
+}
+/*#endregion*/
