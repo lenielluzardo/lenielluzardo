@@ -1,16 +1,21 @@
 console.log("\n # START Static website build process. --\n");
 
-//#region Module imports.
+//#region Module Imports.
 console.log("- # Loading dependencies. --\n");
 
 const fs = require("fs");
 const path = require("path");
 const marked = require("marked");
+const customHeadingId = require ("marked-custom-heading-id");
 const matter = require("gray-matter");
 const Handlebars = require("handlebars");
 const { execSync } = require("child_process");
-
 //#endregion.
+
+//#region Module Configurations.
+marked.use(customHeadingId());
+
+//#endregion
 
 
 //#region Variables declaration.
@@ -187,20 +192,23 @@ function buildArticles(articles) {
 
       console.log(`___ ${index} - Setting Handlebars template values from: ${article} --\n`);
     
+      console.log('DATA IS: ', data);
 
-      const articlehtml = Handlebars.compile(articleTmpl)({
-        meta: data ,        
-        content: htmlContent,
-        articles: articless
-      });
+      // const articlehtml = Handlebars.compile(articleTmpl)({
+      //   route: "/article",
+      //   meta: data,
+      //   content: htmlContent,
+      //   articles: articless,
+      // });
 
+      // const html = layoutTmpl(articlehtml)
       const html = layoutTmpl({
         route: "/article",
-        title: data.title,
-        date: data.date,
+        meta: data,
         content: htmlContent,
-        articles: articless
+        articles: articless,
       });
+
       // const outputFileName = file.replace(".md", ".html");
       console.log(`___ ${index} - Build html page output file name for:  ${article} --\n`);
       const outputFileName = path.basename(article).replace(".md", ".html");

@@ -1,5 +1,5 @@
 ---
-title: "this is my example article on how to create and ssg with github"
+title: "This is my example article on how to create and ssg with github"
 excerpt: "a simple and fast way to blog using only html css and js"
 author: "leniel luzardo"
 author_bio: "a software developer exported from the caribbean."
