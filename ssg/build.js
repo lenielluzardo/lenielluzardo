@@ -53,15 +53,7 @@ let hbsTemplates = fs.readdirSync(path_hbs_template);
 console.log(`___ Template files: ${hbsTemplates} --\n`);
 
 hbsTemplates.forEach((fileName, index) => {
-  
-  // switch (fileName) {
-  //   case fileName.includes('partial'):
-      
-  //     break;
-  //   case '':
-  //     break;
-  // }
-
+ 
   console.log(`___ ${index} - Reading source template for: ${fileName} --\n`);
   tmplSrc = fs.readFileSync(`${path_hbs_template}/${fileName}`, "utf-8");
 
@@ -166,18 +158,26 @@ console.log(`-- # END BUILD: Home html page. --\n`);
 
 const articles = fs.readdirSync(path_db_entries).filter((file) => file.endsWith(".md"));
 
-const articless = articles.map((article) => {
-  const outputFileName = path.basename(article).replace(".md", ".html");
+const articles_latest = articles.map((entryFileName) => {
+  
+  const entryTitle = entryFileName.replace(".md", "").replaceAll("-", " ")
+                      .toLowerCase().split(' ')
+                      .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
+                      .join(' ');
+                      
+  const dashedName = entryFileName.replace(".md", ".html");
 
-  let articlee = {
-    title: outputFileName,
-    path: outputFileName,
+  let entry = {
+    title: entryTitle,
+    slug: `/blog/${dashedName}`,
   };
 
-  return articlee;
+  console.log(entry);
+  return entry;
 });
 
 function buildArticles(articles) {
+  
   if (articles) {
     articles.forEach((article, index) => {
    
@@ -192,21 +192,13 @@ function buildArticles(articles) {
 
       console.log(`___ ${index} - Setting Handlebars template values from: ${article} --\n`);
     
-      console.log('DATA IS: ', data);
+      articles_latest
 
-      // const articlehtml = Handlebars.compile(articleTmpl)({
-      //   route: "/article",
-      //   meta: data,
-      //   content: htmlContent,
-      //   articles: articless,
-      // });
-
-      // const html = layoutTmpl(articlehtml)
       const html = layoutTmpl({
         route: "/article",
         meta: data,
         content: htmlContent,
-        articles: articless,
+        articles: articles_latest,
       });
 
       // const outputFileName = file.replace(".md", ".html");
@@ -238,7 +230,7 @@ if (buildBlogPg) {
   const blogHtml = layoutTmpl({
     route: "/blog",
     stylePath: "/style.css",
-    articles: articless,
+    articles: articles_latest,
   });
 
   fs.writeFileSync(path.join(path_blog, "index.html"), blogHtml);

@@ -7,8 +7,8 @@ author_img: "%author_img%"
 author_profile: "https://www.linkedin.com/in/lenielluzardo"
 category: "Web Development"
 tags: ["Node.js", "Blogging", "GitHub"]
-date_created: "2025-03-03"
-date_modified: "2025-03-03"
+date_created: "March 03, 2025"
+date_modified: "March 03, 2025"
 article_url: "%article_url%"
 aritcle_img_url: "https://res.cloudinary.com/du3l28sfg/image/upload/v1741032541/blog/iwr6traoh40sgsoxqy9y.jpg"
 aritcle_img_alt: "A placeholder image for testing purposes."
@@ -47,27 +47,42 @@ This article assume you have basic understanding of programming concepts and too
 ---
 
 ## Initialize a Repository. {#init-repository}
+*This section is currently under construction*
 
 ---
+
 ## Create Project Struture. {#project-structure}
+*This section is currently under construction*
 
 ---
+
 ## Install Dependencies. {#install-dependencies}
+*This section is currently under construction*
 
 ---
+
 ## Create A Node Script. {#create-node-script}
+*This section is currently under construction*
 
 ---
+
 ## Create Handlebars Template. {#create-hbs-template}
+*This section is currently under construction*
 
 ---
+
 ## Build The HTML Files. {#build-html}
+*This section is currently under construction*
 
 ---
+
 ## Deploy to Github. {#github-deploy}
+*This section is currently under construction*
 
 --
+
 ## Conclusion
+*This section is currently under construction*
 
 
 ---
