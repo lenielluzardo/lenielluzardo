@@ -12,15 +12,29 @@ const { execSync } = require("child_process");
 
 //#endregion.
 
+
 //#region Variables declaration.
 console.log("- # Declaring variables. --\n");
-const _templatepath = path.join(__dirname, "template");
-const contentPath = path.join(__dirname, "content");
-const publicPath = path.join(__dirname, "docs");
-const blogPath = path.join(__dirname, "docs/blog");
+
+const path_root = path.join(__dirname, "../");
+const path_ssg_root = path.join(__dirname, '');
+const path_db = `${path_root}db`;
+const path_db_entries = `${path_db}/entries`;
+const path_hbs_template = `${path_ssg_root}/hbs_template`;
+const path_public = `${path_root}docs`;
+const path_blog = `${path_public}/blog`;
+
 const buildHomePg = true;
 const buildBlogPg = true;
 const buildPosts = false;
+
+console.log(`PATHS VALUES: \n`);
+console.log(`'__dirname': ${__dirname}`);
+console.log(`path_db: ${path_db}`);
+console.log(`path_db_entries: ${path_db_entries}`);
+console.log(`path_hbs_template: ${path_hbs_template}`);
+console.log(`path_public: ${path_public}`);
+console.log(`path_blog: ${path_blog}`);
 
 //#endregion.
 
@@ -29,7 +43,7 @@ console.log(`-- # START Handlebars template process. --\n`);
 let layoutTmpl = null;
 let articleTmpl = null;
 
-let hbsTemplates = fs.readdirSync(_templatepath);
+let hbsTemplates = fs.readdirSync(path_hbs_template);
 
 console.log(`___ Template files: ${hbsTemplates} --\n`);
 
@@ -44,7 +58,7 @@ hbsTemplates.forEach((fileName, index) => {
   // }
 
   console.log(`___ ${index} - Reading source template for: ${fileName} --\n`);
-  tmplSrc = fs.readFileSync(`${_templatepath}/${fileName}`, "utf-8");
+  tmplSrc = fs.readFileSync(`${path_hbs_template}/${fileName}`, "utf-8");
 
   // console.log(`Template source is:\n ${tmplSrc} \n`);
 
@@ -89,8 +103,8 @@ console.log(`-- # END Handlebars template process. --\n`);
 // ];
 
 //- Ensure the oput directory exists
-if (!fs.existsSync(blogPath)) {
-  fs.mkdirSync(blogPath);
+if (!fs.existsSync(path_blog)) {
+  fs.mkdirSync(path_blog);
 }
 
 // const templateSource = fs.readFileSync(`${templatePath}/layout.hbs`, "utf-8");
@@ -136,7 +150,7 @@ if (buildHomePg) {
     stylePath: "/style.css",
   });
 
-  fs.writeFileSync(path.join(publicPath, "index.html"), homeHtml);
+  fs.writeFileSync(path.join(path_public, "index.html"), homeHtml);
 }
 console.log(`-- # END BUILD: Home html page. --\n`);
 //#endregion
@@ -145,7 +159,7 @@ console.log(`-- # END BUILD: Home html page. --\n`);
 
 
 
-const articles = fs.readdirSync(contentPath).filter((file) => file.endsWith(".md"));
+const articles = fs.readdirSync(path_db_entries).filter((file) => file.endsWith(".md"));
 
 const articless = articles.map((article) => {
   const outputFileName = path.basename(article).replace(".md", ".html");
@@ -163,7 +177,7 @@ function buildArticles(articles) {
     articles.forEach((article, index) => {
    
       console.log(`___ ${index} - Reading content article from: ${article} --\n`);
-      const content = fs.readFileSync(path.join(contentPath, article), "utf-8");
+      const content = fs.readFileSync(path.join(path_db_entries, article), "utf-8");
 
       console.log(`___ ${index} - Getting matter metada from: ${article} --\n`);
       const { data, content: markdownContent } = matter(content);
@@ -192,7 +206,7 @@ function buildArticles(articles) {
       const outputFileName = path.basename(article).replace(".md", ".html");
 
       console.log(`___ ${index} - Building output path for:  ${article} --\n`);
-      const outputPath = path.join(blogPath, outputFileName);
+      const outputPath = path.join(path_blog, outputFileName);
 
       console.log(`___ ${index} - Writing HTML page into file system for: ${article} --\n`);
       fs.writeFileSync(outputPath, html);
@@ -219,7 +233,7 @@ if (buildBlogPg) {
     articles: articless,
   });
 
-  fs.writeFileSync(path.join(blogPath, "index.html"), blogHtml);
+  fs.writeFileSync(path.join(path_blog, "index.html"), blogHtml);
 }
 console.log(`-- # END BUILD: Blog html page. --\n`);
 //#endregion
