@@ -1,9 +1,10 @@
 ---
 title: "This is my example article on how to create and ssg with github"
 excerpt: "a simple and fast way to blog using only html css and js"
-author: "leniel luzardo"
+author: "Leniel Luzardo"
 author_bio: "a software developer exported from the caribbean."
 author_img: "%author_img%"
+author_profile: "https://www.linkedin.com/in/lenielluzardo"
 category: "software development"
 tags: ["javascript", "node.js", "github"]
 date_created: "March 03, 2025"
@@ -14,8 +15,6 @@ aritcle_img_alt: "A placeholder image for testing purposes."
 ---
 
 ## a simple and fast way to blog using only html css and js
-
-![%article_img_alt%](%article_img_url%)
 
 [//]: # "%article_introduction%"
 

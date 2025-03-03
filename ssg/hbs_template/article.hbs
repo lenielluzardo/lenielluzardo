@@ -8,12 +8,22 @@
           {{title}}
         </h1>
         
-        <p>
-          Published at: 
-          <time datetime="{{date_created}}">
-            {{date_created}}
-          </time>
-        </p>
+        <div class="article-metadata">
+          <p  id="article-author" class="byline vcard">
+            <address class="author">
+              By 
+              <a  class="url fn n" rel="author" href="{{ author_profile }}" 
+                  target="_blank" rel="noreferrer noopener">
+                {{ author }}
+              </a>
+              </address> 
+            on 
+            <time title="{{ date_created }}" pubdate datetime="{{ date_created}}" >
+              {{ date_created }}
+            </time>
+
+          </p>
+        </div>
 
         <div class="img-container">
           <img src="{{aritcle_img_url}}" alt="{{aritcle_img_alt}}">

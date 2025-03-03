@@ -4,6 +4,7 @@ excerpt: "%excerpt%"
 author: "%author%"
 author_bio: "%author_bio%"
 author_img: "%author_img%"
+author_profile: "%author_profile%
 category: "%category%"
 tags: ["%tag1%", "%tag2%", "%tag3%"]
 date_created: "%date_created%"
@@ -16,8 +17,6 @@ aritcle_img_alt: "%article_img_alt%"
 # %title%.
 
 ## %excerpt%
-
-![%article_img_alt%](%article_img_url%)
 
 [//]: # "%article_introduction%"
 
