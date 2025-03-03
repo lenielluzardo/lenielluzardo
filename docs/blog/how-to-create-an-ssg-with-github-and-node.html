@@ -82,7 +82,7 @@
             <header>
       
               <h1>
-                This is my example article on how to create and ssg with github
+                How To Create a Static Site Generator with Node JS and Github.
               </h1>
               
               <div class="article-metadata">
@@ -95,71 +95,65 @@
                     </a>
                     </address> 
                   on 
-                  <time title="March 03, 2025" pubdate datetime="March 03, 2025" >
-                    March 03, 2025
+                  <time title="2025-03-03" pubdate datetime="2025-03-03" >
+                    2025-03-03
                   </time>
       
                 </p>
               </div>
       
               <div class="article-img-container">
-                <img src="https://www.placehold.co/700x400" alt="A placeholder image for testing purposes.">
+                <img src="https://res.cloudinary.com/du3l28sfg/image/upload/v1741032541/blog/iwr6traoh40sgsoxqy9y.jpg" alt="A placeholder image for testing purposes.">
               </div>
             </header>
             
               <!--#region Article Content -->
             <section class="article-content">
       
-              <h2>a simple and fast way to blog using only html css and js</h2>
-      <h3>Lets begin.</h3>
+              <h2>A simple and a fast way to create your personal blog and portfolio.</h2>
+      <p>Hello, fellow developers and tech enthusiasts! Today, I want to share the steps to create a simple Static Site Generator using Node.js and Github. If you are like me, looking to create your own cms to showcase your experience, portfolio or just want to start blogging, or as a simple and fun project to build, then, continue reading you&#39;ll find detailed information on how to do it. </p>
+      <h2>Article Outline.</h2>
+      <p>I don&#39;t want to waste your time, so, if you are on a rush or want to dive directly the steps, here they are:</p>
       <ol>
       <li><strong><a href="#pre-requisites">Pre-requesites</a></strong></li>
-      <li><strong><a href="#step1">%Step 1%.</a></strong></li>
-      <li><strong><a href="#step2">%Step 2%.</a></strong>  </li>
-      <li><strong><a href="#step3">%Step 3%.</a></strong></li>
-      <li><strong><a href="#step4">%Step 4%.</a></strong></li>
-      <li><strong><a href="#step5">%Step 5%.</a></strong></li>
-      <li><strong><a href="#step6">%Step 6%.</a></strong></li>
-      <li><strong><a href="#step7">%Step 7%.</a></strong></li>
+      <li><strong><a href="#init-repository">Initialize a Repository.</a></strong></li>
+      <li><strong><a href="#project-structe">Create Project Struture.</a></strong></li>
+      <li><strong><a href="#install-dependencies">Install Dependencies.</a></strong></li>
+      <li><strong><a href="#create-node-script">Create A Node Script.</a></strong></li>
+      <li><strong><a href="#create-hbs-template">Create Handlebars Template.</a></strong></li>
+      <li><strong><a href="#build-html">Build The HTML Files.</a></strong></li>
+      <li><strong><a href="#github-deploy">Deploy to Github.</a></strong></li>
       <li><strong><a href="#conclusion">Conclusion.</a></strong></li>
       </ol>
       <hr>
       <h2 id="pre-requesites">Pre-requisites.</h2>
       <p>This article assume you have basic understanding of programming concepts and tools such as:</p>
       <ol>
-      <li><strong>Prereq1</strong></li>
-      <li><strong>Prereq2</strong></li>
-      <li><strong>Prereq3</strong></li>
-      <li><strong>Prereq4</strong></li>
-      <li><strong>Prereq5</strong></li>
-      <li><strong>Prereq6</strong></li>
-      <li><strong>Prereq7</strong></li>
+      <li><strong>Basic JavaScript programming knowledge.</strong></li>
+      <li><strong>A Github account.</strong></li>
+      <li><strong>A Github repository.</strong></li>
+      <li><strong>Node.js. installed in your machine.</strong></li>
+      <li><strong>Git installed in your machine.</strong></li>
+      <li><strong>A little bit of time.</strong></li>
       </ol>
       <hr>
-      <h2 id="step1">%Step 1%.</h2>
-      <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit.Veniam nisi vitae molestias et amet! Magni error vel aut praesentium nesciunt?</p>
+      <h2 id="init-repository">Initialize a Repository.</h2>
       <hr>
-      <h2 id="step2">%Step 2%.</h2>
-      <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam nemo magnam in odio illo consequatur id mollitia veritatis alias accusamus quis perferendis iste eos magni perspiciatis dignissimos, possimus deleniti aliquam! Laudantium voluptates, dolore illo quibusdam praesentium voluptatem facere iure id dicta odio voluptate</p>
+      <h2 id="project-structure">Create Project Struture.</h2>
       <hr>
-      <h2 id="step3">%Step 3%.</h2>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam nemo magnam in odio illo consequatur id mollitia veritatis alias accusamus quis perferendis iste eos magni perspiciatis dignissimos, possimus deleniti aliquam!Laudantium voluptates, dolore illo quibusdam praesentium voluptatem facere iure id dicta odio voluptate</p>
+      <h2 id="install-dependencies">Install Dependencies.</h2>
       <hr>
-      <h2 id="step4">%Step 4%.</h2>
-      <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam nemo magnam in odio illo consequatur id mollitia veritatis alias accusamus quis perferendis iste eos magni perspiciatis dignissimos, possimus deleniti aliquam!Laudantium voluptates, dolore illo quibusdam praesentium voluptatem facere iure id dicta odio voluptate</p>
+      <h2 id="create-node-script">Create A Node Script.</h2>
       <hr>
-      <h2 id="step5">%Step 5%.</h2>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam nemo magnam in odio illo consequatur id mollitia veritatis alias accusamus quis perferendis iste eos magni perspiciatis dignissimos, possimus deleniti aliquam! Laudantium voluptates, dolore illo quibusdam praesentium voluptatem facere iure id dicta odio voluptate</p>
+      <h2 id="create-hbs-template">Create Handlebars Template.</h2>
       <hr>
-      <h2 id="step6">%Step 6%.</h2>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam nemo magnam in odio illo consequatur id mollitia veritatis alias accusamus quis perferendis iste eos magni perspiciatis dignissimos, possimus deleniti aliquam!Laudantium voluptates, dolore illo quibusdam praesentium voluptatem facere iure id dicta odio voluptate</p>
+      <h2 id="build-html">Build The HTML Files.</h2>
       <hr>
-      <h2 id="step7">%Step 7%.</h2>
-      <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam nemo magnam in odio illo consequatur id mollitia veritatis alias accusamus quis perferendis iste eos magni perspiciatis dignissimos, possimus deleniti aliquam!Laudantium voluptates, dolore illo quibusdam praesentium voluptatem facere iure id dicta odio voluptate</p>
-      <hr>
+      <h2 id="github-deploy">Deploy to Github.</h2>
+      <p>--</p>
       <h2>Conclusion</h2>
-      <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam nemo magnam in odio illo consequatur id mollitia veritatis alias accusamus quis perferendis iste eos magni perspiciatis dignissimos, possimus deleniti aliquam! Laudantium voluptates, dolore illo quibusdam praesentium voluptatem facere iure id dicta odio voluptate</p>
       <hr>
+      <p><em>This post was written in Markdown and automatically rendered by this Node.js SSG blogging system. Pretty cool, huh?</em></p>
       
       
             </section>
