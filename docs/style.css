@@ -110,6 +110,10 @@ main{
   margin: 2rem 0;
   text-align: justify;
 }
+#article h1 {
+  font-size: 2rem;
+  margin: 1rem 0;
+}
 .img-container{
   text-align: center;
 }

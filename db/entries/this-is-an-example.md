@@ -6,7 +6,7 @@ author_bio: "a software developer exported from the caribbean."
 author_img: "%author_img%"
 category: "software development"
 tags: ["javascript", "node.js", "github"]
-date_created: "2025-03-03"
+date_created: "March 03, 2025"
 date_modified: "2025-03-03"
 article_url: "%article_url%"
 aritcle_img_url: "https://www.placehold.co/700x400"
