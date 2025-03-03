@@ -1,75 +1,28 @@
 
 <section id="blog">
     <article id="article" class="roundbox">
-
       <header>
+      {{#with meta}}
 
-        <h1>{{ title }} 
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt, reiciendis!
+        <h1>
+          {{ title }}
         </h1>
-
-        <time datetime="{{date}}">{{date}}</time>
+        
+        <time datetime="{{date_created}}">{{date_created}}</time>
 
         <div class="img-container">
-          <img src="https://www.placehold.co/700x400" alt="">
+          <img src={{article_img_url}} alt={{article_img_alt}}>
         </div>
-
+      {{/with}}
       </header>
       
+        <!--#region Article Content -->
       <section class="article-content">
 
-<!--#region Article Content -->
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-          Veniam nisi vitae molestias et amet! Magni error vel aut praesentium nesciunt?
-        </p>
-
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam nemo magnam in odio illo consequatur id mollitia veritatis 
-          alias accusamus quis perferendis iste eos magni perspiciatis dignissimos, possimus deleniti aliquam!
-          Laudantium voluptates, dolore illo quibusdam praesentium voluptatem facere iure id dicta odio voluptate
-        </p>
-
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam nemo magnam in odio illo consequatur id mollitia veritatis 
-          alias accusamus quis perferendis iste eos magni perspiciatis dignissimos, possimus deleniti aliquam!
-          Laudantium voluptates, dolore illo quibusdam praesentium voluptatem facere iure id dicta odio voluptate
-        </p>
-        
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam nemo magnam in odio illo consequatur id mollitia veritatis 
-          alias accusamus quis perferendis iste eos magni perspiciatis dignissimos, possimus deleniti aliquam!
-          Laudantium voluptates, dolore illo quibusdam praesentium voluptatem facere iure id dicta odio voluptate
-        </p>
-        
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam nemo magnam in odio illo consequatur id mollitia veritatis 
-          alias accusamus quis perferendis iste eos magni perspiciatis dignissimos, possimus deleniti aliquam!
-          Laudantium voluptates, dolore illo quibusdam praesentium voluptatem facere iure id dicta odio voluptate
-        </p>
-        
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam nemo magnam in odio illo consequatur id mollitia veritatis 
-          alias accusamus quis perferendis iste eos magni perspiciatis dignissimos, possimus deleniti aliquam!
-          Laudantium voluptates, dolore illo quibusdam praesentium voluptatem facere iure id dicta odio voluptate
-        </p>
-        
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam nemo magnam in odio illo consequatur id mollitia veritatis 
-          alias accusamus quis perferendis iste eos magni perspiciatis dignissimos, possimus deleniti aliquam!
-          Laudantium voluptates, dolore illo quibusdam praesentium voluptatem facere iure id dicta odio voluptate
-        </p>
-        
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam nemo magnam in odio illo consequatur id mollitia veritatis 
-          alias accusamus quis perferendis iste eos magni perspiciatis dignissimos, possimus deleniti aliquam!
-          Laudantium voluptates, dolore illo quibusdam praesentium voluptatem facere iure id dicta odio voluptate
-        </p>
-<!--#endregion -->
-        
         {{{content}}}
 
       </section>
+        <!--#endregion -->
 
       {{!-- <aside> --}}
         {{!-- related articles partial here ex: If is a tutorial that expand over several articles --}}

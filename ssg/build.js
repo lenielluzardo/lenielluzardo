@@ -187,9 +187,9 @@ function buildArticles(articles) {
 
       console.log(`___ ${index} - Setting Handlebars template values from: ${article} --\n`);
     
+
       const articlehtml = Handlebars.compile(articleTmpl)({
-        title: data.title,
-        date: data.date,
+        meta: data ,        
         content: htmlContent,
         articles: articless
       });
