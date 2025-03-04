@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - '/db/entries/**.md' # Trigger only when .md files change
+      - 'db/entries/**' # Trigger only when .md files change
 
 jobs:
   build-and-deploy:
