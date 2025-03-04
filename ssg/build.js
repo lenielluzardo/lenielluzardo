@@ -17,7 +17,6 @@ marked.use(customHeadingId());
 
 //#endregion
 
-
 //#region Variables declaration.
 console.log("- # Declaring variables. --\n");
 
@@ -50,31 +49,25 @@ let articleTmpl = null;
 
 let hbsTemplates = fs.readdirSync(path_hbs_template);
 
-console.log(`___ Template files: ${hbsTemplates} --\n`);
+console.log(`___ Template files: ${hbsTemplates} --`);
 
 hbsTemplates.forEach((fileName, index) => {
  
-  console.log(`___ ${index} - Reading source template for: ${fileName} --\n`);
+  console.log(`___ ${index} - Reading source template for: ${fileName} --`);
   tmplSrc = fs.readFileSync(`${path_hbs_template}/${fileName}`, "utf-8");
 
-  // console.log(`Template source is:\n ${tmplSrc} \n`);
-
   if (fileName === "layout.hbs") {
-    console.log(`___ ${index} - Compiling and saving ${fileName} template. --\n`);
+    console.log(`___ ${index} - Compiling and saving ${fileName} template. --`);
     layoutTmpl = Handlebars.compile(tmplSrc);
 
-    // console.log(`${fileName} template value is:\n ${layoutTmpl} \n`);
   } else {
-    console.log(`___ ${index} - Compiling ${fileName} template. --\n`);
+    console.log(`___ ${index} - Compiling ${fileName} template. --`);
     let partialName = fileName.replace(".hbs", "");
 
-    // let tmpl = Handlebars.compile(tmplSrc);
-
-    console.log(`___ ${index} - Registering ${partialName} template. --\n`);
+    console.log(`___ ${index} - Registering ${partialName} template. --`);
     Handlebars.registerPartial(partialName, tmplSrc);
    
     if (partialName === 'article') {
-      // let tmpl = Handlebars.compile(tmplSrc);
       articleTmpl = tmplSrc;
     }
   }
@@ -93,50 +86,11 @@ Handlebars.registerHelper("main", (context) => {
 });
 console.log(`-- # END Handlebars template process. --\n`);
 //#endregion.
-// const articless = [
-//   { name: "this is my #1 article", url: "this-is-my-no1-article" },
-//   { name: "this is my #2 article", url: "this-is-my-no2-article" },
-// ];
 
 //- Ensure the oput directory exists
 if (!fs.existsSync(path_blog)) {
   fs.mkdirSync(path_blog);
 }
-
-// const templateSource = fs.readFileSync(`${templatePath}/layout.hbs`, "utf-8");
-// const template = Handlebars.compile(templateSource);
-
-// const latestPost = findLatestPost();
-// console.log(`Before start ${latestPost}`);
-
-// const changedPosts = findChangedPosts();
-
-// if (latestPost) {
-//   console.log(`Processing file (inside if): ${latestPost}`); // Log the file being processed
-
-//   const content = fs.readFileSync(path.join(inputDir, latestPost), "utf-8");
-
-//   const { data, content: markdownContent } = matter(content);
-
-//   const htmlContent = marked.parse(markdownContent);
-
-//   const postHtml = template({
-//     title: data.title,
-//     main: htmlContent,
-//     date: data.date,
-//   });
-
-//   const outputFileName = latestPost.replace(".md", ".html");
-//   fs.writeFileSync(path.join(blogDir, outputFileName), postHtml);
-
-//   console.log(__dirname);
-//   console.log(publicDir);
-//   console.log(blogDir);
-//   console.log(`Generated: ${outputFileName}`);
-
-// } else {
-//   console.log('No new file to process.');
-// }
 
 //#region Home HTML page build.
 console.log(`-- # START BUILD: Home html page. --\n`);
@@ -151,8 +105,7 @@ console.log(`-- # END BUILD: Home html page. --\n`);
 //#endregion
 
 //#region Articles HTML pages build.
-
-
+console.log(`-- # START BUILD: Articles html page. --`);
 
 const articles = fs.readdirSync(path_db_entries).filter((file) => file.endsWith(".md"));
 
@@ -180,16 +133,16 @@ function buildArticles(articles) {
   if (articles) {
     articles.forEach((article, index) => {
    
-      console.log(`___ ${index} - Reading content article from: ${article} --\n`);
+      console.log(`___ ${index} - Reading content article from: ${article} --`);
       const content = fs.readFileSync(path.join(path_db_entries, article), "utf-8");
 
-      console.log(`___ ${index} - Getting matter metada from: ${article} --\n`);
+      console.log(`___ ${index} - Getting matter metada from: ${article} --`);
       const { data, content: markdownContent } = matter(content);
 
-      console.log(`___ ${index} - Parsing content to HTML from: ${article} --\n`);
+      console.log(`___ ${index} - Parsing content to HTML from: ${article} --`);
       const htmlContent = marked.parse(markdownContent);
 
-      console.log(`___ ${index} - Setting Handlebars template values from: ${article} --\n`);
+      console.log(`___ ${index} - Setting Handlebars template values from: ${article} --`);
     
       articles_latest.forEach(entry => {
        if (entry.filename === article) {
@@ -206,16 +159,16 @@ function buildArticles(articles) {
       });
 
       // const outputFileName = file.replace(".md", ".html");
-      console.log(`___ ${index} - Build html page output file name for:  ${article} --\n`);
+      console.log(`___ ${index} - Build html page output file name for:  ${article} --`);
       const outputFileName = path.basename(article).replace(".md", ".html");
 
-      console.log(`___ ${index} - Building output path for:  ${article} --\n`);
+      console.log(`___ ${index} - Building output path for:  ${article} --`);
       const outputPath = path.join(path_blog, outputFileName);
 
-      console.log(`___ ${index} - Writing HTML page into file system for: ${article} --\n`);
+      console.log(`___ ${index} - Writing HTML page into file system for: ${article} --`);
       fs.writeFileSync(outputPath, html);
 
-      console.log(`___ ${index} - HTML file generated: ${outputPath} --\n`);
+      console.log(`___ ${index} - HTML file generated: ${outputPath} --`);
     });
   } else {
     console.log("-- # INFO: No new or updated articles to process.");
@@ -223,13 +176,12 @@ function buildArticles(articles) {
 }
 
 buildArticles(articles)
-console.log(`-- # END BUILD: Blog Articles html pages`);
+console.log(`-- # END BUILD: Blog Articles html pages --`);
 //#endregion.
 
-
-
 //#region Blog HTML page build.
-console.log(`-- # START BUILD: Blog html page. --\n`);
+console.log('\n');
+console.log(`-- # START BUILD: Blog html page. --`);
 if (buildBlogPg) {
   const blogHtml = layoutTmpl({
     route: "/blog",
@@ -238,7 +190,7 @@ if (buildBlogPg) {
 
   fs.writeFileSync(path.join(path_blog, "index.html"), blogHtml);
 }
-console.log(`-- # END BUILD: Blog html page. --\n`);
+console.log(`-- # END BUILD: Blog html page. --`);
 //#endregion
-console.log("# END Static website build process. --\n");
-// console.log('static site generator completed.')
+
+console.log("# END Static website build process. --");
