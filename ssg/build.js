@@ -118,9 +118,12 @@ let articles = [];
 
 if (inc_files.length > 0) {
   console.log(`INCREMENTAL BUILD ACTIVATED FOR: ${inc_files}`);
-  let filename = inc_files.replace('db/entries/', '');
+  let inc_filenames = inc_files.map(f => {
+    let name = f.replace('db/entries/', '')
+    return name;
+  });
   
-  articles.push(filename);
+  articles = inc_filenames;
   console.log('Articles: ', articles);
 }
 else {
