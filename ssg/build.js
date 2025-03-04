@@ -143,7 +143,6 @@ console.log(`-- # START BUILD: Home html page. --\n`);
 if (buildHomePg) {
   const homeHtml = layoutTmpl({
     route: "/",
-    stylePath: "/style.css",
   });
 
   fs.writeFileSync(path.join(path_public, "index.html"), homeHtml);
@@ -234,7 +233,6 @@ console.log(`-- # START BUILD: Blog html page. --\n`);
 if (buildBlogPg) {
   const blogHtml = layoutTmpl({
     route: "/blog",
-    stylePath: "/style.css",
     articles_latest: articles_latest,
   });
 
