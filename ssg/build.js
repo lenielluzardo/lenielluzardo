@@ -10,7 +10,14 @@ const customHeadingId = require ("marked-custom-heading-id");
 const matter = require("gray-matter");
 const Handlebars = require("handlebars");
 const { execSync } = require("child_process");
+const minimist = require("minimist");
+
 //#endregion.
+
+const args = minimist(process.argv.slice(2));
+const inc_files = args.files ? args.files.split(" ") : [];
+
+
 
 //#region Module Configurations.
 marked.use(customHeadingId());
@@ -107,7 +114,15 @@ console.log(`-- # END BUILD: Home html page. --\n`);
 //#region Articles HTML pages build.
 console.log(`-- # START BUILD: Articles html page. --`);
 
-const articles = fs.readdirSync(path_db_entries).filter((file) => file.endsWith(".md"));
+let articles = [];
+
+if (inc_files.length > 0) {
+  console.log(`INCREMENTAL BUILD ACTIVATED FOR: ${inc_files}`);
+  articles = inc_files;
+}
+else {
+  articles = fs.readdirSync(path_db_entries).filter((file) => file.endsWith(".md"));
+}
 
 let articles_latest = articles.map((entryFileName) => {
   

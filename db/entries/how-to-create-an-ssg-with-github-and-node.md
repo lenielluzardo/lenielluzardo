@@ -25,7 +25,7 @@ I don't want to waste your time, so, if you are on a rush or want to dive direct
 2. **[Initialize a Repository.](#init-repository)**
 3. **[Create Project Struture.](#project-structe)**
 4. **[Install Dependencies.](#install-dependencies)**
-5. **[Create A Node Script.](#create-node-script)**
+5. **[Create The Build Script.](#create-build-script)**
 6. **[Create Handlebars Template.](#create-hbs-template)**
 7. **[Build The HTML Files.](#build-html)**
 8. **[Deploy to Github.](#github-deploy)**
@@ -61,7 +61,7 @@ This article assume you have basic understanding of programming concepts and too
 
 ---
 
-## Create A Node Script. {#create-node-script}
+## Create The Build Script. {#create-build-script}
 *This section is currently under construction*
 
 ---
