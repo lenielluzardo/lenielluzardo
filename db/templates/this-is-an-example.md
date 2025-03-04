@@ -10,8 +10,8 @@ tags: ["javascript", "node.js", "github"]
 date_created: "March 03, 2025"
 date_modified: "2025-03-03"
 article_url: "%article_url%"
-aritcle_img_url: "https://www.placehold.co/700x400"
-aritcle_img_alt: "A placeholder image for testing purposes."
+article_img_url: "https://www.placehold.co/700x400"
+article_img_alt: "A placeholder image for testing purposes."
 ---
 
 ## a simple and fast way to blog using only html css and js

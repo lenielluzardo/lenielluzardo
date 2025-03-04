@@ -10,8 +10,8 @@ tags: ["%tag1%", "%tag2%", "%tag3%"]
 date_created: "%date_created%"
 date_modified: "%date_modified%"
 article_url: "%article_url%"
-aritcle_img_url: "%article_img_url%"
-aritcle_img_alt: "%article_img_alt%"
+article_img_url: "%article_img_url%"
+article_img_alt: "%article_img_alt%"
 ---
 
 # %title%.

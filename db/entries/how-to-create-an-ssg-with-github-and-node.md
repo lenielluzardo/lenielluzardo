@@ -10,8 +10,8 @@ tags: ["Node.js", "Blogging", "GitHub"]
 date_created: "March 03, 2025"
 date_modified: "March 03, 2025"
 article_url: "%article_url%"
-aritcle_img_url: "https://res.cloudinary.com/du3l28sfg/image/upload/v1741032541/blog/iwr6traoh40sgsoxqy9y.jpg"
-aritcle_img_alt: "A placeholder image for testing purposes."
+article_img_url: "https://res.cloudinary.com/du3l28sfg/image/upload/v1741032541/blog/iwr6traoh40sgsoxqy9y.jpg"
+article_img_alt: "A placeholder image for testing purposes."
 ---
 ## A simple and a fast way to create your personal blog and portfolio.
 

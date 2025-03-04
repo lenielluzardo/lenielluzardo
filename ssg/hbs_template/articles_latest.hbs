@@ -2,7 +2,7 @@
   <h3>Latest articles:</h3>
   <ul class="roundbox">
    
-    {{#each articles }}
+    {{#each articles_latest }}
      
       <li>
         <a href="{{this.slug}}">
@@ -10,7 +10,7 @@
     
             <div class="card-img">
               {{!-- <img src="{{img-src}}" alt="{{img-alt}}"> --}}
-              <img src="https://placehold.co/500" alt="{{this.article_img_alt}}">
+              <img src="{{this.article_img_url}}" alt="{{this.article_img_alt}}">
             </div>
     
             <div class="card-content">

@@ -81,7 +81,6 @@ hbsTemplates.forEach((fileName, index) => {
 });
 
 Handlebars.registerHelper("main", (context) => {
-  console.log(context);
 
   switch (context.data.root.route) {
     case "/":
@@ -158,7 +157,7 @@ console.log(`-- # END BUILD: Home html page. --\n`);
 
 const articles = fs.readdirSync(path_db_entries).filter((file) => file.endsWith(".md"));
 
-const articles_latest = articles.map((entryFileName) => {
+let articles_latest = articles.map((entryFileName) => {
   
   const entryTitle = entryFileName.replace(".md", "").replaceAll("-", " ")
                       .toLowerCase().split(' ')
@@ -170,6 +169,7 @@ const articles_latest = articles.map((entryFileName) => {
   let entry = {
     title: entryTitle,
     slug: `/blog/${dashedName}`,
+    filename: entryFileName
   };
 
   console.log(entry);
@@ -192,13 +192,18 @@ function buildArticles(articles) {
 
       console.log(`___ ${index} - Setting Handlebars template values from: ${article} --\n`);
     
-      articles_latest
+      articles_latest.forEach(entry => {
+       if (entry.filename === article) {
+          entry['article_img_url'] = data.article_img_url;
+          entry['article_img_alt'] = data.article_img_alt;
+        }
+      })
 
       const html = layoutTmpl({
         route: "/article",
         meta: data,
         content: htmlContent,
-        articles: articles_latest,
+        articles_latest: articles_latest,
       });
 
       // const outputFileName = file.replace(".md", ".html");
@@ -230,7 +235,7 @@ if (buildBlogPg) {
   const blogHtml = layoutTmpl({
     route: "/blog",
     stylePath: "/style.css",
-    articles: articles_latest,
+    articles_latest: articles_latest,
   });
 
   fs.writeFileSync(path.join(path_blog, "index.html"), blogHtml);
