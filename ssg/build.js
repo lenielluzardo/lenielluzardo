@@ -113,8 +113,8 @@ console.log(`-- # END BUILD: Home html page. --\n`);
 
 //#region Articles HTML pages build.
 console.log(`-- # START BUILD: Articles html page. --`);
-
-let articles = [];
+let articles_to_build = []
+let articles = fs.readdirSync(path_db_entries).filter((file) => file.endsWith(".md"));
 
 if (inc_files.length > 0) {
   console.log(`INCREMENTAL BUILD ACTIVATED FOR: ${inc_files}`);
@@ -124,11 +124,10 @@ if (inc_files.length > 0) {
     return name;
   });
   
-  articles = inc_filenames;
-  console.log('Articles: ', articles);
+  articles_to_build = inc_filenames;
 }
 else {
-  articles = fs.readdirSync(path_db_entries).filter((file) => file.endsWith(".md"));
+  articles_to_build = articles; 
 }
 
 let articles_latest = articles.map((entryFileName) => {
@@ -150,13 +149,15 @@ let articles_latest = articles.map((entryFileName) => {
   return entry;
 });
 
-function buildArticles(articles) {
-  
+console.log("Articles to build: ", articles_to_build);
+function buildArticles(articles_to_build) {
   if (articles) {
     articles.forEach((article, index) => {
-   
       console.log(`___ ${index} - Reading content article from: ${article} --`);
-      const content = fs.readFileSync(path.join(path_db_entries, article), "utf-8");
+      const content = fs.readFileSync(
+        path.join(path_db_entries, article),
+        "utf-8"
+      );
 
       console.log(`___ ${index} - Getting matter metada from: ${article} --`);
       const { data, content: markdownContent } = matter(content);
@@ -164,14 +165,16 @@ function buildArticles(articles) {
       console.log(`___ ${index} - Parsing content to HTML from: ${article} --`);
       const htmlContent = marked.parse(markdownContent);
 
-      console.log(`___ ${index} - Setting Handlebars template values from: ${article} --`);
-    
-      articles_latest.forEach(entry => {
-       if (entry.filename === article) {
-          entry['article_img_url'] = data.article_img_url;
-          entry['article_img_alt'] = data.article_img_alt;
+      console.log(
+        `___ ${index} - Setting Handlebars template values from: ${article} --`
+      );
+
+      articles_latest.forEach((entry) => {
+        if (entry.filename === article) {
+          entry["article_img_url"] = data.article_img_url;
+          entry["article_img_alt"] = data.article_img_alt;
         }
-      })
+      });
 
       const html = layoutTmpl({
         route: "/article",
@@ -181,13 +184,17 @@ function buildArticles(articles) {
       });
 
       // const outputFileName = file.replace(".md", ".html");
-      console.log(`___ ${index} - Build html page output file name for:  ${article} --`);
+      console.log(
+        `___ ${index} - Build html page output file name for:  ${article} --`
+      );
       const outputFileName = path.basename(article).replace(".md", ".html");
 
       console.log(`___ ${index} - Building output path for:  ${article} --`);
       const outputPath = path.join(path_blog, outputFileName);
 
-      console.log(`___ ${index} - Writing HTML page into file system for: ${article} --`);
+      console.log(
+        `___ ${index} - Writing HTML page into file system for: ${article} --`
+      );
       fs.writeFileSync(outputPath, html);
 
       console.log(`___ ${index} - HTML file generated: ${outputPath} --`);
