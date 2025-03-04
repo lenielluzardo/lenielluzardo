@@ -120,6 +120,7 @@ if (inc_files.length > 0) {
   console.log(`INCREMENTAL BUILD ACTIVATED FOR: ${inc_files}`);
   let inc_filenames = inc_files.map(f => {
     let name = f.replace('db/entries/', '')
+    console.log(`name change from: ${f} || to: ${name}`);
     return name;
   });
   
