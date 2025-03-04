@@ -17,8 +17,6 @@ const minimist = require("minimist");
 const args = minimist(process.argv.slice(2));
 const inc_files = args.files ? args.files.split(" ") : [];
 
-
-
 //#region Module Configurations.
 marked.use(customHeadingId());
 
@@ -56,62 +54,54 @@ let articleTmpl = null;
 
 let hbsTemplates = fs.readdirSync(path_hbs_template);
 
-console.log(`___ Template files: ${hbsTemplates} --`);
+function processHBSTemplates(hbsTemplates) {
+  console.log(`___ Template files: ${hbsTemplates} --`);
 
-hbsTemplates.forEach((fileName, index) => {
- 
-  console.log(`___ ${index} - Reading source template for: ${fileName} --`);
-  tmplSrc = fs.readFileSync(`${path_hbs_template}/${fileName}`, "utf-8");
+  hbsTemplates.forEach((fileName, index) => {
+    console.log(`___ ${index} - Reading source template for: ${fileName} --`);
+    tmplSrc = fs.readFileSync(`${path_hbs_template}/${fileName}`, "utf-8");
 
-  if (fileName === "layout.hbs") {
-    console.log(`___ ${index} - Compiling and saving ${fileName} template. --`);
-    layoutTmpl = Handlebars.compile(tmplSrc);
+    if (fileName === "layout.hbs") {
+      console.log(
+        `___ ${index} - Compiling and saving ${fileName} template. --`
+      );
+      layoutTmpl = Handlebars.compile(tmplSrc);
+    } else {
+      console.log(`___ ${index} - Compiling ${fileName} template. --`);
+      let partialName = fileName.replace(".hbs", "");
 
-  } else {
-    console.log(`___ ${index} - Compiling ${fileName} template. --`);
-    let partialName = fileName.replace(".hbs", "");
+      console.log(`___ ${index} - Registering ${partialName} template. --`);
+      Handlebars.registerPartial(partialName, tmplSrc);
 
-    console.log(`___ ${index} - Registering ${partialName} template. --`);
-    Handlebars.registerPartial(partialName, tmplSrc);
-   
-    if (partialName === 'article') {
-      articleTmpl = tmplSrc;
+      if (partialName === "article") {
+        articleTmpl = tmplSrc;
+      }
     }
-  }
-});
+  });
 
-Handlebars.registerHelper("main", (context) => {
+  Handlebars.registerHelper("main", (context) => {
+    switch (context.data.root.route) {
+      case "/":
+        return "home";
+      case "/blog":
+        return "blog";
+      case "/article":
+        return "article";
+    }
+  });
+}
 
-  switch (context.data.root.route) {
-    case "/":
-      return "home";
-    case "/blog":
-      return "blog";
-    case "/article":
-      return "article";
-  }
-});
+processHBSTemplates(hbsTemplates);
 console.log(`-- # END Handlebars template process. --\n`);
 //#endregion.
 
-//- Ensure the oput directory exists
+//#region Articles HTML pages build.
+
+// Ensure the blog directory exists
 if (!fs.existsSync(path_blog)) {
   fs.mkdirSync(path_blog);
 }
 
-//#region Home HTML page build.
-console.log(`-- # START BUILD: Home html page. --\n`);
-if (buildHomePg) {
-  const homeHtml = layoutTmpl({
-    route: "/",
-  });
-
-  fs.writeFileSync(path.join(path_public, "index.html"), homeHtml);
-}
-console.log(`-- # END BUILD: Home html page. --\n`);
-//#endregion
-
-//#region Articles HTML pages build.
 console.log(`-- # START BUILD: Articles html page. --`);
 let articles_to_build = []
 let articles = fs.readdirSync(path_db_entries).filter((file) => file.endsWith(".md"));
@@ -221,6 +211,18 @@ if (buildBlogPg) {
   fs.writeFileSync(path.join(path_blog, "index.html"), blogHtml);
 }
 console.log(`-- # END BUILD: Blog html page. --`);
+//#endregion
+
+//#region Home HTML page build.
+console.log(`-- # START BUILD: Home html page. --\n`);
+if (buildHomePg) {
+  const homeHtml = layoutTmpl({
+    route: "/",
+  });
+
+  fs.writeFileSync(path.join(path_public, "index.html"), homeHtml);
+}
+console.log(`-- # END BUILD: Home html page. --\n`);
 //#endregion
 
 console.log("# END Static website build process. --");
