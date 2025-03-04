@@ -7,9 +7,10 @@ author_img: "%author_img%"
 author_profile: "https://www.linkedin.com/in/lenielluzardo"
 category: "software development"
 tags: ["javascript", "node.js", "github"]
-date_created: "March 03, 2025"
-date_modified: "2025-03-03"
-article_url: "%article_url%"
+date_created: "2025-03-04"
+date_modified: "2025-03-04"
+article_url: "https://www.luzar.dev/blog/test-article-1-updated-5.html"
+article_slug: "/blog/test-article-1-updated-5.html"
 article_img_url: "https://www.placehold.co/700x400"
 article_img_alt: "A placeholder image for testing purposes."
 ---

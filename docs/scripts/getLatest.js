@@ -4,7 +4,7 @@ let partial_latest = document.getElementById('partial_latest');
 
 console.log(partial_latest);
 
-fetch('/blog/__partials__/_latest_articles_.html')
+fetch('/blog/__partials__/_articles_latest.html')
   .then(res => res.text())
   .then(result => {
     if (partial_latest) {

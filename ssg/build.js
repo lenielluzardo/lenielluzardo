@@ -15,7 +15,7 @@ const minimist = require("minimist");
 //#endregion.
 
 const args = minimist(process.argv.slice(2));
-const inc_files = args.files ? args.files.split(" ") : [];
+const entries_incremental = args.files ? args.files.split(" ") : [];
 
 //#region Module Configurations.
 marked.use(customHeadingId());
@@ -51,6 +51,7 @@ console.log(`path_blog: ${path_blog}`);
 console.log(`-- # START Handlebars template process. --\n`);
 let layoutTmpl = null;
 let articleTmpl = null;
+let hbs_articles_latest = null;
 
 let hbsTemplates = fs.readdirSync(path_hbs_template);
 
@@ -66,6 +67,7 @@ function processHBSTemplates(hbsTemplates) {
         `___ ${index} - Compiling and saving ${fileName} template. --`
       );
       layoutTmpl = Handlebars.compile(tmplSrc);
+
     } else {
       console.log(`___ ${index} - Compiling ${fileName} template. --`);
       let partialName = fileName.replace(".hbs", "");
@@ -75,6 +77,10 @@ function processHBSTemplates(hbsTemplates) {
 
       if (partialName === "article") {
         articleTmpl = tmplSrc;
+      }
+      if (partialName == "articles_latest") {
+        hbs_articles_latest = tmplSrc;
+        console.log(hbs_articles_latest);
       }
     }
   });
@@ -96,116 +102,110 @@ console.log(`-- # END Handlebars template process. --\n`);
 //#endregion.
 
 //#region Articles HTML pages build.
+console.log(`-- # START BUILD: Articles html page. --`);
 
 // Ensure the blog directory exists
 if (!fs.existsSync(path_blog)) {
   fs.mkdirSync(path_blog);
 }
 
-console.log(`-- # START BUILD: Articles html page. --`);
-let articles_to_build = []
-let articles = fs.readdirSync(path_db_entries).filter((file) => file.endsWith(".md"));
+function buildArticle(index, a_file_name, meta_data, md_content) {
+  console.log(`___ ${index} - Parsing content to HTML from: ${a_file_name} --`);
+  const html_content = marked.parse(md_content);
 
-if (inc_files.length > 0) {
-  console.log(`INCREMENTAL BUILD ACTIVATED FOR: ${inc_files}`);
-  let inc_filenames = inc_files.map(f => {
-    let name = f.replace('db/entries/', '')
-    console.log(`name change from: ${f} || to: ${name}`);
-    return name;
+  console.log(
+    `___ ${index} - Setting Handlebars template values from: ${a_file_name} --`
+  );
+
+  const html = layoutTmpl({
+    route: "/article",
+    meta: meta_data,
+    content: html_content,
   });
-  
-  articles_to_build = inc_filenames;
+
+  console.log(
+    `___ ${index} - Build html page output file name for:  ${a_file_name} --`
+  );
+  const outputFileName = path.basename(a_file_name).replace(".md", ".html");
+
+  console.log(`___ ${index} - Building output path for:  ${a_file_name} --`);
+  const outputPath = path.join(path_blog, outputFileName);
+
+  console.log(
+    `___ ${index} - Writing HTML page into file system for: ${a_file_name} --`
+  );
+  fs.writeFileSync(outputPath, html);
+
+  console.log(`___ ${index} - HTML file generated: ${outputPath} --`);
 }
-else {
-  articles_to_build = articles; 
-}
 
-let articles_latest = articles.map((entryFileName) => {
+const articles_all = fs.readdirSync(path_db_entries).filter((file) => file.endsWith(".md"));
+const articles_latest_vm = [];
+
+if (articles_all) {
   
-  const entryTitle = entryFileName.replace(".md", "").replaceAll("-", " ")
-                      .toLowerCase().split(' ')
-                      .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
-                      .join(' ');
-                      
-  const dashedName = entryFileName.replace(".md", ".html");
+  articles_all.forEach((_art, _idx) => {
+    console.log(`___ ${_idx} - Reading content article from: ${_art} --`);
+    const content = fs.readFileSync(path.join(path_db_entries, _art), "utf-8");
 
-  let entry = {
-    title: entryTitle,
-    slug: `/blog/${dashedName}`,
-    filename: entryFileName
-  };
+    console.log(`___ ${_idx} - Getting matter metada from: ${_art} --`);
+    const { data, content: md_content } = matter(content);
 
-  console.log(entry);
-  return entry;
-});
+    articles_latest_vm.push({ ...data });
 
-console.log("Articles to build: ", articles_to_build);
+    if (entries_incremental.length > 0) {
+      console.log(`INCREMENTAL BUILD ACTIVATED FOR: ${entries_incremental}`);
 
-function buildArticles(articles_to_build) {
-  if (articles_to_build) {
-    articles_to_build.forEach((article, index) => {
-      console.log(`___ ${index} - Reading content article from: ${article} --`);
-      const content = fs.readFileSync(
-        path.join(path_db_entries, article),
-        "utf-8"
-      );
-
-      console.log(`___ ${index} - Getting matter metada from: ${article} --`);
-      const { data, content: markdownContent } = matter(content);
-
-      console.log(`___ ${index} - Parsing content to HTML from: ${article} --`);
-      const htmlContent = marked.parse(markdownContent);
-
-      console.log(
-        `___ ${index} - Setting Handlebars template values from: ${article} --`
-      );
-
-      articles_latest.forEach((entry) => {
-        if (entry.filename === article) {
-          entry["article_img_url"] = data.article_img_url;
-          entry["article_img_alt"] = data.article_img_alt;
-        }
+      let articles_incremental = entries_incremental.map((f) => {
+        let name = f.replace("db/entries/", "");
+        console.log(`name change from: ${f} || to: ${name}`);
+        return name;
       });
 
-      const html = layoutTmpl({
-        route: "/article",
-        meta: data,
-        content: htmlContent,
-        articles_latest: articles_latest,
-      });
-
-      // const outputFileName = file.replace(".md", ".html");
-      console.log(
-        `___ ${index} - Build html page output file name for:  ${article} --`
+      const article_to_build = articles_incremental.find(
+        (articleName) => articleName === _art
       );
-      const outputFileName = path.basename(article).replace(".md", ".html");
-
-      console.log(`___ ${index} - Building output path for:  ${article} --`);
-      const outputPath = path.join(path_blog, outputFileName);
-
-      console.log(
-        `___ ${index} - Writing HTML page into file system for: ${article} --`
-      );
-      fs.writeFileSync(outputPath, html);
-
-      console.log(`___ ${index} - HTML file generated: ${outputPath} --`);
-    });
-  } else {
-    console.log("-- # INFO: No new or updated articles to process.");
-  }
+      if (article_to_build) {
+        buildArticle(_idx, _art, data, md_content);
+      }
+    } else {
+      // If not incremental then build all articles.
+      buildArticle(_idx, _art, data, md_content);
+    }
+  });
+} else {
+  console.info("-- # INFO: No new or updated articles to process.");
 }
 
-buildArticles(articles_to_build)
 console.log(`-- # END BUILD: Blog Articles html pages --`);
 //#endregion.
 
 //#region Blog HTML page build.
-console.log('\n');
+console.log('\n', articles_latest_vm);
 console.log(`-- # START BUILD: Blog html page. --`);
 if (buildBlogPg) {
+
+  const sorted_articles_latest_vm = articles_latest_vm.sort((a, b) => {
+      const aDate = new Date(a.date_created);
+      const bDate = new Date(b.date_created);
+      
+      return bDate.getDate() - aDate.getDate()
+  });
+
+  if (hbs_articles_latest) {
+    const html_articles_latest = Handlebars.compile(hbs_articles_latest)({
+      articles_latest: sorted_articles_latest_vm
+    });
+
+    fs.writeFileSync(
+      path.join(path_blog, "/__partials__/_articles_latest.html"),
+      html_articles_latest
+    );
+  }
+
   const blogHtml = layoutTmpl({
     route: "/blog",
-    articles_latest: articles_latest,
+    articles_latest: sorted_articles_latest_vm,
   });
 
   fs.writeFileSync(path.join(path_blog, "index.html"), blogHtml);
@@ -226,3 +226,10 @@ console.log(`-- # END BUILD: Home html page. --\n`);
 //#endregion
 
 console.log("# END Static website build process. --");
+
+//  articles_latest.forEach((entry) => {
+//    if (entry.filename === article) {
+//      entry["article_img_url"] = data.article_img_url;
+//      entry["article_img_alt"] = data.article_img_alt;
+//    }
+//  });
