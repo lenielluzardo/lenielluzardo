@@ -1,5 +1,5 @@
 ---
-title: "TEST ARTICLE 1 UPDATED 5"
+title: "TEST ARTICLE 1 UPDATEDD 5"
 excerpt: "a simple and fast way to blog using only html css and js"
 author: "Leniel Luzardo"
 author_bio: "a software developer exported from the caribbean."
