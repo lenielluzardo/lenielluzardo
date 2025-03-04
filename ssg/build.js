@@ -118,7 +118,10 @@ let articles = [];
 
 if (inc_files.length > 0) {
   console.log(`INCREMENTAL BUILD ACTIVATED FOR: ${inc_files}`);
-  articles = inc_files;
+  let filename = inc_files.replace('db/entries/', '');
+  
+  articles.push(filename);
+  console.log('Articles: ', articles);
 }
 else {
   articles = fs.readdirSync(path_db_entries).filter((file) => file.endsWith(".md"));
