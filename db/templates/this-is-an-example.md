@@ -9,7 +9,8 @@ category: "software development"
 tags: ["javascript", "node.js", "github"]
 date_created: "March 03, 2025"
 date_modified: "2025-03-03"
-article_url: "%article_url%"
+article_url: "https://www.luzar.dev/blog/how-to-create-a-ssg-with-nodejs-and-github.html"
+article_slug: "/blog/how-to-create-a-ssg-with-nodejs-and-github.html"
 article_img_url: "https://www.placehold.co/700x400"
 article_img_alt: "A placeholder image for testing purposes."
 ---

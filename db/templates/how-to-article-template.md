@@ -9,7 +9,8 @@ category: "%category%"
 tags: ["%tag1%", "%tag2%", "%tag3%"]
 date_created: "%date_created%"
 date_modified: "%date_modified%"
-article_url: "%article_url%"
+article_url: "https://www.luzar.dev/blog/how-to-create-a-ssg-with-nodejs-and-github.html"
+article_slug: "/blog/how-to-create-a-ssg-with-nodejs-and-github.html"
 article_img_url: "%article_img_url%"
 article_img_alt: "%article_img_alt%"
 ---
