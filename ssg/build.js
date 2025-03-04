@@ -151,8 +151,8 @@ let articles_latest = articles.map((entryFileName) => {
 
 console.log("Articles to build: ", articles_to_build);
 function buildArticles(articles_to_build) {
-  if (articles) {
-    articles.forEach((article, index) => {
+  if (articles_to_build) {
+    articles_to_build.forEach((article, index) => {
       console.log(`___ ${index} - Reading content article from: ${article} --`);
       const content = fs.readFileSync(
         path.join(path_db_entries, article),
