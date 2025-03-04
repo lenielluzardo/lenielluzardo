@@ -49,8 +49,7 @@ console.log(`path_blog: ${path_blog}`);
 
 //#region Handlebars configuration & tamplate build.
 console.log(`-- # START Handlebars template process. --\n`);
-let layoutTmpl = null;
-let articleTmpl = null;
+let hbs_layout = null;
 let hbs_articles_latest = null;
 
 let hbsTemplates = fs.readdirSync(path_hbs_template);
@@ -66,7 +65,7 @@ function processHBSTemplates(hbsTemplates) {
       console.log(
         `___ ${index} - Compiling and saving ${fileName} template. --`
       );
-      layoutTmpl = Handlebars.compile(tmplSrc);
+      hbs_layout = Handlebars.compile(tmplSrc);
 
     } else {
       console.log(`___ ${index} - Compiling ${fileName} template. --`);
@@ -80,7 +79,6 @@ function processHBSTemplates(hbsTemplates) {
       }
       if (partialName == "articles_latest") {
         hbs_articles_latest = tmplSrc;
-        console.log(hbs_articles_latest);
       }
     }
   });
@@ -117,7 +115,7 @@ function buildArticle(index, a_file_name, meta_data, md_content) {
     `___ ${index} - Setting Handlebars template values from: ${a_file_name} --`
   );
 
-  const html = layoutTmpl({
+  const html = hbs_layout({
     route: "/article",
     meta: meta_data,
     content: html_content,
@@ -180,30 +178,32 @@ if (articles_all) {
 console.log(`-- # END BUILD: Blog Articles html pages --`);
 //#endregion.
 
-//#region Blog HTML page build.
-console.log('\n', articles_latest_vm);
-console.log(`-- # START BUILD: Blog html page. --`);
-if (buildBlogPg) {
+//#region Articles Latest Partial Build
+const sorted_articles_latest_vm = articles_latest_vm.sort((a, b) => {
+  const aDate = new Date(a.date_created);
+  const bDate = new Date(b.date_created);
 
-  const sorted_articles_latest_vm = articles_latest_vm.sort((a, b) => {
-      const aDate = new Date(a.date_created);
-      const bDate = new Date(b.date_created);
-      
-      return bDate.getDate() - aDate.getDate()
+  return bDate.getDate() - aDate.getDate();
+});
+
+if (hbs_articles_latest) {
+  const html_articles_latest = Handlebars.compile(hbs_articles_latest)({
+    articles_latest: sorted_articles_latest_vm,
   });
 
-  if (hbs_articles_latest) {
-    const html_articles_latest = Handlebars.compile(hbs_articles_latest)({
-      articles_latest: sorted_articles_latest_vm
-    });
+  fs.writeFileSync(
+    path.join(path_blog, "/__partials__/_articles_latest.html"),
+    html_articles_latest
+  );
+}
+//#endregion
 
-    fs.writeFileSync(
-      path.join(path_blog, "/__partials__/_articles_latest.html"),
-      html_articles_latest
-    );
-  }
+//#region Blog HTML page build.
+console.log(`-- # START BUILD: Blog html page. --`);
 
-  const blogHtml = layoutTmpl({
+if (buildBlogPg) {
+
+  const blogHtml = hbs_layout({
     route: "/blog",
     articles_latest: sorted_articles_latest_vm,
   });
@@ -215,8 +215,9 @@ console.log(`-- # END BUILD: Blog html page. --`);
 
 //#region Home HTML page build.
 console.log(`-- # START BUILD: Home html page. --\n`);
+
 if (buildHomePg) {
-  const homeHtml = layoutTmpl({
+  const homeHtml = hbs_layout({
     route: "/",
   });
 
@@ -226,10 +227,3 @@ console.log(`-- # END BUILD: Home html page. --\n`);
 //#endregion
 
 console.log("# END Static website build process. --");
-
-//  articles_latest.forEach((entry) => {
-//    if (entry.filename === article) {
-//      entry["article_img_url"] = data.article_img_url;
-//      entry["article_img_alt"] = data.article_img_alt;
-//    }
-//  });
