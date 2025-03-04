@@ -38,7 +38,7 @@ jobs:
         run: |
           # Pass the changed files to your Node.js script
           if [ -n "${{ steps.changed-files.outputs.changed_files }}" ]; then
-            node build.js --files "${{ steps.changed-files.outputs.changed_files }}"
+            node ssg/build.js --files "${{ steps.changed-files.outputs.changed_files }}"
           else
             echo "No .md files changed, skipping build."
           fi
