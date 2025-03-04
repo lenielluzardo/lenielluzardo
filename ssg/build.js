@@ -150,6 +150,7 @@ let articles_latest = articles.map((entryFileName) => {
 });
 
 console.log("Articles to build: ", articles_to_build);
+
 function buildArticles(articles_to_build) {
   if (articles_to_build) {
     articles_to_build.forEach((article, index) => {
@@ -204,7 +205,7 @@ function buildArticles(articles_to_build) {
   }
 }
 
-buildArticles(articles)
+buildArticles(articles_to_build)
 console.log(`-- # END BUILD: Blog Articles html pages --`);
 //#endregion.
 
