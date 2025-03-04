@@ -205,7 +205,6 @@ if (buildBlogPg) {
 
   const blogHtml = hbs_layout({
     route: "/blog",
-    articles_latest: sorted_articles_latest_vm,
   });
 
   fs.writeFileSync(path.join(path_blog, "index.html"), blogHtml);
