@@ -12,21 +12,21 @@
           <p  id="article-author" class="byline vcard">
             <address class="author">
               By 
-              <a  class="url fn n" rel="author" href="{{ author_profile }}" 
+              <a  class="url fn n" rel="author" href="{{author_profile}}" 
                   target="_blank" rel="noreferrer noopener">
                 {{ author }}
               </a>
               </address> 
             on 
-            <time title="{{ date_created }}" pubdate datetime="{{ date_created}}" >
-              {{ date_created }}.
+            <time title="{{created}}" pubdate datetime="{{created}}" >
+              {{created}}.
             </time>
 
           </p>
         </div>
 
         <div class="article-img-container">
-          <img src="{{article_img_url}}" alt="{{article_img_alt}}">
+          <img src="{{img_url}}" alt="{{img_alt}}">
         </div>
       {{/with}}
       </header>
