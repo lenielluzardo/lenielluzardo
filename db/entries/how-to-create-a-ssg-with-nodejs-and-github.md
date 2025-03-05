@@ -392,7 +392,9 @@ After it finish, you'll notice that a new HTML  file was added to the `docs/` di
 ---
 
 ## Deploy to Github. {#github-deploy}
-*This section is currently under construction*
+Well, we have our SSG but somthing is missing. We need to make available or articles for the world to see. This step is an easy one, we just need to go to our repository settings tab, under the pages section in the apart build and deployment, we're going to select "deploy from branch", we choose our "main" branch and then our "docs" directory. And github will take care the deployment process for us, it will deploy any static file that is under the "docs" directory. Make sure you have and index.html as the default file of our website.
+
+This is a very general and quick overview on how to deploy it. I intend to write a more detailed explanation of this step. And to implement incremental deployments also. 
 
 --
 
