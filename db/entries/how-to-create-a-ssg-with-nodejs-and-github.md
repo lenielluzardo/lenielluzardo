@@ -394,13 +394,18 @@ After it finish, you'll notice that a new HTML  file was added to the `docs/` di
 ## Deploy to Github. {#github-deploy}
 Well, we have our SSG but somthing is missing. We need to make available or articles for the world to see. This step is an easy one, we just need to go to our repository settings tab, under the pages section in the apart build and deployment, we're going to select "deploy from branch", we choose our "main" branch and then our "docs" directory. And github will take care the deployment process for us, it will deploy any static file that is under the "docs" directory. Make sure you have and index.html as the default file of our website.
 
-This is a very general and quick overview on how to deploy it. I intend to write a more detailed explanation of this step. And to implement incremental deployments also. 
+This is a very general and quick overview on how to deploy it. I intend to write a more detailed explanation of this step. And to implement incremental deployments also in following articles. 
 
 --
 
 ## Conclusion
-*This section is currently under construction*
+Although it may seen like is not a common pattern, this approach allow you to have an hybrid system that takes the advantages of the headless CMS pattern and Static pages, without the need to pay and configure any type of server, nor database. Your database are the **`.md`** files that you can use later with other system if the requirements change, but for a symple blog that doesn't have huge loads of articles or that change no so often it's a perfect match. Also you don't need to learn another framework or platform, making the development process really easy.
 
+Obviously we didn't compose a complicated HTML layout, nor implemented sub-routes. But we will do it in another guide that will be based on the progress we made today. I'll keep you posted, I hope to pulish this article and make the other in a couple of days.
+
+Until then, "and in case I don't see ya, Good afternoon, good evening and good night" 
+
+![Truman bye bye](https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExcmV6dHYwbXF6ZDViZDNlMTl0OWNzdXF5ODBlZmI4a3BlNTAycnI1OCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/dRvEZLV0ORAmHT1L5u/giphy.gif)
 
 ---
 
