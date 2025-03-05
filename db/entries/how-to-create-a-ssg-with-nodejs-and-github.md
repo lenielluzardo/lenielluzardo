@@ -22,7 +22,7 @@ article_img_alt: "A placeholder image for testing purposes."
 3. **[Initialize a Repository.](#create-repository)**
 4. **[Create Project Struture.](#project-structe)**
 5. **[Install Dependencies.](#install-dependencies)**
-6. **[Create The Build Script.](#create-build-script)**
+6. **[Building the SSG.](#building-ssg)**
 7. **[Create Handlebars Template.](#create-hbs-template)**
 8. **[Build The HTML Files.](#build-html)**
 9. **[Deploy to Github.](#github-deploy)**
@@ -76,7 +76,7 @@ Ok let's start with the pre-requesites; please make sure you have the following 
 
 First things, first; is necessary that you [Create a Github account][2.1] and [initialize a repository][2.2]. If you don't have one already.
 
-[Github has a special repository][2.3] that is presented in your profile commonly used to showcase your personal information, experience, or a custom message. Although, is not necessary, for this example, we'll use the Github "special repo" to create our SSG; the main idea of this, is to have a personal blog to write articles and show our experience in the same repository of our Github profile README.md file, that way we can have all the information for our brand centrilized. Although, you can create your SSG in any another repository if that's what you want to do. 
+[Github has a special repository][2.3] that is presented in your profile commonly used to showcase your personal information, experience, or a custom message. Although, is not necessary, for this example, we'll use the Github "special repo" to create our SSG; the main idea of this, is to have a personal blog to write articles and show our experience in the same repository of our Github profile README**.md** file, that way we can have all the information for our brand centrilized. Although, you can create your SSG in any another repository if that's what you want to do. 
 
 Ok, once you have created your account and your repository, its [time to clone it into your machine][2.4].
 
@@ -92,7 +92,7 @@ Now that we have our repository cloned into our machine, we can navigate to the 
 
 We will use a project structure that will allow us to: use or migrate the articles we write to a headless CMS later, if that is what we want. But that is out of the scope of this tutorial for now.
 
-For the Github "special repo" to work properly, the README.md file needs to be in the root directory of our repository. Because we want to maintain the root directory as clean as possible. we will create the following sub-directories for our project:
+For the Github "special repo" to work properly, the README**.md** file needs to be in the root directory of our repository. Because we want to maintain the root directory as clean as possible. we will create the following sub-directories for our project:
 
  * One directory called **db**, for the articles or 'entries' .
  * One directory called **ssg**, for the SSG script and Handlebars templates.
@@ -107,7 +107,7 @@ repository
 |-- db/
 |-- docs/
 |-- ss/
-|__ README.md
+|__ README**.md**
 
 ```
 ¡Great! Now we have everything in place to start hitting the keyboard and produce some magic! 😉.
@@ -148,11 +148,12 @@ You'll be asked to fill some values, and after you entered them a ``"package.jso
 ### Install dependencies.
 Now, let's install our dependencies, for this project we need the following libraries:
 
-1. **[gray-matter][5.1]:** In order to parse YAML frontmatter metadata from out .md files to JSON.
+1. **[gray-matter][5.1]:** In order to parse YAML frontmatter metadata from out **.md** files to JSON.
 2. **[handlebars][5.2]**: In order to compose layouts for the different sections of our website.
-3. **[marked][5.3]**: In order to parse the content of our .md files into HTML.
+3. **[marked][5.3]**: In order to parse the content of our **.md** files into HTML.
 4. **[marked-custom-heading-id][5.4]**: In orther to take advantage of Markdown extended syntax for reference heading ids.
 5. **[minimist][5.5]**: In order to read arguments from the terminal environment, to activate incremental builds.
+6. **[fs][5.6]**: Node FS module in order to load, read and write from and to the filesystem. 
 
 **Run the following command:**
 ```
@@ -161,6 +162,7 @@ npm install gray-matter handlebars marked marked-custom-heading-id minimist
 We should end up with a `package.json` file similar to this:
 
 ```json
+/repository/ssg/package.json
 
 {
   "name": "node-ssg",
@@ -185,30 +187,208 @@ We should end up with a `package.json` file similar to this:
   }
 }
 ```
-
 [5.1]: https://www.npmjs.com/package/gray-matter "Gray Matter library"
 [5.2]: https://www.npmjs.com/package/handlebars "Handlebars library"
 [5.3]: https://www.npmjs.com/package/marked "Marked library"
 [5.4]: https://www.npmjs.com/package/marked-custom-heading-id "Marked Custom Headings library"
 [5.5]: https://www.npmjs.com/package/minimist "Minimist library"
-
-
+[5.6]: https://nodejs.org/api/fs.html "File System module from Node.js"
 
 ---
 
-## Create The Build Script. {#create-build-script}
-*This section is currently under construction*
+## Building the SSG. {#building-ssg}
+Now the fun part has come: coding the script that will do the magic for us 😎. Generally speaking the whole logic of this system consists in:
+
+1. Load the **.md** files from our file system located at `repository/db/`.
+2. Reading the content of the **.md** files.
+3. Compose some general layout for our home page and articles pages using Handlebars.
+4. Compile the templates into HTML markup.
+5. Writing the HTML files into the `repository/docs` directory.
+
+### Creating the Build Script.
+
+Inside `repository/ssg/` directory, create a file called `build.js`. This will be our application entry point. As a side quest: open the `package.json` file, and make sure the section called `"main"` has the name of our build script as a value.
+
+```json 
+/repository/ssg/package.json
+
+{
+  ... some key values
+
+  "main": "build.js",
+  
+  ... more key values
+}
+```
+
+Now, in our `build.js` script import the following libraries like so:
+
+```javascript 
+/repository/ssg/build.js
+
+const fs = require("fs");                 // This is for input/ouput operation.
+const path = require("path");             // This is for path construction and navigation.
+const marked = require("marked");         // This is to parse **.md** file to html.
+const customHeadingId = require ("marked-custom-heading-id"); // To use **.md** extended syntax features (for reference heading ids).
+const matter = require("gray-matter");    // To extract frontmatter metadata.
+const Handlebars = require("handlebars"); // To compose some HTML templates.
+const minimist = require("minimist");     // To read arguments from the terminal.
+```
+
+Now let's define some variables for the repository paths, to be able to target the directories from which we want to read from and the ones we want to write to:
+
+*<ins>Note:</ins> Take in consideration that for the `root` path we need to navigate a level up in order to access the `db/` and the `docs/` directory.*
+
+
+```javascript 
+/repository/ssg/build.js
+
+...module imports
+
+const path_root = path.join(__dirname, "../");      // this is: repository/
+const path_db = path.join(path_root, 'db');         // this is: repository/db      
+const path_ssg = path.join(path_root, 'ssg');       // this is: repository/ssg
+const path_docs = path.join(path_root, 'docs');     // this is: repository/docs
+```
+With this configuration in place, we should be ready for the next step which is composing our templates.
 
 ---
 
 ## Create Handlebars Template. {#create-hbs-template}
-*This section is currently under construction*
+
+¡Great!, we have all our dependencies and all the repository paths. Now we need to compose some html templates that will be filled with our **.md** content. To avoid making this tutorial longer than already is, we will create a simple html template to show the fundamentals of the Handlebars engine, but **[you can check the source code for this repo][6.1]** to have a hint on what type of structure can web achieve with this template engine.
+
+In `/repository/ssg/` create a file called `template.hbs`. Then open it an write some markup like this:
+
+```html
+/repository/ssg/template.hbs
+
+<!-- Handlebars uses doble curly braces to output variable values stored in the context -->
+<h1>{{ title }}</h1>
+<article> 
+
+<!-- Handlebars used triple curly braces to output HTML text directly without scaping -->
+{{{ content }}} 
+
+</article>
+```
+
+Now we need to read the contents of this file and pre-compile it in order to use it correctly.
+We'll use the `fs` module to read the content of the template file and then pass it to the `Handlebars.compile()` function. We'll define a function to enclose the compilation code and be able to reuse it and to mantain everything a little bit more organized.
+
+```javascript
+/repository/ssg/build.js
+
+... module imports
+... paths configuration
+
+const path_hbs_template = path.join(path_ssg, 'template.hbs');
+
+function compileHBSTemplate(path) {
+  // Reads the content of the template.
+  hbsTemplateContent = fs.readFileSync(path, "utf-8");
+  
+  // Compile the template content, this returns a function that builds the HTML later.
+  const hbsCompiledTemplate = Handlebars.compile(hbsTemplateContent); 
+  
+  // We return the pre-compiled template.
+  return hbsCompiledTemplate;
+}
+
+// We get the precompile template that we'll use later to create the html.
+const hbsCompiledTemplate = compileHBSTemplate(path_hbs_template);
+
+```
+
+[6.1]: https://github.com/lenielluzardo/lenielluzardo/tree/main/ssg/hbs_template "Author's repository Templating"
 
 ---
 
 ## Build The HTML Files. {#build-html}
-*This section is currently under construction*
 
+We're almost there, don't faint yet. Now with the template in place, the next step is to:
+
+1. Create a function that will build the HTML for us; this function will accept four parameters: `filename`, `metadata` `mdContent` and the `hbsTemplate`. And will parse the precompile HBS template into HTML, injection the dynamic data from the other variables and write the final result to the filesystem. Think of this like an odd MVC-Frankenstein pattern 🧟‍♂️!
+
+2. Then, we will get our **`.md`** files. And use the `fs` module to read the entire `db/` directory. That way, we'll get a list of all the articles we have in our website.
+
+3. Finally we need to iterate over the **`.md`** list to read the content for each file an build the HTML, calling the function we previously defined and passing the corresponding arguments. We will use **`gray-matter`** to extract the frontmatter metadata from the **`.md`** file and **`marked`** to parse the **markdown** syntax to HTML.
+
+
+```javascript
+/repository/ssg/build.js
+
+... module imports
+... paths configuration
+... hbs template configuration
+
+// 1. Defining the build HTML file function.
+function buildHTMLfile(fileName, metadata, mdContent, hbsTemplate) {
+  
+  const htmlContent = marked.parse(mdContent);
+
+  const html = hbsTemplate({
+    title: metadata.title,
+    content: htmlContent,
+  });
+
+  // Replacing file extensions from .md to .html
+  const htmlFileName = fileName.replace(".md", ".html");
+  const outputPath = path.join(path_docs, htmlFileName);
+
+  fs.writeFileSync(outputPath, html);
+}
+
+// 2. Read Entries / articles / blog post etc.. from /repository/db
+const mdEntries = fs.readdirSync(path_db);
+
+// Check is not empty.
+if (mdEntries && mdEntries.length > 0) {
+
+// 3. Iterating over the list.
+  md.Entries.forEach((fileName) => {
+    
+    // Form the filename path
+    const path_filename = path.join(path_db, fileName);
+
+    // Reads its content
+    const content = fs.readFileSync(path_filename, "utf-8");
+
+    // Get the frontmatter and body content.
+    const { data, content: mdContent } = matter(content); 
+
+    // Calling the build HTML function
+    buildHTMLfile(fileName, data, mdContent, hbsCompiledTemplate);
+  });
+}
+
+```
+
+Pfff! Long journey my friend, you made it. Although we're not done 😅.
+I'll provide you with a **`.md`** article template. You'll notice that it has more properties and metadata than the Handlebars template with made. If you want, as an exercise, you can pass more properties to the HBS template. I won't paste it here because is too long, but [you can find it here][7.1]
+
+For the sake of this example we'll go with:
+```markdown
+
+---
+title: "My title"
+---
+
+# My Heading
+Some paragraph.
+
+```
+
+Ok, once you have a **`.md`** file located in your `db/` directory, the next step is to make the engine roar!. Open a new terminal, navigate to the `ssg/` directory and:
+
+**Run this command:**
+``node build``
+
+After it finish, you'll notice that a new HTML  file was added to the `docs/` directory. And if you open it, you'll notice that the content is the same from your markdown article.
+
+**Congratulations!!!**🥳🎉🎉 we have a working SSG of articles.
+
+[7.1]: https://github.com/lenielluzardo/node-ssg-template/blob/main/db/myarticle.md "Markdown article template"
 ---
 
 ## Deploy to Github. {#github-deploy}

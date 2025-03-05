@@ -1,7 +1,9 @@
 /*#region Initial Config*/
 :root{
-  --navheader-font-color: #fff;
   --body-font-color:#2a2a2a;
+  --navheader-font-color: #fff;
+  --theme-web-color: radial-gradient(rgb(12, 0, 72), rgb(16, 0, 57));
+  --theme-code-color: #e2e2e2;
 }
 body {
   font-family: 'Istok Web', sans-serif;
@@ -22,7 +24,7 @@ body {
 #website-header{
   grid-area: nav;
   padding: 1rem;
-  background: radial-gradient(rgb(12, 0, 72), rgb(16, 0, 57));
+  background: var(--theme-web-color);
   box-shadow: 0 1px .3rem .1rem #a5a5a5;
    display: flex;
   flex-direction: column;
@@ -111,6 +113,7 @@ main{
   margin: 2rem 0;
   text-align: justify;
   width: 80%;
+  font-size: 1.2rem;
 }
 #article h1 {
   font-size: 2rem;
@@ -136,14 +139,17 @@ main{
   margin: auto;
   float: none!important;
 }
-#article pre > code {
-  background: darkslategray;
-  display: block;
-  color: white;
-  padding: 1rem;
-  border-radius: 0.3rem;
+#article code {
   font-weight: 600;
 }
+#article pre > code {
+  background: var(--theme-code-color);
+  display: block;
+  color: #292929;
+  padding: 1rem;
+  border-radius: 0.3rem;
+  font-size: 1rem;
+  }
 /*#endregion*/
 
 /*#region Articles Latest*/

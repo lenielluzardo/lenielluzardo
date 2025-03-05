@@ -2,9 +2,9 @@
   "name": "lenielluzardo-ssg",
   "version": "1.0.0",
   "description": "static site generator with js",
-  "main": "generate.js",
+  "main": "build.js",
   "scripts": {
-    "generate": "node generate.js"
+    "build": "node build.js"
   },
   "repository": {
     "type": "git",

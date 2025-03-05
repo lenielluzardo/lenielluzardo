@@ -9,7 +9,6 @@ const marked = require("marked");
 const customHeadingId = require ("marked-custom-heading-id");
 const matter = require("gray-matter");
 const Handlebars = require("handlebars");
-const { execSync } = require("child_process");
 const minimist = require("minimist");
 
 //#endregion.
