@@ -11,7 +11,7 @@ date_created: "2025-03-03"
 date_modified: "2025-03-03"
 article_url: "https://www.luzar.dev/blog/how-to-create-a-ssg-with-nodejs-and-github.html"
 article_slug: "/blog/how-to-create-a-ssg-with-nodejs-and-github.html"
-article_img_url: "https://res.cloudinary.com/du3l28sfg/image/upload/v1741032541/blog/iwr6traoh40sgsoxqy9y.jpg"
+article_img_url: "https://res.cloudinary.com/du3l28sfg/image/upload/v1741032541/blog/covers/iwr6traoh40sgsoxqy9y.jpg"
 article_img_alt: "A placeholder image for testing purposes."
 ---
 <div id="outline">
