@@ -95,6 +95,8 @@ I've been blessed to be part of excellent Agile teams, building web applications
 
 ---
 
+### 
+
 <details> 
 <summary>
   <h3 class="inline">
@@ -121,3 +123,5 @@ I've been blessed to be part of excellent Agile teams, building web applications
 ### Jul 2011 - Jul 2015 | Aviation Military Academy.
 - Bachelor degrees in Arts and Military Science - Aeronautical Mention.
 - Air Force Lieutenant (retired).
+
+

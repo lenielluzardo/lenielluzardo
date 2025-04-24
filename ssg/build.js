@@ -5,13 +5,27 @@ console.log("- # Loading dependencies. --\n");
 
 const fs = require("fs");
 const path = require("path");
-const marked = require("marked");
+const { Marked } = require("marked");
 const customHeadingId = require ("marked-custom-heading-id");
 const matter = require("gray-matter");
 const Handlebars = require("handlebars");
 const minimist = require("minimist");
+const { markedHighlight } = require("marked-highlight");
+const hljs  = require("highlight.js");
+
+const marked = new Marked(
+  markedHighlight({
+    emptyLangClass:'hljs',
+    langPrefix: 'hljs language-',
+    highlight(code, lang, info) {
+        const language = hljs.getLanguage(lang) ? lang : 'plaintext';
+         return hljs.highlight(code, { language }).value;
+    }
+  })
+)
 
 //#endregion.
+
 
 const args = minimist(process.argv.slice(2));
 const entries_incremental = args.files ? args.files.split(" ") : [];
@@ -108,7 +122,33 @@ if (!fs.existsSync(path_blog)) {
 
 function buildArticle(index, a_file_name, meta_data, md_content) {
   console.log(`___ ${index} - Parsing content to HTML from: ${a_file_name} --`);
-  const html_content = marked.parse(md_content);
+  let html_content = marked.parse(md_content);
+  
+  console.log("trying to extract outline");
+
+  let outlineEndTag = '</outline>';
+  let idxOutlineStart = html_content.indexOf(`<outline>`);
+  let idxOutlineEnd = html_content.indexOf(`</outline>`);
+  let inxEndOutlineEnd = idxOutlineEnd + outlineEndTag.length;
+    
+  let outline = html_content.substring(idxOutlineStart, inxEndOutlineEnd);
+
+  console.log(inxEndOutlineEnd);
+
+  console.log("the outline is");
+  console.log(outline);
+  
+  console.log("the HTML is");
+  html_content = html_content.replace(outline, "");
+
+  console.log(html_content)
+
+  outline = outline.replace("<outline>", "");
+  outline = outline.replace("</outline>", "");
+
+  console.log("the outline is #2");
+
+  console.log(outline);
 
   console.log(
     `___ ${index} - Setting Handlebars template values from: ${a_file_name} --`
@@ -117,6 +157,7 @@ function buildArticle(index, a_file_name, meta_data, md_content) {
   const html = hbs_layout({
     route: "/article",
     meta: meta_data,
+    outline: outline,
     content: html_content,
   });
 

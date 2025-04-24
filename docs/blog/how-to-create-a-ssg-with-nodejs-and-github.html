@@ -8,9 +8,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Istok+Web:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <link rel="stylesheet" href="/assets/style.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.11.1/build/styles/base16/harmonic16-dark.min.css"/>
   <title> Leniel Luzardo - </title>
 </head>
 <body>
@@ -81,41 +79,10 @@
   <main>
       
       <section id="blog">
-          <article id="article" class="roundbox">
-            <header>
+          <article id="article">
+            <section id="outline">
+             
       
-              <h1>
-                How To Create a SSG with Node JS and Github.
-              </h1>
-              
-              <div class="article-metadata">
-                <p  id="article-author" class="byline vcard">
-                  <address class="author">
-                    By 
-                    <a  class="url fn n" rel="author" href="https://www.linkedin.com/in/lenielluzardo" 
-                        target="_blank" rel="noreferrer noopener">
-                      Leniel Luzardo
-                    </a>
-                    </address> 
-                  on 
-                  <time title="2025-03-03" pubdate datetime="2025-03-03" >
-                    2025-03-03.
-                  </time>
-      
-                </p>
-              </div>
-      
-              <div class="article-img-container">
-                <img src="https://res.cloudinary.com/du3l28sfg/image/upload/v1741032541/blog/covers/iwr6traoh40sgsoxqy9y.jpg" alt="A placeholder image for testing purposes.">
-              </div>
-            </header>
-            
-              <!--#region Article Content -->
-            <section class="article-content">
-      
-              <div id="outline">
-      
-      <h2>Outline.</h2>
       <ol>
       <li><strong><a href="#introduction">A simple and a fast way to create your personal blog and portfolio.</a></strong></li>
       <li><strong><a href="#pre-requisites">Pre-requesites</a></strong></li>
@@ -128,7 +95,43 @@
       <li><strong><a href="#github-deploy">Deploy to Github.</a></strong></li>
       <li><strong><a href="#conclusion">Conclusion.</a></strong></li>
       </ol>
-      </div>
+      
+            </section>
+      
+            <div id="content-container">
+              <header>
+                <div class="article-img-container">
+                  <img src="https://res.cloudinary.com/du3l28sfg/image/upload/v1741032541/blog/covers/iwr6traoh40sgsoxqy9y.jpg" alt="A placeholder image for testing purposes.">
+                </div>
+      
+                <h1>
+                  How To Create a SSG with Node JS and Github.
+                </h1>
+                
+                <div class="article-metadata">
+                  <p  id="article-author" class="byline vcard">
+                    <address class="author">
+                      By 
+                      <a  class="url fn n" rel="author" href="https://www.linkedin.com/in/lenielluzardo" 
+                          target="_blank" rel="noreferrer noopener">
+                        Leniel Luzardo
+                      </a>
+                      </address> 
+                    on 
+                    <time title="2025-03-03" pubdate datetime="2025-03-03" >
+                      2025-03-03.
+                    </time>
+      
+                  </p>
+                </div>
+      
+              
+              </header>
+              
+                <!--#region Article Content -->
+              <section class="article-content">
+      
+                
       
       <hr>
       <h2 id="introduction">A simple and fast way to create your personal blog and portfolio.</h2>
@@ -137,7 +140,7 @@
       <p>You might be asking: <strong>But aren&#39;t there already several well-known SSGs on the web that are well-supported and have great communities, documentation, plugins, and resources?</strong></p>
       <p>To which I&#39;d say: <strong>Yes, but</strong>:</p>
       <ul>
-      <li><p><strong>First:</strong> This is a great and fun project to practice your programming skills, with a &quot;real-world&quot; final product that is a little bit more than a &quot;Hello World&quot; console application. <em>(Bt the way, I don&#39;t have any problem with &quot;Hello world&quot; console apps; they&#39;re fun</em> 😉*)*</p>
+      <li><p><strong>First:</strong> This is a great and fun project to practice your programming skills, with a &quot;real-world&quot; final product that is a little bit more than a &quot;Hello World&quot; console application. <em>(Bt the way, I don&#39;t have any problem with &quot;Hello world&quot; console apps; they&#39;re fun</em> 😉 <em>)</em></p>
       </li>
       <li><p><strong>Second:</strong> You won&#39;t have any dependency on third-party vendors or the need to learn another JS framework. We&#39;ll use only Vanilla JavaScript, the Node.js environment and GitHub to create a simple and low-maintenance blogging system.</p>
       </li>
@@ -173,31 +176,28 @@
       </ul>
       <p>The only directory with a strict name is the <strong>docs</strong> directory. This is because, when we deploy our site later, we’ll use the GitHub Pages branch deployment feature. Unfortunately, at the time of writing this guide, GitHub Pages only allows you to deploy from the root directory or a subdirectory called &quot;/docs&quot; <em>(without using the GitHub Custom Actions workflow).</em></p>
       <p>Okay, our repository structure should look something like this:</p>
-      <pre><code>repository/
+      <pre><code class="hljs">repository/
       |-- db/
       |-- docs/
       |-- ss/
       |-- README**.md**
-      </code></pre>
-      <p>Great! Now we have everything in place to start typing away and create some magic! 😉</p>
+      </code></pre><p>Great! Now we have everything in place to start typing away and create some magic! 😉</p>
       <hr>
       <h2 id="install-dependencies">Install Dependencies.</h2>
       <p>Now that we have our repository structure in place, let’s open the code editor you chose (I’ll be using VS Code). If you’re using VS Code like me, you can open the editor from the file explorer’s context menu by right-clicking the explorer window and selecting <strong>&quot;Open with Code&quot;</strong>.</p>
       <p><img src="https://res.cloudinary.com/du3l28sfg/image/upload/v1741105903/blog/exampleof/open-vscode-contex-from-menu_dnkvdd.png" alt="Open VS Code from Context Menu"></p>
       <h3>Check That Node Is Installed</h3>
       <p>Once the code editor is open, we need to confirm that Node is installed, just in case you missed it in the steps above.<br><strong>Run the following command in a new terminal:</strong> <em>(If you’re using VS Code, you can open the integrated terminal.)</em></p>
-      <pre><code>\repository\ssg &gt; node --version
+      <pre><code class="hljs">\repository\ssg &gt; node --version
       
-      // If you see something like it means it&#39;s installed: 
+      // If you see something like it means it&#x27;s installed: 
       // ouput:
       // v22.14.0 
-      </code></pre>
-      <h3>Initialize the Manifest</h3>
+      </code></pre><h3>Initialize the Manifest</h3>
       <p>After confirming that Node is installed, let’s initialize our application manifest, which will contain general information about our app and hold references to all our dependencies.</p>
       <p><strong>In your terminal, run:</strong></p>
-      <pre><code>npm init
-      </code></pre>
-      <p>You’ll be asked to fill in some values, and after you enter them, a <code>&quot;package.json&quot;</code> file will be created.</p>
+      <pre><code class="hljs">npm init
+      </code></pre><p>You’ll be asked to fill in some values, and after you enter them, a <code>&quot;package.json&quot;</code> file will be created.</p>
       <p><img src="https://res.cloudinary.com/du3l28sfg/image/upload/v1741109966/blog/exampleof/npm-init_ofiix6.png" alt="npm init Example"></p>
       <h3>Install dependencies.</h3>
       <p>Now, let’s install our dependencies. For this project, we need the following libraries:</p>
@@ -210,35 +210,33 @@
       <li><strong><a href="https://nodejs.org/api/fs.html" title="File System module from Node.js">fs</a>:</strong> The Node FS module, used to load, read, and write to the filesystem.</li>
       </ol>
       <p><strong>Run the following command:</strong></p>
-      <pre><code>npm install gray-matter handlebars marked marked-custom-heading-id minimist
-      </code></pre>
-      <p>We should end up with a <code>&quot;package.json&quot;</code> file similar to this:</p>
-      <pre><code class="language-json">/repository/ssg/package.json
+      <pre><code class="hljs">npm install gray-matter handlebars marked marked-custom-heading-id minimist
+      </code></pre><p>We should end up with a <code>&quot;package.json&quot;</code> file similar to this:</p>
+      <pre><code class="hljs language-json">/repository/ssg/package.json
       
-      {
-        &quot;name&quot;: &quot;node-ssg&quot;,
-        &quot;version&quot;: &quot;1.0.0&quot;,
-        &quot;description&quot;: &quot;My awesome SSG with Node&quot;,
-        &quot;main&quot;: &quot;index.js&quot;,
-        &quot;scripts&quot;: {
-          &quot;test&quot;: &quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;
-        },
-        &quot;repository&quot;: {
-          &quot;type&quot;: &quot;git&quot;,
-          &quot;url&quot;: &quot;your-git-repo&quot;
-        },
-        &quot;author&quot;: &quot;your-name&quot;,
-        &quot;license&quot;: &quot;ISC&quot;,
-        &quot;dependencies&quot;: {
-          &quot;gray-matter&quot;: &quot;^4.0.3&quot;,
-          &quot;handlebars&quot;: &quot;^4.7.8&quot;,
-          &quot;marked&quot;: &quot;^15.0.7&quot;,
-          &quot;marked-custom-heading-id&quot;: &quot;^2.0.11&quot;,
-          &quot;minimist&quot;: &quot;^1.2.8&quot;
-        }
-      }
-      </code></pre>
-      <hr>
+      <span class="hljs-punctuation">{</span>
+        <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;node-ssg&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;version&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;1.0.0&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;description&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;My awesome SSG with Node&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;main&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;index.js&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;scripts&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+          <span class="hljs-attr">&quot;test&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;</span>
+        <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;repository&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+          <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;git&quot;</span><span class="hljs-punctuation">,</span>
+          <span class="hljs-attr">&quot;url&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;your-git-repo&quot;</span>
+        <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;author&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;your-name&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;license&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;ISC&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;dependencies&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+          <span class="hljs-attr">&quot;gray-matter&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;^4.0.3&quot;</span><span class="hljs-punctuation">,</span>
+          <span class="hljs-attr">&quot;handlebars&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;^4.7.8&quot;</span><span class="hljs-punctuation">,</span>
+          <span class="hljs-attr">&quot;marked&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;^15.0.7&quot;</span><span class="hljs-punctuation">,</span>
+          <span class="hljs-attr">&quot;marked-custom-heading-id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;^2.0.11&quot;</span><span class="hljs-punctuation">,</span>
+          <span class="hljs-attr">&quot;minimist&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;^1.2.8&quot;</span>
+        <span class="hljs-punctuation">}</span>
+      <span class="hljs-punctuation">}</span>
+      </code></pre><hr>
       <h2 id="building-ssg">Building the SSG</h2>
       <p>Now the fun part has arrived: coding the script that will work its magic for us 😎. Generally speaking, the entire logic of this system consists of the following steps:</p>
       <ol>
@@ -250,77 +248,72 @@
       </ol>
       <h3>Creating the Build Script</h3>
       <p>Inside the <code>repository/ssg/</code> directory, create a file named <code>build.js</code>. This will serve as our application’s entry point. As a side task, open the <code>package.json</code> file and ensure that the <code>&quot;main&quot;</code> field specifies our build script as its value.</p>
-      <pre><code class="language-json">/repository/ssg/package.json
+      <pre><code class="hljs language-json">/repository/ssg/package.json
       
-      {
+      <span class="hljs-punctuation">{</span>
         ... some key values
       
-        &quot;main&quot;: &quot;build.js&quot;,
+        <span class="hljs-attr">&quot;main&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;build.js&quot;</span><span class="hljs-punctuation">,</span>
         
         ... more key values
-      }
-      </code></pre>
-      <p>Now, in our <code>build.js</code> script, import the following libraries as shown below:</p>
-      <pre><code class="language-javascript">/repository/ssg/build.js
+      <span class="hljs-punctuation">}</span>
+      </code></pre><p>Now, in our <code>build.js</code> script, import the following libraries as shown below:</p>
+      <pre><code class="hljs language-javascript">/repository/ssg/build.<span class="hljs-property">js</span>
       
-      const fs = require(&quot;fs&quot;);                 // This is for input/ouput operation.
-      const path = require(&quot;path&quot;);             // This is for path construction and navigation.
-      const marked = require(&quot;marked&quot;);         // This is to parse **.md** file to html.
-      const customHeadingId = require (&quot;marked-custom-heading-id&quot;); // To use **.md** extended syntax features (for reference heading ids).
-      const matter = require(&quot;gray-matter&quot;);    // To extract frontmatter metadata.
-      const Handlebars = require(&quot;handlebars&quot;); // To compose some HTML templates.
-      const minimist = require(&quot;minimist&quot;);     // To read arguments from the terminal.
-      </code></pre>
-      <p>Now let’s define some variables for the repository paths to target the directories we want to read from and write to:</p>
+      <span class="hljs-keyword">const</span> fs = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;fs&quot;</span>);                 <span class="hljs-comment">// This is for input/ouput operation.</span>
+      <span class="hljs-keyword">const</span> path = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;path&quot;</span>);             <span class="hljs-comment">// This is for path construction and navigation.</span>
+      <span class="hljs-keyword">const</span> marked = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;marked&quot;</span>);         <span class="hljs-comment">// This is to parse **.md** file to html.</span>
+      <span class="hljs-keyword">const</span> customHeadingId = <span class="hljs-built_in">require</span> (<span class="hljs-string">&quot;marked-custom-heading-id&quot;</span>); <span class="hljs-comment">// To use **.md** extended syntax features (for reference heading ids).</span>
+      <span class="hljs-keyword">const</span> matter = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;gray-matter&quot;</span>);    <span class="hljs-comment">// To extract frontmatter metadata.</span>
+      <span class="hljs-keyword">const</span> <span class="hljs-title class_">Handlebars</span> = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;handlebars&quot;</span>); <span class="hljs-comment">// To compose some HTML templates.</span>
+      <span class="hljs-keyword">const</span> minimist = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;minimist&quot;</span>);     <span class="hljs-comment">// To read arguments from the terminal.</span>
+      </code></pre><p>Now let’s define some variables for the repository paths to target the directories we want to read from and write to:</p>
       <p><strong>Note:</strong> Take into consideration that for the <code>root</code> path, we need to navigate one level up to access the <code>repository/db/</code> and <code>repository/docs/</code> directories.</p>
-      <pre><code class="language-javascript">/repository/ssg/build.js
+      <pre><code class="hljs language-javascript">/repository/ssg/build.<span class="hljs-property">js</span>
       
-      ...module imports
+      ...<span class="hljs-variable language_">module</span> imports
       
-      const path_root = path.join(__dirname, &quot;../&quot;);      // this is: repository/
-      const path_db = path.join(path_root, &#39;db&#39;);         // this is: repository/db      
-      const path_ssg = path.join(path_root, &#39;ssg&#39;);       // this is: repository/ssg
-      const path_docs = path.join(path_root, &#39;docs&#39;);     // this is: repository/docs
-      </code></pre>
-      <p>With this configuration in place, we should be ready for the next step: composing our templates.</p>
+      <span class="hljs-keyword">const</span> path_root = path.<span class="hljs-title function_">join</span>(__dirname, <span class="hljs-string">&quot;../&quot;</span>);      <span class="hljs-comment">// this is: repository/</span>
+      <span class="hljs-keyword">const</span> path_db = path.<span class="hljs-title function_">join</span>(path_root, <span class="hljs-string">&#x27;db&#x27;</span>);         <span class="hljs-comment">// this is: repository/db      </span>
+      <span class="hljs-keyword">const</span> path_ssg = path.<span class="hljs-title function_">join</span>(path_root, <span class="hljs-string">&#x27;ssg&#x27;</span>);       <span class="hljs-comment">// this is: repository/ssg</span>
+      <span class="hljs-keyword">const</span> path_docs = path.<span class="hljs-title function_">join</span>(path_root, <span class="hljs-string">&#x27;docs&#x27;</span>);     <span class="hljs-comment">// this is: repository/docs</span>
+      </code></pre><p>With this configuration in place, we should be ready for the next step: composing our templates.</p>
       <hr>
       <h2 id="create-hbs-template">Create a Handlebars Template</h2>
       <p>Great! We have all our dependencies and repository paths set up. Now we need to create some <code>HTML</code> templates that will be populated with our <strong>.md</strong> content. To avoid making this tutorial longer than it already is, we’ll create a simple <code>HTML</code> template to demonstrate the fundamentals of the Handlebars engine. However, <strong><a href="https://github.com/lenielluzardo/lenielluzardo/tree/main/ssg/hbs_template" title="Author&#39;s repository Templating">you can check the source code for this repo</a></strong> to get an idea of the structure you can achieve with this template engine.</p>
       <p>In the <code>repository/ssg/</code> directory, create a file named <code>template.hbs</code>. Then open it and write some markup as shown below:</p>
-      <pre><code class="language-html">/repository/ssg/template.hbs
+      <pre><code class="hljs language-html">/repository/ssg/template.hbs
       
-      &lt;!-- Handlebars uses doble curly braces to output variable values stored in the context --&gt;
-      &lt;h1&gt;{{ title }}&lt;/h1&gt;
-      &lt;article&gt; 
+      <span class="hljs-comment">&lt;!-- Handlebars uses doble curly braces to output variable values stored in the context --&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>{{ title }}<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">article</span>&gt;</span> 
       
-      &lt;!-- Handlebars used triple curly braces to output HTML text directly without scaping --&gt;
+      <span class="hljs-comment">&lt;!-- Handlebars used triple curly braces to output HTML text directly without scaping --&gt;</span>
       {{{ content }}} 
       
-      &lt;/article&gt;
-      </code></pre>
-      <p>Now we need to read the contents of this file and precompile it to use it correctly.<br>We’ll use the <code>fs</code> module to read the contents of the template file and then pass them to the <code>Handlebars.compile()</code> function. We’ll define a function to encapsulate the compilation code, making it reusable and keeping everything a bit more organized.</p>
-      <pre><code class="language-javascript">/repository/ssg/build.js
+      <span class="hljs-tag">&lt;/<span class="hljs-name">article</span>&gt;</span>
+      </code></pre><p>Now we need to read the contents of this file and precompile it to use it correctly.<br>We’ll use the <code>fs</code> module to read the contents of the template file and then pass them to the <code>Handlebars.compile()</code> function. We’ll define a function to encapsulate the compilation code, making it reusable and keeping everything a bit more organized.</p>
+      <pre><code class="hljs language-javascript">/repository/ssg/build.<span class="hljs-property">js</span>
       
-      ... module imports
+      ... <span class="hljs-variable language_">module</span> imports
       ... paths configuration
       
-      const path_hbs_template = path.join(path_ssg, &#39;template.hbs&#39;);
+      <span class="hljs-keyword">const</span> path_hbs_template = path.<span class="hljs-title function_">join</span>(path_ssg, <span class="hljs-string">&#x27;template.hbs&#x27;</span>);
       
-      function compileHBSTemplate(path) {
-        // Reads the content of the template.
-        hbsTemplateContent = fs.readFileSync(path, &quot;utf-8&quot;);
+      <span class="hljs-keyword">function</span> <span class="hljs-title function_">compileHBSTemplate</span>(<span class="hljs-params">path</span>) {
+        <span class="hljs-comment">// Reads the content of the template.</span>
+        hbsTemplateContent = fs.<span class="hljs-title function_">readFileSync</span>(path, <span class="hljs-string">&quot;utf-8&quot;</span>);
         
-        // Compile the template content, this returns a function that builds the HTML later.
-        const hbsCompiledTemplate = Handlebars.compile(hbsTemplateContent); 
+        <span class="hljs-comment">// Compile the template content, this returns a function that builds the HTML later.</span>
+        <span class="hljs-keyword">const</span> hbsCompiledTemplate = <span class="hljs-title class_">Handlebars</span>.<span class="hljs-title function_">compile</span>(hbsTemplateContent); 
         
-        // We return the pre-compiled template.
-        return hbsCompiledTemplate;
+        <span class="hljs-comment">// We return the pre-compiled template.</span>
+        <span class="hljs-keyword">return</span> hbsCompiledTemplate;
       }
       
-      // We get the precompile template that we&#39;ll use later to create the html.
-      const hbsCompiledTemplate = compileHBSTemplate(path_hbs_template);
-      </code></pre>
-      <hr>
+      <span class="hljs-comment">// We get the precompile template that we&#x27;ll use later to create the html.</span>
+      <span class="hljs-keyword">const</span> hbsCompiledTemplate = <span class="hljs-title function_">compileHBSTemplate</span>(path_hbs_template);
+      </code></pre><hr>
       <h2 id="build-html">Build the HTML Files</h2>
       <p>We’re almost there—don’t give up yet! With the template in place, the next step is to:</p>
       <ol>
@@ -331,63 +324,61 @@
       <li><p>Finally, we need to iterate over the <strong><code>.md</code></strong> list to read the content of each file and build the <code>HTML</code> by calling the previously defined function with the corresponding arguments. We’ll use <strong><code>gray-matter</code></strong> to extract the frontmatter metadata from the <strong><code>.md</code></strong> files and <strong><code>marked</code></strong> to parse the Markdown syntax into <code>HTML</code>.</p>
       </li>
       </ol>
-      <pre><code class="language-javascript">/repository/ssg/build.js
+      <pre><code class="hljs language-javascript">/repository/ssg/build.<span class="hljs-property">js</span>
       
-      ... module imports
+      ... <span class="hljs-variable language_">module</span> imports
       ... paths configuration
       ... hbs template configuration
       
-      // 1. Defining the build HTML file function.
-      function buildHTMLfile(fileName, metadata, mdContent, hbsTemplate) {
+      <span class="hljs-comment">// 1. Defining the build HTML file function.</span>
+      <span class="hljs-keyword">function</span> <span class="hljs-title function_">buildHTMLfile</span>(<span class="hljs-params">fileName, metadata, mdContent, hbsTemplate</span>) {
         
-        const htmlContent = marked.parse(mdContent);
+        <span class="hljs-keyword">const</span> htmlContent = marked.<span class="hljs-title function_">parse</span>(mdContent);
       
-        const html = hbsTemplate({
-          title: metadata.title,
-          content: htmlContent,
+        <span class="hljs-keyword">const</span> html = <span class="hljs-title function_">hbsTemplate</span>({
+          <span class="hljs-attr">title</span>: metadata.<span class="hljs-property">title</span>,
+          <span class="hljs-attr">content</span>: htmlContent,
         });
       
-        // Replacing file extensions from .md to .html
-        const htmlFileName = fileName.replace(&quot;.md&quot;, &quot;.html&quot;);
-        const outputPath = path.join(path_docs, htmlFileName);
+        <span class="hljs-comment">// Replacing file extensions from .md to .html</span>
+        <span class="hljs-keyword">const</span> htmlFileName = fileName.<span class="hljs-title function_">replace</span>(<span class="hljs-string">&quot;.md&quot;</span>, <span class="hljs-string">&quot;.html&quot;</span>);
+        <span class="hljs-keyword">const</span> outputPath = path.<span class="hljs-title function_">join</span>(path_docs, htmlFileName);
       
-        fs.writeFileSync(outputPath, html);
+        fs.<span class="hljs-title function_">writeFileSync</span>(outputPath, html);
       }
       
-      // 2. Read Entries / articles / blog post etc.. from /repository/db
-      const mdEntries = fs.readdirSync(path_db);
+      <span class="hljs-comment">// 2. Read Entries / articles / blog post etc.. from /repository/db</span>
+      <span class="hljs-keyword">const</span> mdEntries = fs.<span class="hljs-title function_">readdirSync</span>(path_db);
       
-      // Check is not empty.
-      if (mdEntries &amp;&amp; mdEntries.length &gt; 0) {
+      <span class="hljs-comment">// Check is not empty.</span>
+      <span class="hljs-keyword">if</span> (mdEntries &amp;&amp; mdEntries.<span class="hljs-property">length</span> &gt; <span class="hljs-number">0</span>) {
       
-      // 3. Iterating over the list.
-        md.Entries.forEach((fileName) =&gt; {
+      <span class="hljs-comment">// 3. Iterating over the list.</span>
+        md.<span class="hljs-property">Entries</span>.<span class="hljs-title function_">forEach</span>(<span class="hljs-function">(<span class="hljs-params">fileName</span>) =&gt;</span> {
           
-          // Form the filename path
-          const path_filename = path.join(path_db, fileName);
+          <span class="hljs-comment">// Form the filename path</span>
+          <span class="hljs-keyword">const</span> path_filename = path.<span class="hljs-title function_">join</span>(path_db, fileName);
       
-          // Reads its content
-          const content = fs.readFileSync(path_filename, &quot;utf-8&quot;);
+          <span class="hljs-comment">// Reads its content</span>
+          <span class="hljs-keyword">const</span> content = fs.<span class="hljs-title function_">readFileSync</span>(path_filename, <span class="hljs-string">&quot;utf-8&quot;</span>);
       
-          // Get the frontmatter and body content.
-          const { data, content: mdContent } = matter(content); 
+          <span class="hljs-comment">// Get the frontmatter and body content.</span>
+          <span class="hljs-keyword">const</span> { data, <span class="hljs-attr">content</span>: mdContent } = <span class="hljs-title function_">matter</span>(content); 
       
-          // Calling the build HTML function
-          buildHTMLfile(fileName, data, mdContent, hbsCompiledTemplate);
+          <span class="hljs-comment">// Calling the build HTML function</span>
+          <span class="hljs-title function_">buildHTMLfile</span>(fileName, data, mdContent, hbsCompiledTemplate);
         });
       }
-      </code></pre>
-      <p>Whew! That was a long journey, my friend—you made it! Although we’re not done yet 😅.<br>I’ll provide you with a <strong><code>.md</code></strong> article template. You’ll notice that it has more properties and metadata than the Handlebars template we created. If you’d like, as an exercise, you can pass additional properties to the Handlebars template. I won’t include it here because it’s too long, but <a href="https://github.com/lenielluzardo/node-ssg-template/blob/main/db/myarticle.md" title="Markdown article template">you can find it here</a>.</p>
+      </code></pre><p>Whew! That was a long journey, my friend—you made it! Although we’re not done yet 😅.<br>I’ll provide you with a <strong><code>.md</code></strong> article template. You’ll notice that it has more properties and metadata than the Handlebars template we created. If you’d like, as an exercise, you can pass additional properties to the Handlebars template. I won’t include it here because it’s too long, but <a href="https://github.com/lenielluzardo/node-ssg-template/blob/main/db/myarticle.md" title="Markdown article template">you can find it here</a>.</p>
       <p>For the sake of this example, we’ll proceed with:</p>
-      <pre><code class="language-markdown">
+      <pre><code class="hljs language-markdown">
       ---
-      title: &quot;My title&quot;
-      ---
+      <span class="hljs-section">title: &quot;My title&quot;
+      ---</span>
       
-      # My Heading
+      <span class="hljs-section"># My Heading</span>
       Some paragraph.
-      </code></pre>
-      <p>Ok, once you have a <strong><code>.md</code></strong> file located in your <code>repository/db/</code> directory, the next step is to make the engine roar! Open a new terminal, navigate to the <code>repository/ssg/</code> directory, and:</p>
+      </code></pre><p>Ok, once you have a <strong><code>.md</code></strong> file located in your <code>repository/db/</code> directory, the next step is to make the engine roar! Open a new terminal, navigate to the <code>repository/ssg/</code> directory, and:</p>
       <p><strong>Run this command:</strong>
       <code>node build</code></p>
       <p>After it finishes, you&#39;ll notice that a new HTML file has been added to the <code>docs/</code> directory. If you open it, you&#39;ll notice that the content is the same as your markdown article.</p>
@@ -396,7 +387,7 @@
       <h2 id="github-deploy">Deploy to Github.</h2>
       <p>Well, we have our SSG, but something is missing. We need to make our articles available for the world to see. This step is an easy one; we just need to go to our repository&#39;s settings tab. Under the Pages section in the &quot;Build and Deployment&quot; area, we&#39;re going to select &quot;Deploy from branch,&quot; choose our &quot;main&quot; branch, and then select our &quot;docs&quot; directory. GitHub will take care of the deployment process for us; it will deploy any static file that is under the &quot;docs&quot; directory. Make sure you have an index.html file as the default file for our website.</p>
       <p>This is a very general and quick overview of how to deploy it. I intend to write a more detailed explanation of this step and to implement incremental deployments in following articles.</p>
-      <p>--</p>
+      <hr>
       <h2>Conclusion</h2>
       <p>Although it may seem like it is not a common pattern, this approach allows you to have a hybrid system that takes advantage of the headless CMS pattern and static pages, without the need to pay for or configure any type of server or database. Your database consists of the <strong><code>.md</code></strong> files that you can use later with another system if the requirements change. However, for a simple blog that doesn&#39;t have huge loads of articles or that does not change so often, it&#39;s a perfect match. Also, you don&#39;t need to learn another framework or platform, making the development process really easy.</p>
       <p>Obviously, we didn&#39;t compose a complicated HTML layout, nor did we implement sub-routes. But we will do it in another guide that will be based on the progress we made today. I&#39;ll keep you posted; I hope to publish this article and make the others in a couple of days.</p>
@@ -406,7 +397,8 @@
       <p><em>This post was written in Markdown and automatically rendered by this Node.js SSG blogging system. Pretty cool, huh?</em></p>
       
       
-            </section>
+              </section>
+            </div>
               <!--#endregion -->
       
           </article>
@@ -415,14 +407,11 @@
           <script src="/scripts/__partials__.js"></script>
         </div>
       
-      
       </section>  </main>
 
 
  
-<!-- and it's easy to individually load additional languages -->
 
-<script>hljs.highlightAll();</script>
   <script type="module" src="/scripts/script.js"></script>
 </body>
 </html>

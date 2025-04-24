@@ -9,7 +9,7 @@ body {
   font-family: 'Istok Web', sans-serif;
   display: grid;
   grid-template-columns: auto 1fr;
-  grid-template-areas: 
+  grid-template-areas:
    "nav main";
   height: 100vh;
   color:var(--body-font-color);
@@ -88,16 +88,17 @@ body {
 /*#region Main Content Container*/
 main{
   grid-area: main;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  align-content: center;
-  width: 100%;
-  height: 100%;
+  /* display: flex; */
+  /* flex-direction: column; */
+  /* align-items: center; */
+  /* align-content: center; */
+  /* width: 100%; */
+  /* height: 100%; */
   overflow-y: scroll;
 }
 #blog {
-  width: 80%;
+  padding: 2rem;
+  /* width: 80%; */
 }
 /*#endregion*/
 
@@ -109,15 +110,31 @@ main{
 
 /*#region Article (single)*/
 #article{
-  padding: 2rem;
-  margin: 2rem 0;
+  display: grid;
+  grid-template: auto / 1fr 1fr;
+  grid-gap: 1rem;
   text-align: justify;
-  width: 80%;
+  /* width: 80%; */
   font-size: 1.2rem;
+}
+outline {
+  /* grid-area: outline; */
+  width: 40%;
+  position: sticky;
+  top: 0;
+}
+#content-container {
+  width: 70%;
+  display: flex;
 }
 #article h1 {
   font-size: 2rem;
   margin: 1rem 0;
+}
+#content-container {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
 }
 .article-img-container{
     text-align: center;
@@ -143,13 +160,12 @@ main{
   font-weight: 600;
 }
 #article pre > code {
-  background: var(--theme-code-color);
   display: block;
-  color: #292929;
   padding: 1rem;
-  border-radius: 0.3rem;
   font-size: 1rem;
-  }
+  /* border: 3px solid rgba(0, 0, 0, 0.214);   */
+  border-radius: 0.5rem;
+}
 /*#endregion*/
 
 /*#region Articles Latest*/
@@ -195,7 +211,7 @@ main{
 }
 .card-img {
   width: 100%;
-  height: 60%; 
+  height: 60%;
   overflow: hidden;
 }
 .card-img > img {
@@ -225,7 +241,7 @@ main{
 @media screen and (max-width: 600px) {
   body {
     grid-template: auto 1fr / auto;
-    grid-template-areas: 
+    grid-template-areas:
    "nav" "main";
   }
 
