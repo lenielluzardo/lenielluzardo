@@ -57,8 +57,6 @@ I've been blessed to be part of excellent Agile teams, building web applications
 
 </details>
 
----
-
 <details> 
 <summary>
   <h3 class="inline">
@@ -75,8 +73,6 @@ I've been blessed to be part of excellent Agile teams, building web applications
 | ✅ | Creation of Unit Test using XUnit.
 </details>
 
---- 
-
 <details> 
 <summary>
   <h3 id="" class="inline">
@@ -92,8 +88,6 @@ I've been blessed to be part of excellent Agile teams, building web applications
 | ✅| Building XML parser to MSSQL based on XML standard schema.
 | ✅| Creation and execution of Unit Test using NUnit.
 </details>
-
----
 
 <details> 
 <summary>
