@@ -16,7 +16,8 @@ I've been blessed to be part of excellent Agile teams, building web applications
   Check the stack I've been working on in the along the years.
 </summary>
 
-| # Target| # Tech ||||||
+
+||||||||
 |-|-|-|-|-|-|-|
 | **Front-End**  | React | Angular | HTML | CSS | WPF | jQuery |
 | **Back-End**   |.NET 7+ |.NET Core | .NET Framework | ASP.NET |-|-|
@@ -27,7 +28,6 @@ I've been blessed to be part of excellent Agile teams, building web applications
 | **CI/CD**      | Azure DevOps | GitHub Actions |-|-|-|-|
 | **Agile/Scrum**| Azure Devops | Jira |-|-|-|-|
 | **Security**   | OWASP Top 10 | Veracode | Checkmarx |-|-|-|
-||||||||
 </details>
 
 ## Work Experience
