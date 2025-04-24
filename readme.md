@@ -1,4 +1,4 @@
-## About
+## Hello there!
 I've been blessed to be part of excellent Agile teams, building web applications with .NET and improving the quality of services from well-known international companies, following Clean Code principles.
 
 ### Let's Work Together! 💪
@@ -11,7 +11,7 @@ I've been blessed to be part of excellent Agile teams, building web applications
 [github]:'https://github.com/lenielluzardo'
 [gmail]:'lenielluzardo.dev@gmail.com'
 
-### Stack
+### Tech-Stack
 <details> 
 <summary>
   Check the stack I've been working on in the along the years.
@@ -31,7 +31,7 @@ I've been blessed to be part of excellent Agile teams, building web applications
 ||||||||
 </details>
 
-## Experience
+## Work Experience
 
 <details>
 <summary>
@@ -64,9 +64,7 @@ I've been blessed to be part of excellent Agile teams, building web applications
 
 <details> 
 <summary>
-  <h3 id="" class="inline">
     2020-02 — 2021-03 | Globant.
-  </h3>
 </summary>
 
 |Role:| Back-end Developer ( ASP.NET Web API )|
