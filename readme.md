@@ -2,9 +2,8 @@
 I've been blessed to be part of excellent Agile teams, building web applications with .NET and improving the quality of services from well-known international companies, following Clean Code principles.
 
 ### Let's Work Together! 💪
-| | | | |
-|-|-|-|-|
 | Contact: | [Email](gmail) | [LinkedIn](linkedin) | [GitHub](github) |
+|-|-|-|-|
 
 
 [linkedin]:'https://www.linkedin.com/in/lenielluzardo/'
@@ -76,8 +75,6 @@ I've been blessed to be part of excellent Agile teams, building web applications
 | ✅| Creation and execution of Unit Test using NUnit.
 </details>
 
----
-
 <details> 
 <summary>
     2019-05 — 2020-12 | Ingenieria Informatica 
@@ -90,15 +87,18 @@ I've been blessed to be part of excellent Agile teams, building web applications
 | ✅ | Composing UI login module with XAML.
 </details>
 
----
-
 ## Education.
-### Jan 2019 - Current | Self-taught Software Developer.
-- Plurasight.com
-- Udemy.com
-- Platzi.com
 
-## Education
-### Jul 2011 - Jul 2015 | Aviation Military Academy.
-- Bachelor degrees in Arts and Military Science - Aeronautical Mention.
-- Air Force Lieutenant (retired).
+<details>
+<summary>
+  College education and courses . . .
+</summary>
+
+| Certification | Field | Year | At |
+|-|-|-|-|
+| Course | Computer Science Fundamentals | 2019 | platzi.com | 
+| Course | Web Development | 2019 | platzi.com |
+| Course | Advanced C# Programming | 2020 | pluralsight.com |
+| Course | React Programming | 2022 | udemy.com |
+| Bachelor's Degree | Arts and Military Science - Aeronautical Mention | 2015 | EAM |
+</details>
