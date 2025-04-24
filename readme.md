@@ -1,5 +1,5 @@
 ## Hello there!
-I've been blessed to be part of excellent Agile teams, building web applications with .NET and improving the quality of services from well-known international companies, following Clean Code principles.
+I've had the privilege of working with outstanding Agile teams, collaborating to build web applications that enhance service quality for leading businesses worldwide.🌍
 
 ### Let's Work Together! 💪
 | Contact: | [Email](gmail) | [LinkedIn](linkedin) | [GitHub](github) |
