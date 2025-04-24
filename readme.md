@@ -1,9 +1,3 @@
-<style>
-  .inline{
-    display:inline;
-  }
-</style>
-
 ## About
 I've been blessed to be part of excellent Agile teams, building web applications with .NET and improving the quality of services from well-known international companies, following Clean Code principles.
 
@@ -17,11 +11,10 @@ I've been blessed to be part of excellent Agile teams, building web applications
 [github]:'https://github.com/lenielluzardo'
 [gmail]:'lenielluzardo.dev@gmail.com'
 
+### Stack
 <details> 
 <summary>
-  <h2 class="inline">
-    Stack.
-  </h2>
+  Check the stack I've been working on in the along the years.
 </summary>
 
 | # Target| # Tech ||||||
@@ -42,9 +35,7 @@ I've been blessed to be part of excellent Agile teams, building web applications
 
 <details>
 <summary>
-  <h3 class="inline"> 
     2022-12 — 2024-12 | Cognizant Softvision.
-  </h3>
 </summary> 
 
 |Role:| Full-stack Developer ( .NET + React ) |
@@ -59,9 +50,7 @@ I've been blessed to be part of excellent Agile teams, building web applications
 
 <details> 
 <summary>
-  <h3 class="inline">
     2021-05 — 2022-09 | Pricewaterhouse & Coopers
-  </h3>
 </summary>
 
 |Role:| Full-stack Developer ( ASP.NET Razor ) |
@@ -89,11 +78,11 @@ I've been blessed to be part of excellent Agile teams, building web applications
 | ✅| Creation and execution of Unit Test using NUnit.
 </details>
 
+---
+
 <details> 
 <summary>
-  <h3 class="inline">
     2019-05 — 2020-12 | Ingenieria Informatica 
-  </h3>
 </summary>
 
 |Role:| Full-stack Developer ( .NET + WPF ) |
