@@ -3,7 +3,7 @@ I've had the privilege of working with outstanding Agile teams, collaborating to
 
 ### Let's Work Together! 💪
 | Contact: | [Email](mailto:lenielluzardo.dev@gmail.com) | [LinkedIn](https://www.linkedin.com/in/lenielluzardo/)|
-|-|-|-|-|
+|-|-|-|
 
 ### Tech-Stack
 <details> 
