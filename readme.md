@@ -2,13 +2,8 @@
 I've had the privilege of working with outstanding Agile teams, collaborating to build web applications that enhance service quality for leading businesses worldwide.🌍
 
 ### Let's Work Together! 💪
-| Contact: | [Email][gmail] | [LinkedIn][linkedin] | [GitHub][github] |
+| Contact: | [Email](mailto:lenielluzardo.dev@gmail.com) | [LinkedIn](https://www.linkedin.com/in/lenielluzardo/)|
 |-|-|-|-|
-
-
-[linkedin]:'https://www.linkedin.com/in/lenielluzardo/'
-[github]:'https://github.com/lenielluzardo'
-[gmail]:'lenielluzardo.dev@gmail.com'
 
 ### Tech-Stack
 <details> 
