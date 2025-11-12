@@ -1,5 +1,5 @@
 [build]
-  command = "npm install && npx eleventy"
+  command = "git submodule update --init --recursive && npm install && npx eleventy"
   publish = "public"
 
 [build.environment]
