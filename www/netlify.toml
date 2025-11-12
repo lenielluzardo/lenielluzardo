@@ -1,6 +1,6 @@
 [build]
   command = "npm install && npx eleventy"
-  publish = "_site"
+  publish = "public"
 
 [build.environment]
   NODE_VERSION = "20"
