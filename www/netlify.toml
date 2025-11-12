@@ -1,0 +1,9 @@
+[build]
+  command = "npm install && npx eleventy"
+  publish = "_site"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+[build.processing]
+  git_submodules = true
