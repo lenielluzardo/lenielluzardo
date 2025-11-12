@@ -1,6 +1,9 @@
 # Eleventy build output
 public/
 
+# External content
+src/blog/
+
 # Node modules
 node_modules/
 
