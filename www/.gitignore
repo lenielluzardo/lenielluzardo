@@ -1,0 +1,15 @@
+# Eleventy build output
+public/
+
+# Node modules
+node_modules/
+
+# Environment variables
+.env
+
+# Editor and OS specific files
+.DS_Store
+.vscode/
+
+# Eleventy cache
+.cache/
