@@ -15,7 +15,8 @@ UPDATE_SUBMODULE="git submodule update --remote --recursive"
 # GIT_COMMIT="git commit -m \"update submodule pointer commit\""
 # LOG_GIT_PUSH="echo Git: Commiting change..."
 # GIT_PUSH="git push --set-upstream origin blog"
-BUILD_SITE="npm install && npx eleventy"
+NPM_INSTALL="npm install"
+ELEVENTY_BUILD="npx eleventy"
 
 
 $GIT_BRANCH
@@ -32,4 +33,5 @@ $UPDATE_SUBMODULE
 # $GIT_COMMIT
 # $LOG_GIT_PUSH
 # $GIT_PUSH
-$BUILD_SITE
+$NPM_INSTALL
+$ELEVENTY_BUILD
