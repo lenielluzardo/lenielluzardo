@@ -1,10 +1,9 @@
 [build]
-  command = "npm install && npx eleventy"
+  command = "git submodule update --remote && npm install && npx eleventy"
   publish = "public"
 
 [build.environment]
   NODE_VERSION = "20"
-  GIT_SSH_COMMAND = "ssh -i $SSH_PRIVATE_KEY -o StrictHostKeyChecking=no"
 
 [build.processing]
   git_submodules = true

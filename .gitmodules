@@ -1,3 +1,4 @@
 [submodule "www/src/blog"]
 	path = www/src/blog
-	url = git@github.com:lenielluzardo/ll.db.blog.git
+	url =  https://github.com/lenielluzardo/ll.db.blog.git
+
