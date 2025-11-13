@@ -4,6 +4,7 @@
 
 [build.environment]
   NODE_VERSION = "20"
+  GIT_SSH_COMMAND = "ssh -i $GIT_SSH_KEY -o StrictHostKeyChecking=no"
 
 [build.processing]
   git_submodules = true
