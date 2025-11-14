@@ -1,11 +1,14 @@
 module.exports = function (eleventyConfig)
 {
-    // eleventyConfig.addPassthroughCopy("./path/to/dir");
+    eleventyConfig.addPassthroughCopy("src/style.css");
+    eleventyConfig.addPassthroughCopy("src/assets");
+    eleventyConfig.addPassthroughCopy("src/blog/assets");
 
     return {
         dir: {
             input: "src",
-            output: "public"
+            output: "public",
+            layouts: "_layouts"
         }
     };
 }
