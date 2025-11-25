@@ -11,7 +11,7 @@ booking: "/booking",
 linkedin: https://www.linkedin.com/in/lenielluzardo,
 }
 ---
-<div class="homepage-container">
+<div id="homepage-container">
     <section id="gretting" class="section ">
 
         <div class="section-content">
@@ -89,3 +89,17 @@ linkedin: https://www.linkedin.com/in/lenielluzardo,
         </div>
     </section>
 </div>
+<script>
+    const scrollContainer = document.getElementById('homepage-container');
+
+scrollContainer.addEventListener('scroll', (event) => {
+  // Prevent default vertical scrolling behavior
+  event.preventDefault();
+
+  // Determine scroll direction and amount
+  const scrollAmount = event.deltaY; // deltaY is typically for vertical scroll, but we'll use it for horizontal
+
+  // Adjust scrollLeft property for horizontal scrolling
+  scrollContainer.scrollLeft +=  11.79;
+});
+</script>
