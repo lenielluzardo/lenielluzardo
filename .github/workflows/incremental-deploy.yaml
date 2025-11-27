@@ -1,0 +1,62 @@
+name: Incremental Deploy
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '**.md' # Trigger only when .md files change
+
+# Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2 # Fetch the last two commits to compare changes
+
+      - name: Change SSG directory
+        run: cd ssg
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "20"
+
+      - name: Install dependencies
+        run: cd ./ssg; npm install
+
+      - name: Get changed .md files
+        id: changed-files
+        run: |
+          # Get the list of changed .md files between the commits
+          CHANGED_FILES=$(git diff --name-only HEAD^ HEAD | grep '\.md$' || echo "")
+          echo "changed_files=$CHANGED_FILES" >> $GITHUB_OUTPUT
+
+      - name: Build only changed .md files
+        run: |
+          # Pass the changed files to your Node.js script
+          if [ -n "${{ steps.changed-files.outputs.changed_files }}" ]; then
+            node ssg/build.js --files "${{ steps.changed-files.outputs.changed_files }}"
+          else
+            echo "No .md files changed, skipping build."
+          fi
+
+      - name: Deploy changed HTML files
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Assuming your HTML files are in ./docs
+          # Deploy only the changed HTML files (adjust this based on your hosting)
+          if [ -n "${{ steps.changed-files.outputs.changed_files }}" ]; then
+            # Example: Deploy to GitHub Pages (modify for your hosting)
+            git config user.name "GitHub Actions"
+            git config user.email "actions@github.com"
+            git add ./docs/blog/*.html
+            git commit -m "Deploy updated HTML files" || echo "Nothing to commit"
+            git push
+          fi

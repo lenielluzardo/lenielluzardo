@@ -1,0 +1,27 @@
+<aside id="articles-latest">
+  <h3>Latest articles:</h3>
+  <ul class="roundbox">
+   
+    {{#each articles_latest }}
+     
+      <li>
+        <a href="{{this.slug}}">
+          <div class="card-container">
+    
+            <div class="card-img">
+              {{!-- <img src="{{img-src}}" alt="{{img-alt}}"> --}}
+              <img src="{{this.img_url}}" alt="{{this.img_alt}}">
+            </div>
+    
+            <div class="card-content">
+              <h4 class="card-title">{{this.title}}</h4>
+            </div>
+    
+          </div>
+        </a>
+      </li>
+    
+    {{/each}}
+  
+  </ul>
+</aside>

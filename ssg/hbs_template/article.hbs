@@ -1,0 +1,58 @@
+
+<section id="blog">
+    <article id="article">
+      <section id="outline">
+       {{{ outline }}}
+      </section>
+
+      <div id="content-container">
+        <header>
+        {{#with meta}}
+          <div class="article-img-container">
+            <img src="{{img_url}}" alt="{{img_alt}}">
+          </div>
+
+          <h1>
+            {{title}}
+          </h1>
+          
+          <div class="article-metadata">
+            <p  id="article-author" class="byline vcard">
+              <address class="author">
+                By 
+                <a  class="url fn n" rel="author" href="{{author_profile}}" 
+                    target="_blank" rel="noreferrer noopener">
+                  {{ author }}
+                </a>
+                </address> 
+              on 
+              <time title="{{created}}" pubdate datetime="{{created}}" >
+                {{created}}.
+              </time>
+
+            </p>
+          </div>
+
+        
+        {{/with}}
+        </header>
+        
+          <!--#region Article Content -->
+        <section class="article-content">
+
+          {{{content}}}
+
+        </section>
+      </div>
+        <!--#endregion -->
+
+      {{!-- <aside> --}}
+        {{!-- related articles partial here ex: If is a tutorial that expand over several articles --}}
+      {{!-- </aside> --}}
+    </article>
+
+  <div id="partial_latest">
+    <script src="/scripts/__partials__.js"></script>
+  </div>
+
+</section>
