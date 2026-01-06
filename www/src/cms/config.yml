@@ -5,11 +5,8 @@
 # - Blog posts: lenielluzardo/ll.db.blog (as git submodule)
 #
 backend:
-  name: github
-  repo: lenielluzardo/lenielluzardo # Main repository
+  name: git-gateway
   branch: main # Branch to update (main or master)
-  base_url: https://api.netlify.com
-  auth_endpoint: auth
   
 # Alternative backend for local development
 # Uncomment this when developing locally
