@@ -1,0 +1,11 @@
+{% if site.features.blogCTA.enabled %}
+<aside class="blog-cta">
+    <div class="blog-cta-content">
+        <h3>{{ site.features.blogCTA.title }}</h3>
+        <p>{{ site.features.blogCTA.description }}</p>
+        <a href="{{ site.features.blogCTA.buttonLink }}" class="btn">
+            {{ site.features.blogCTA.buttonText }}
+        </a>
+    </div>
+</aside>
+{% endif %}
