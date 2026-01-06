@@ -44,12 +44,39 @@ cd lenielluzardo/www
 npm install
 ```
 
-3. Start the development server:
+3. Initialize git submodules (for blog content):
+```bash
+git submodule update --init --recursive
+```
+
+4. Start the development server:
 ```bash
 npm start
 ```
 
 The site will be available at `http://localhost:8080`
+
+## Blog Content Management
+
+Blog posts are stored in a separate repository as a git submodule:
+- **Blog Repository**: [lenielluzardo/ll.db.blog](https://github.com/lenielluzardo/ll.db.blog)
+- **Mounted at**: `src/blog/`
+
+📖 **[Complete Blog Workflow Guide →](BLOG_WORKFLOW.md)**
+
+### Quick Blog Post Creation
+
+Using Netlify CMS (Recommended):
+1. Go to `/admin/cms/`
+2. Create new post in "Blog Posts" section
+3. Automatic commit and deploy
+
+Using Local Development:
+```bash
+cd src/blog
+touch $(date +%Y-%m-%d)-my-post.md
+# Edit the file, commit, and push
+```
 
 ## Development
 
