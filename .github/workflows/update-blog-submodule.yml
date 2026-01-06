@@ -1,0 +1,43 @@
+name: Update Blog Submodule
+
+on:
+  repository_dispatch:
+    types: [blog-updated]
+  workflow_dispatch: # Allow manual trigger
+
+jobs:
+  update-submodule:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout main repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          submodules: true
+          fetch-depth: 0
+      
+      - name: Update blog submodule to latest
+        run: |
+          cd www/src/blog
+          git checkout main
+          git pull origin main
+          cd ../../..
+          
+      - name: Check for changes
+        id: check_changes
+        run: |
+          git diff --quiet www/src/blog || echo "changes=true" >> $GITHUB_OUTPUT
+      
+      - name: Commit and push if changes exist
+        if: steps.check_changes.outputs.changes == 'true'
+        run: |
+          git config user.name "GitHub Action"
+          git config user.email "action@github.com"
+          git add www/src/blog
+          git commit -m "chore: update blog submodule with new content [skip ci]"
+          git push origin main
+      
+      - name: No changes detected
+        if: steps.check_changes.outputs.changes != 'true'
+        run: echo "No new blog content to update"
