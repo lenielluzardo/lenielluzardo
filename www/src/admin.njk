@@ -4,6 +4,16 @@ title: Admin Dashboard
 permalink: /admin/
 ---
 
+<div id="auth-check" style="display: none;">
+    <div style="text-align: center; padding: var(--space-2xl);">
+        <h2>Authentication Required</h2>
+        <p>Please log in to access the admin dashboard.</p>
+        <button onclick="netlifyIdentity.open()" class="button">Log In</button>
+    </div>
+</div>
+
+<div id="admin-content">
+
 <style>
     .admin-container {
         max-width: 900px;
@@ -290,5 +300,19 @@ permalink: /admin/
         </div>
     </form>
 </div>
+
+</div> <!-- End admin-content -->
+
+<script>
+    // Check authentication
+    if (window.netlifyIdentity) {
+        netlifyIdentity.on('init', user => {
+            if (!user) {
+                document.getElementById('admin-content').style.display = 'none';
+                document.getElementById('auth-check').style.display = 'block';
+            }
+        });
+    }
+</script>
 
 <script src="/admin.js"></script>

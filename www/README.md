@@ -88,6 +88,14 @@ www/
 
 ## Admin Dashboard
 
+⚠️ **All admin sections require authentication via Netlify Identity**
+
+After deploying to Netlify:
+1. Enable Netlify Identity in your site settings
+2. Enable Git Gateway under Identity settings
+3. Invite yourself as a user with admin role
+4. Log in at any admin page to access features
+
 ### Configuration Dashboard
 
 Access at `/admin/` to manage site features:

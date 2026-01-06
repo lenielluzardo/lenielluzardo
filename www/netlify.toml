@@ -9,6 +9,22 @@
   git_submodules = true
 
 # Netlify CMS - Enable Identity and Git Gateway
+
+# Protect admin routes with authentication
+[[redirects]]
+  from = "/admin/*"
+  to = "/admin/:splat"
+  status = 200
+  force = false
+  conditions = {Role = ["admin"]}
+
+# Allow unauthenticated users to see login page
+[[redirects]]
+  from = "/admin/*"
+  to = "/.netlify/identity/login"
+  status = 302
+  force = false
+
 # Single Page App redirect for client-side routing
 [[redirects]]
   from = "/*"

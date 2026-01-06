@@ -4,6 +4,16 @@ title: Content Manager
 permalink: /admin/content/
 ---
 
+<div id="auth-check" style="display: none;">
+    <div style="text-align: center; padding: var(--space-2xl);">
+        <h2>Authentication Required</h2>
+        <p>Please log in to access the content manager.</p>
+        <button onclick="netlifyIdentity.open()" class="button">Log In</button>
+    </div>
+</div>
+
+<div id="admin-content">
+
 <style>
     .content-admin {
         max-width: 1200px;
@@ -383,5 +393,19 @@ permalink: /admin/content/
         </form>
     </div>
 </div>
+
+</div> <!-- End admin-content -->
+
+<script>
+    // Check authentication
+    if (window.netlifyIdentity) {
+        netlifyIdentity.on('init', user => {
+            if (!user) {
+                document.getElementById('admin-content').style.display = 'none';
+                document.getElementById('auth-check').style.display = 'block';
+            }
+        });
+    }
+</script>
 
 <script src="/content-admin.js"></script>
