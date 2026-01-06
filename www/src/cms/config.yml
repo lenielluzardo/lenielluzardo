@@ -1,0 +1,130 @@
+# Netlify CMS (Decap CMS) Configuration
+# 
+# IMPORTANT: Update line 8 with your GitHub username and repository name!
+# Format: username/repository
+# Example: johndoe/johndoe-portfolio
+#
+backend:
+  name: github
+  repo: lenielluzardo/lenielluzardo # ⚠️ REPLACE WITH YOUR REPO: username/repo-name
+  branch: main # Branch to update (main or master)
+  
+# Alternative backend for local development
+# Uncomment this when developing locally
+# backend:
+#   name: git-gateway
+
+# For local development without OAuth
+local_backend: true
+
+# Publish mode
+publish_mode: editorial_workflow # Enables draft/review workflow
+
+# Media files configuration
+media_folder: "src/assets/uploads" # Where uploaded images will be stored
+public_folder: "/assets/uploads" # The public path for uploaded files
+
+# Collections - Content types
+collections:
+  # Blog Posts Collection
+  - name: "blog"
+    label: "Blog Posts"
+    folder: "src/blog"
+    create: true
+    slug: "{{slug}}"
+    preview_path: "blog/{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Publish Date", name: "date", widget: "datetime" }
+      - { label: "Description", name: "description", widget: "string" }
+      - { label: "Tags", name: "tags", widget: "list", required: false }
+      - { label: "Draft", name: "draft", widget: "boolean", default: false, required: false }
+      - { label: "Layout", name: "layout", widget: "hidden", default: "article.njk" }
+      - { label: "Body", name: "body", widget: "markdown" }
+  
+  # Projects Collection
+  - name: "projects"
+    label: "Projects"
+    folder: "src/projects"
+    create: true
+    slug: "{{slug}}"
+    preview_path: "projects/{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Description", name: "description", widget: "string" }
+      - { label: "Date", name: "date", widget: "datetime", required: false }
+      - { label: "Technologies", name: "tech", widget: "list", required: false }
+      - { label: "Display Order", name: "order", widget: "number", default: 1, value_type: "int" }
+      - { label: "Project URL", name: "link", widget: "string", required: false }
+      - { label: "GitHub URL", name: "github", widget: "string", required: false }
+      - { label: "Featured Image", name: "image", widget: "image", required: false }
+      - { label: "Layout", name: "layout", widget: "hidden", default: "article.njk" }
+      - { label: "Body", name: "body", widget: "markdown" }
+  
+  # Site Configuration
+  - name: "settings"
+    label: "Site Settings"
+    files:
+      - label: "Site Configuration"
+        name: "config"
+        file: "site.config.json"
+        fields:
+          - label: "Features"
+            name: "features"
+            widget: "object"
+            fields:
+              - label: "Blog CTA"
+                name: "blogCTA"
+                widget: "object"
+                fields:
+                  - { label: "Enabled", name: "enabled", widget: "boolean", default: true }
+                  - { label: "Title", name: "title", widget: "string" }
+                  - { label: "Description", name: "description", widget: "text" }
+                  - { label: "Button Text", name: "buttonText", widget: "string" }
+                  - { label: "Button Link", name: "buttonLink", widget: "string" }
+              
+              - label: "Newsletter"
+                name: "newsletter"
+                widget: "object"
+                fields:
+                  - { label: "Enabled", name: "enabled", widget: "boolean", default: true }
+                  - { label: "Title", name: "title", widget: "string" }
+                  - { label: "Description", name: "description", widget: "text" }
+                  - { label: "Placeholder", name: "placeholder", widget: "string" }
+                  - { label: "Button Text", name: "buttonText", widget: "string" }
+              
+              - label: "Recent Posts"
+                name: "recentPosts"
+                widget: "object"
+                fields:
+                  - { label: "Enabled", name: "enabled", widget: "boolean", default: true }
+                  - { label: "Show on Homepage", name: "showOnHomepage", widget: "boolean", default: true }
+                  - { label: "Limit", name: "limit", widget: "number", default: 3 }
+              
+              - label: "Recent Projects"
+                name: "recentProjects"
+                widget: "object"
+                fields:
+                  - { label: "Enabled", name: "enabled", widget: "boolean", default: true }
+                  - { label: "Show on Homepage", name: "showOnHomepage", widget: "boolean", default: true }
+                  - { label: "Limit", name: "limit", widget: "number", default: 3 }
+              
+              - label: "Work with Me Page"
+                name: "workWithMePage"
+                widget: "object"
+                fields:
+                  - { label: "Enabled", name: "enabled", widget: "boolean", default: true }
+              
+              - label: "Blog Categories"
+                name: "blogCategories"
+                widget: "object"
+                fields:
+                  - { label: "Enabled", name: "enabled", widget: "boolean", default: true }
+          
+          - label: "Contact"
+            name: "contact"
+            widget: "object"
+            fields:
+              - { label: "Email", name: "email", widget: "string" }
+              - { label: "LinkedIn", name: "linkedin", widget: "string" }
+              - { label: "GitHub", name: "github", widget: "string" }
