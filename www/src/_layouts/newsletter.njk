@@ -1,0 +1,20 @@
+{% if site.features.newsletter.enabled %}
+<aside class="newsletter-signup">
+    <div class="newsletter-content">
+        <h3>{{ site.features.newsletter.title }}</h3>
+        <p>{{ site.features.newsletter.description }}</p>
+        <form class="newsletter-form" action="{{ site.newsletter.actionUrl }}" method="POST">
+            <input 
+                type="email" 
+                name="email" 
+                placeholder="{{ site.features.newsletter.placeholder }}" 
+                required 
+                class="newsletter-input"
+            >
+            <button type="submit" class="btn">
+                {{ site.features.newsletter.buttonText }}
+            </button>
+        </form>
+    </div>
+</aside>
+{% endif %}

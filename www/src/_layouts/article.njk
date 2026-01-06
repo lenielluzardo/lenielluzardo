@@ -3,9 +3,34 @@ layout: base.njk
 ---
 
 <article>
-    <h1>{{ title }}</h1>
+    <header>
+        <h1>{{ title }}</h1>
+        {% if date %}
+        <p class="blog-post-date">{{ date | readableDate }}</p>
+        {% endif %}
+        {% if tags %}
+        <div class="project-tech">
+            {% for tag in tags %}
+            {% if tag != "posts" %}
+            <span class="tech-tag">{{ tag }}</span>
+            {% endif %}
+            {% endfor %}
+        </div>
+        {% endif %}
+    </header>
     
-    {{ content | safe }}
+    <div class="article-content">
+        {{ content | safe }}
+    </div>
     
-    {% include "./trueman.njk" %}
+    {% if page.url.includes('/blog/') %}
+    
+    {% include "./blog-cta.njk" %}
+    
+    {% include "./newsletter.njk" %}
+    
+    <nav class="article-nav">
+        <a href="/blog" class="btn-outline btn">← Back to Blog</a>
+    </nav>
+    {% endif %}
 </article>

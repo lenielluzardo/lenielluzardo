@@ -1,0 +1,294 @@
+---
+layout: base.njk
+title: Admin Dashboard
+permalink: /admin/
+---
+
+<style>
+    .admin-container {
+        max-width: 900px;
+        margin: 0 auto;
+    }
+    
+    .admin-header {
+        background: var(--color-card-bg);
+        padding: var(--space-lg);
+        border-radius: var(--border-radius);
+        margin-bottom: var(--space-xl);
+        border: 1px solid var(--color-border);
+    }
+    
+    .feature-section {
+        background: var(--color-card-bg);
+        padding: var(--space-lg);
+        border-radius: var(--border-radius);
+        margin-bottom: var(--space-md);
+        border: 1px solid var(--color-border);
+    }
+    
+    .feature-toggle {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: var(--space-sm) 0;
+        border-bottom: 1px solid var(--color-border);
+    }
+    
+    .feature-toggle:last-child {
+        border-bottom: none;
+    }
+    
+    .feature-info h3 {
+        margin: 0 0 var(--space-xs) 0;
+        font-size: var(--text-lg);
+    }
+    
+    .feature-info p {
+        margin: 0;
+        font-size: var(--text-sm);
+        color: var(--color-text-secondary);
+    }
+    
+    .toggle-switch {
+        position: relative;
+        width: 60px;
+        height: 30px;
+    }
+    
+    .toggle-switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+    
+    .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: var(--color-border);
+        transition: .3s;
+        border-radius: 30px;
+    }
+    
+    .slider:before {
+        position: absolute;
+        content: "";
+        height: 22px;
+        width: 22px;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        transition: .3s;
+        border-radius: 50%;
+    }
+    
+    input:checked + .slider {
+        background-color: var(--color-accent);
+    }
+    
+    input:checked + .slider:before {
+        transform: translateX(30px);
+    }
+    
+    .form-group {
+        margin-bottom: var(--space-md);
+    }
+    
+    .form-group label {
+        display: block;
+        margin-bottom: var(--space-xs);
+        font-weight: 600;
+    }
+    
+    .form-group input,
+    .form-group textarea {
+        width: 100%;
+        padding: var(--space-sm);
+        border: 1px solid var(--color-border);
+        border-radius: var(--border-radius);
+        background: var(--color-bg);
+        color: var(--color-text);
+        font-family: inherit;
+    }
+    
+    .form-group textarea {
+        min-height: 80px;
+        resize: vertical;
+    }
+    
+    .status-message {
+        padding: var(--space-md);
+        border-radius: var(--border-radius);
+        margin-bottom: var(--space-md);
+        display: none;
+    }
+    
+    .status-message.success {
+        background: #d4edda;
+        color: #155724;
+        border: 1px solid #c3e6cb;
+    }
+    
+    .status-message.error {
+        background: #f8d7da;
+        color: #721c24;
+        border: 1px solid #f5c6cb;
+    }
+    
+    .status-message.show {
+        display: block;
+    }
+    
+    .button-group {
+        display: flex;
+        gap: var(--space-sm);
+        margin-top: var(--space-lg);
+    }
+</style>
+
+<div class="admin-container">
+    <div class="admin-header">
+        <h1>Site Administration</h1>
+        <p>Manage your site features and content.</p>
+        
+        <div style="display: flex; gap: var(--space-md); margin-top: var(--space-lg); flex-wrap: wrap;">
+            <a href="/admin/cms/" class="btn">🚀 Netlify CMS (Full Content Editor)</a>
+            <a href="/admin/content/" class="btn-outline btn">📝 Local Content Manager</a>
+        </div>
+        
+        <div style="margin-top: var(--space-lg); padding: var(--space-md); background: var(--color-card-bg); border: 1px solid var(--color-border); border-radius: var(--border-radius);">
+            <h3 style="margin-top: 0;">💡 Which Admin Should I Use?</h3>
+            <ul style="margin-bottom: 0;">
+                <li><strong>Netlify CMS</strong>: For online editing. Commits directly to GitHub. Requires Netlify deployment and OAuth setup.</li>
+                <li><strong>Local Content Manager</strong>: For local development. Downloads files to place in your project manually.</li>
+            </ul>
+        </div>
+    </div>
+    
+    <div id="statusMessage" class="status-message"></div>
+    
+    <form id="configForm">
+        <div class="feature-section">
+            <h2>Blog Features</h2>
+            
+            <div class="feature-toggle">
+                <div class="feature-info">
+                    <h3>Blog CTA</h3>
+                    <p>Show call-to-action at the end of blog posts</p>
+                </div>
+                <label class="toggle-switch">
+                    <input type="checkbox" id="blogCTA" name="features.blogCTA.enabled">
+                    <span class="slider"></span>
+                </label>
+            </div>
+            
+            <div id="blogCTASettings" style="margin-top: var(--space-md); display: none;">
+                <div class="form-group">
+                    <label>CTA Title</label>
+                    <input type="text" name="features.blogCTA.title" id="blogCTATitle">
+                </div>
+                <div class="form-group">
+                    <label>CTA Description</label>
+                    <textarea name="features.blogCTA.description" id="blogCTADescription"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Button Text</label>
+                    <input type="text" name="features.blogCTA.buttonText" id="blogCTAButtonText">
+                </div>
+            </div>
+            
+            <div class="feature-toggle">
+                <div class="feature-info">
+                    <h3>Blog Categories</h3>
+                    <p>Show tags/categories on blog posts and listing</p>
+                </div>
+                <label class="toggle-switch">
+                    <input type="checkbox" id="blogCategories" name="features.blogCategories.enabled">
+                    <span class="slider"></span>
+                </label>
+            </div>
+        </div>
+        
+        <div class="feature-section">
+            <h2>Newsletter</h2>
+            
+            <div class="feature-toggle">
+                <div class="feature-info">
+                    <h3>Newsletter Signup</h3>
+                    <p>Show newsletter signup form on blog and other pages</p>
+                </div>
+                <label class="toggle-switch">
+                    <input type="checkbox" id="newsletter" name="features.newsletter.enabled">
+                    <span class="slider"></span>
+                </label>
+            </div>
+            
+            <div id="newsletterSettings" style="margin-top: var(--space-md); display: none;">
+                <div class="form-group">
+                    <label>Newsletter Title</label>
+                    <input type="text" name="features.newsletter.title" id="newsletterTitle">
+                </div>
+                <div class="form-group">
+                    <label>Newsletter Description</label>
+                    <textarea name="features.newsletter.description" id="newsletterDescription"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Button Text</label>
+                    <input type="text" name="features.newsletter.buttonText" id="newsletterButtonText">
+                </div>
+            </div>
+        </div>
+        
+        <div class="feature-section">
+            <h2>Homepage Features</h2>
+            
+            <div class="feature-toggle">
+                <div class="feature-info">
+                    <h3>Recent Posts</h3>
+                    <p>Show recent blog posts on homepage</p>
+                </div>
+                <label class="toggle-switch">
+                    <input type="checkbox" id="recentPosts" name="features.recentPosts.enabled">
+                    <span class="slider"></span>
+                </label>
+            </div>
+            
+            <div class="feature-toggle">
+                <div class="feature-info">
+                    <h3>Recent Projects</h3>
+                    <p>Show recent projects on homepage</p>
+                </div>
+                <label class="toggle-switch">
+                    <input type="checkbox" id="recentProjects" name="features.recentProjects.enabled">
+                    <span class="slider"></span>
+                </label>
+            </div>
+        </div>
+        
+        <div class="feature-section">
+            <h2>Pages</h2>
+            
+            <div class="feature-toggle">
+                <div class="feature-info">
+                    <h3>Work with Me Page</h3>
+                    <p>Enable the dedicated "Work with Me" page in navigation</p>
+                </div>
+                <label class="toggle-switch">
+                    <input type="checkbox" id="workWithMePage" name="features.workWithMePage.enabled">
+                    <span class="slider"></span>
+                </label>
+            </div>
+        </div>
+        
+        <div class="button-group">
+            <button type="submit" class="btn">Save Configuration</button>
+            <button type="button" id="downloadConfig" class="btn-outline btn">Download Config</button>
+            <button type="button" id="resetConfig" class="btn-outline btn">Reset to Defaults</button>
+        </div>
+    </form>
+</div>
+
+<script src="/admin.js"></script>

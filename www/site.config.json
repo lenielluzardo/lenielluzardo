@@ -1,0 +1,47 @@
+{
+  "features": {
+    "blogCTA": {
+      "enabled": true,
+      "title": "Need Help with Your Project?",
+      "description": "If you're looking for a developer to help bring your ideas to life, let's talk.",
+      "buttonText": "Work with Me",
+      "buttonLink": "/work-with-me"
+    },
+    "newsletter": {
+      "enabled": true,
+      "title": "Stay Updated",
+      "description": "Get notified when I publish new articles about web development and software engineering.",
+      "placeholder": "your@email.com",
+      "buttonText": "Subscribe"
+    },
+    "recentPosts": {
+      "enabled": true,
+      "showOnHomepage": true,
+      "limit": 3
+    },
+    "recentProjects": {
+      "enabled": true,
+      "showOnHomepage": true,
+      "limit": 3
+    },
+    "workWithMePage": {
+      "enabled": true
+    },
+    "blogCategories": {
+      "enabled": true
+    }
+  },
+  "contact": {
+    "email": "lenielluzardo.dev@gmail.com",
+    "linkedin": "https://www.linkedin.com/in/lenielluzardo",
+    "github": "https://github.com/lenielluzardo"
+  },
+  "newsletter": {
+    "provider": "custom",
+    "actionUrl": "/api/newsletter"
+  },
+  "content": {
+    "drafts": [],
+    "hiddenProjects": []
+  }
+}

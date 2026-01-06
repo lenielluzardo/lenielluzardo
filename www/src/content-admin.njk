@@ -1,0 +1,387 @@
+---
+layout: base.njk
+title: Content Manager
+permalink: /admin/content/
+---
+
+<style>
+    .content-admin {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+    
+    .admin-tabs {
+        display: flex;
+        gap: var(--space-sm);
+        margin-bottom: var(--space-xl);
+        border-bottom: 2px solid var(--color-border);
+    }
+    
+    .tab-button {
+        padding: var(--space-sm) var(--space-lg);
+        background: none;
+        border: none;
+        border-bottom: 3px solid transparent;
+        cursor: pointer;
+        font-size: var(--text-base);
+        color: var(--color-text-secondary);
+        font-weight: 600;
+        transition: all var(--transition-fast);
+    }
+    
+    .tab-button:hover {
+        color: var(--color-text);
+    }
+    
+    .tab-button.active {
+        color: var(--color-accent);
+        border-bottom-color: var(--color-accent);
+    }
+    
+    .tab-content {
+        display: none;
+    }
+    
+    .tab-content.active {
+        display: block;
+    }
+    
+    .content-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: var(--space-lg);
+    }
+    
+    .content-list {
+        background: var(--color-card-bg);
+        border: 1px solid var(--color-border);
+        border-radius: var(--border-radius);
+    }
+    
+    .content-item {
+        padding: var(--space-lg);
+        border-bottom: 1px solid var(--color-border);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: var(--space-md);
+    }
+    
+    .content-item:last-child {
+        border-bottom: none;
+    }
+    
+    .content-item.draft {
+        opacity: 0.6;
+    }
+    
+    .content-info h3 {
+        margin: 0 0 var(--space-xs) 0;
+        font-size: var(--text-lg);
+    }
+    
+    .content-meta {
+        font-size: var(--text-sm);
+        color: var(--color-text-secondary);
+        display: flex;
+        gap: var(--space-md);
+        flex-wrap: wrap;
+    }
+    
+    .status-badge {
+        display: inline-block;
+        padding: 2px 8px;
+        border-radius: 3px;
+        font-size: var(--text-xs);
+        font-weight: 600;
+    }
+    
+    .status-published {
+        background: #d4edda;
+        color: #155724;
+    }
+    
+    .status-draft {
+        background: #fff3cd;
+        color: #856404;
+    }
+    
+    .status-hidden {
+        background: #f8d7da;
+        color: #721c24;
+    }
+    
+    .content-actions {
+        display: flex;
+        gap: var(--space-sm);
+        flex-shrink: 0;
+    }
+    
+    .action-btn {
+        padding: var(--space-xs) var(--space-sm);
+        border: 1px solid var(--color-border);
+        background: var(--color-bg);
+        color: var(--color-text);
+        border-radius: var(--border-radius);
+        cursor: pointer;
+        font-size: var(--text-sm);
+        transition: all var(--transition-fast);
+    }
+    
+    .action-btn:hover {
+        background: var(--color-card-bg);
+    }
+    
+    .action-btn.danger {
+        color: #dc3545;
+        border-color: #dc3545;
+    }
+    
+    .action-btn.danger:hover {
+        background: #dc3545;
+        color: white;
+    }
+    
+    .editor-modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.7);
+        z-index: 1000;
+        overflow-y: auto;
+    }
+    
+    .editor-modal.active {
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        padding: var(--space-xl);
+    }
+    
+    .editor-content {
+        background: var(--color-bg);
+        border-radius: var(--border-radius);
+        width: 100%;
+        max-width: 900px;
+        padding: var(--space-xl);
+        margin: var(--space-xl) 0;
+    }
+    
+    .editor-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: var(--space-xl);
+    }
+    
+    .close-editor {
+        background: none;
+        border: none;
+        font-size: var(--text-2xl);
+        cursor: pointer;
+        color: var(--color-text-secondary);
+    }
+    
+    .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--space-md);
+    }
+    
+    .form-group {
+        margin-bottom: var(--space-md);
+    }
+    
+    .form-group label {
+        display: block;
+        margin-bottom: var(--space-xs);
+        font-weight: 600;
+    }
+    
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+        width: 100%;
+        padding: var(--space-sm);
+        border: 1px solid var(--color-border);
+        border-radius: var(--border-radius);
+        background: var(--color-card-bg);
+        color: var(--color-text);
+        font-family: inherit;
+        font-size: var(--text-base);
+    }
+    
+    .form-group textarea {
+        min-height: 400px;
+        font-family: var(--font-mono);
+        font-size: var(--text-sm);
+        line-height: 1.6;
+    }
+    
+    .tags-input {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--space-xs);
+        padding: var(--space-xs);
+        border: 1px solid var(--color-border);
+        border-radius: var(--border-radius);
+        background: var(--color-card-bg);
+    }
+    
+    .tag-item {
+        background: var(--color-accent);
+        color: var(--color-bg);
+        padding: 2px 8px;
+        border-radius: 3px;
+        font-size: var(--text-sm);
+        display: flex;
+        align-items: center;
+        gap: 4px;
+    }
+    
+    .tag-item button {
+        background: none;
+        border: none;
+        color: inherit;
+        cursor: pointer;
+        font-size: var(--text-sm);
+    }
+    
+    .tags-input input {
+        border: none;
+        background: none;
+        flex: 1;
+        min-width: 120px;
+        padding: var(--space-xs);
+    }
+    
+    .editor-actions {
+        display: flex;
+        gap: var(--space-sm);
+        margin-top: var(--space-xl);
+    }
+    
+    .empty-state {
+        text-align: center;
+        padding: var(--space-2xl);
+        color: var(--color-text-secondary);
+    }
+    
+    .checkbox-group {
+        display: flex;
+        align-items: center;
+        gap: var(--space-sm);
+    }
+    
+    .checkbox-group input[type="checkbox"] {
+        width: auto;
+    }
+</style>
+
+<div class="content-admin">
+    <h1>Content Manager</h1>
+    <p>Create, edit, and manage your blog posts and projects.</p>
+    
+    <div id="statusMessage" class="status-message"></div>
+    
+    <div class="admin-tabs">
+        <button class="tab-button active" data-tab="posts">Blog Posts</button>
+        <button class="tab-button" data-tab="projects">Projects</button>
+    </div>
+    
+    <!-- Blog Posts Tab -->
+    <div id="posts-tab" class="tab-content active">
+        <div class="content-header">
+            <h2>Blog Posts</h2>
+            <button class="btn" onclick="createNewPost()">+ New Post</button>
+        </div>
+        
+        <div id="posts-list" class="content-list">
+            <div class="empty-state">Loading posts...</div>
+        </div>
+    </div>
+    
+    <!-- Projects Tab -->
+    <div id="projects-tab" class="tab-content">
+        <div class="content-header">
+            <h2>Projects</h2>
+            <button class="btn" onclick="createNewProject()">+ New Project</button>
+        </div>
+        
+        <div id="projects-list" class="content-list">
+            <div class="empty-state">Loading projects...</div>
+        </div>
+    </div>
+</div>
+
+<!-- Editor Modal -->
+<div id="editorModal" class="editor-modal">
+    <div class="editor-content">
+        <div class="editor-header">
+            <h2 id="editorTitle">Edit Content</h2>
+            <button class="close-editor" onclick="closeEditor()">&times;</button>
+        </div>
+        
+        <form id="contentForm">
+            <input type="hidden" id="contentSlug" name="slug">
+            <input type="hidden" id="contentType" name="type">
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="contentTitle">Title *</label>
+                    <input type="text" id="contentTitle" name="title" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="contentDate">Date *</label>
+                    <input type="date" id="contentDate" name="date" required>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="contentDescription">Description *</label>
+                <input type="text" id="contentDescription" name="description" required>
+            </div>
+            
+            <div class="form-group" id="tagsGroup">
+                <label>Tags</label>
+                <div class="tags-input" id="tagsContainer">
+                    <input type="text" id="tagInput" placeholder="Add a tag and press Enter">
+                </div>
+            </div>
+            
+            <div class="form-group" id="techGroup" style="display: none;">
+                <label>Technologies</label>
+                <div class="tags-input" id="techContainer">
+                    <input type="text" id="techInput" placeholder="Add technology and press Enter">
+                </div>
+            </div>
+            
+            <div class="form-group" id="orderGroup" style="display: none;">
+                <label for="contentOrder">Display Order</label>
+                <input type="number" id="contentOrder" name="order" min="0">
+            </div>
+            
+            <div class="form-group">
+                <label for="contentBody">Content (Markdown) *</label>
+                <textarea id="contentBody" name="body" required></textarea>
+            </div>
+            
+            <div class="checkbox-group">
+                <input type="checkbox" id="draftCheckbox" name="draft">
+                <label for="draftCheckbox">Save as draft (won't appear on site)</label>
+            </div>
+            
+            <div class="editor-actions">
+                <button type="submit" class="btn">Save & Download</button>
+                <button type="button" class="btn-outline btn" onclick="closeEditor()">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="/content-admin.js"></script>
