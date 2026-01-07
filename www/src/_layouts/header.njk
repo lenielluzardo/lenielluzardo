@@ -6,6 +6,12 @@
         <ul id="nav-links">
             <li><a href="/">Home</a></li>
             <li><a href="/blog">Blog</a></li>
+            {% if site.features.recentProjects.enabled %}
+            <li><a href="/projects">Projects</a></li>
+            {% endif %}
+            {% if site.features.workWithMePage.enabled %}
+            <li><a href="/work-with-me">Work with Me</a></li>
+            {% endif %}
         </ul>
     </nav>
 </header>
