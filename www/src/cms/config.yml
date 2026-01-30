@@ -1,11 +1,15 @@
-# Netlify CMS (Decap CMS) Configuration
+# Decap CMS Configuration - CLOUDFLARE PAGES DEPLOYMENT
 # 
 # Blog posts are managed in main repository at www/src/blog
 # All new posts created here are automatically synced to ll.db.blog via GitHub Actions
 #
+# This configuration uses GitHub OAuth for authentication (requires OAuth Worker)
 backend:
-  name: git-gateway
-  branch: main # Branch to update (main or master)
+  name: github
+  repo: lenielluzardo/lenielluzardo
+  branch: main
+  base_url: https://cms-oauth-proxy.your-subdomain.workers.dev  # Replace with your Worker URL
+  auth_endpoint: /auth
   
 # Alternative backend for local development
 # Uncomment this when developing locally

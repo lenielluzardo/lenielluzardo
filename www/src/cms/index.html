@@ -3,59 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Content Management System</title>
+    <title>Content Management System - Cloudflare Pages</title>
     
-    <!-- 
-        PLATFORM CONFIGURATION:
-        
-        FOR NETLIFY DEPLOYMENT:
-        - Keep Netlify Identity Widget enabled (below)
-        - Use config.yml with git-gateway backend
-        - Configuration: www/config/netlify/netlify-cms-config.yml
-        
-        FOR CLOUDFLARE PAGES DEPLOYMENT:
-        - Comment out Netlify Identity Widget
-        - Comment out Netlify Identity initialization script
-        - Use cloudflare-cms-config.yml with GitHub OAuth backend
-        - Configuration: www/config/cloudflare/cloudflare-cms-config.yml
-        - Requires GitHub OAuth App setup (see deployment docs)
-    -->
-    
-    <!-- Netlify Identity Widget - FOR NETLIFY DEPLOYMENT ONLY -->
-    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-    
-    <!-- 
-        CLOUDFLARE PAGES ALTERNATIVE:
-        When deploying to Cloudflare Pages, comment out the Netlify Identity script above
-        and uncomment the GitHub OAuth configuration in config.yml
-        No additional scripts needed for GitHub OAuth
-    -->
+    <!-- CLOUDFLARE PAGES DEPLOYMENT CONFIGURATION -->
+    <!-- Uses GitHub OAuth (no Netlify Identity) -->
+    <!-- Requires OAuth Worker to be deployed - see www/config/cloudflare/DEPLOYMENT.md -->
 </head>
 <body>
-    <!-- Decap CMS (formerly Netlify CMS) - Works with both platforms -->
+    <!-- Decap CMS -->
     <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
     
-    <!-- Initialize Netlify Identity - FOR NETLIFY DEPLOYMENT ONLY -->
-    <!-- Comment out this entire script block when using Cloudflare Pages with GitHub OAuth -->
-    <script>
-        if (window.netlifyIdentity) {
-            window.netlifyIdentity.on("init", user => {
-                if (!user) {
-                    window.netlifyIdentity.on("login", () => {
-                        document.location.href = "/admin/cms/";
-                    });
-                }
-            });
-        }
-    </script>
-    
-    <!-- 
-        CLOUDFLARE PAGES GITHUB OAUTH:
-        When using Cloudflare Pages with GitHub OAuth:
-        1. Comment out both Netlify Identity scripts above
-        2. Update www/src/cms/config.yml to use GitHub backend
-        3. Set up GitHub OAuth App (see www/config/cloudflare/DEPLOYMENT.md)
-        4. No additional initialization script needed
-    -->
+    <!-- No additional scripts needed for GitHub OAuth -->
 </body>
 </html>
