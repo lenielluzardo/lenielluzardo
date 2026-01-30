@@ -75,50 +75,88 @@ To use Decap CMS with Cloudflare Pages, you need GitHub OAuth authentication.
 3. Configure:
    - **Application name**: `Leniel Luzardo Portfolio CMS`
    - **Homepage URL**: `https://lenielluzardo-portfolio.pages.dev` (your Cloudflare URL)
-   - **Authorization callback URL**: `https://lenielluzardo-portfolio.pages.dev/admin/cms/`
+   - **Authorization callback URL**: ``https://lenielluzardo-portfolio.pages.dev/admin/cms/
 4. Click **"Register application"**
 5. Note the **Client ID**
 6. Click **"Generate a new client secret"** and save it securely
 
 **2. Deploy OAuth Proxy with Cloudflare Workers**
 
-You need an OAuth proxy to handle GitHub authentication. Use this open-source solution:
+You need an OAuth proxy to handle GitHub authentication. Here are working solutions:
 
-```bash
-# Clone the oauth proxy
-git clone https://github.com/vencax/netlify-cms-github-oauth-provider-cloudflare-worker
-cd netlify-cms-github-oauth-provider-cloudflare-worker
+**Option 2A: Simple Cloudflare Worker (Recommended)**
 
-# Install dependencies
-npm install
+Create a new Cloudflare Worker manually:
 
-# Configure wrangler.toml
-# Add your GitHub OAuth credentials
+1. In Cloudflare Dashboard, go to **Workers & Pages** → **Create application** → **Workers** tab
+2. Click **"Create Worker"**
+3. Name it: `cms-oauth-proxy`
+4. Replace the default code with this OAuth proxy code:
+
+```javascript
+// Simple GitHub OAuth proxy for Decap CMS
+export default {
+  async fetch(request, env) {
+    const url = new URL(request.url);
+    
+    // CORS headers
+    const corsHeaders = {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+      'Access-Control-Allow-Headers': 'Content-Type',
+    };
+    
+    if (request.method === 'OPTIONS') {
+      return new Response(null, { headers: corsHeaders });
+    }
+    
+    // Handle /auth endpoint
+    if (url.pathname === '/auth') {
+      const code = url.searchParams.get('code');
+      if (!code) {
+        return new Response('Missing code parameter', { status: 400 });
+      }
+      
+      // Exchange code for token
+      const tokenResponse = await fetch('https://github.com/login/oauth/access_token', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        body: JSON.stringify({
+          client_id: env.OAUTH_CLIENT_ID,
+          client_secret: env.OAUTH_CLIENT_SECRET,
+          code: code,
+        }),
+      });
+      
+      const data = await tokenResponse.json();
+      
+      return new Response(JSON.stringify(data), {
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      });
+    }
+    
+    return new Response('OAuth Proxy for Decap CMS', { headers: corsHeaders });
+  }
+};
 ```
 
-In `wrangler.toml`:
-```toml
-name = "cms-oauth-proxy"
-main = "src/index.js"
-compatibility_date = "2024-01-01"
+5. Click **"Save and Deploy"**
 
-[vars]
-OAUTH_CLIENT_ID = "your_github_client_id"
+6. Add environment variables:
+   - Go to **Settings** → **Variables**
+   - Add `OAUTH_CLIENT_ID` (your GitHub OAuth Client ID)
+   - Add `OAUTH_CLIENT_SECRET` (your GitHub OAuth Secret) - mark as encrypted
 
-[[kv_namespaces]]
-binding = "SESSIONS"
-id = "your_kv_namespace_id"
+7. Your Worker will be available at: `https://cms-oauth-proxy.your-subdomain.workers.dev`
 
-[secrets]
-OAUTH_CLIENT_SECRET = "your_github_client_secret"
-```
+**Option 2B: Use External OAuth Service**
 
-Deploy the Worker:
-```bash
-npx wrangler publish
-```
-
-The Worker will be available at: `https://cms-oauth-proxy.your-subdomain.workers.dev`
+Use a third-party OAuth proxy service:
+- **GitHub OAuth App** with direct authentication (see Option B below)
+- **Decap CMS GitHub Gateway** - https://github.com/decaporg/decap-cms (check their documentation)
 
 **3. Update CMS Configuration**
 
@@ -153,14 +191,39 @@ Edit `www/src/cms/index.html` and comment out Netlify Identity:
 
 #### Option B: Using Alternative OAuth Services
 
-Instead of Cloudflare Workers, you can use:
+Instead of Cloudflare Workers, you can use simpler alternatives:
 
-1. **Vercel Serverless Function** - Free serverless OAuth proxy
-2. **Self-hosted OAuth server** - Full control, requires server
-3. **Keep Netlify Functions** - Use Netlify just for OAuth (free tier)
+**1. Keep Netlify for Auth Only (Easiest)**
+- Deploy your site to Cloudflare Pages
+- Keep Netlify Identity service for CMS authentication (free tier)
+- Your CMS config stays the same (git-gateway)
+- No OAuth Worker needed!
+
+Steps:
+1. Keep your Netlify site active (or create a minimal one just for Identity)
+2. Use Netlify Identity for CMS authentication
+3. Your CMS continues to use `git-gateway` backend
+4. Site hosted on Cloudflare, auth handled by Netlify
+
+This is the **simplest option** - you get Cloudflare's unlimited bandwidth while keeping Netlify's easy authentication.
+
+**2. GitHub Backend with Personal Access Token (For Solo Dev)**
+Update `www/src/cms/config.yml`:
+```yaml
+backend:
+  name: github
+  repo: lenielluzardo/lenielluzardo
+  branch: main
+  # No OAuth needed for local development
+```
+
+Then use Decap CMS with GitHub authentication directly (requires being logged into GitHub).
+
+**3. Vercel Serverless Function** - Free OAuth proxy on Vercel
+**4. Self-hosted OAuth server** - Full control, requires server
 
 For detailed instructions on these alternatives, see:
-- [Decap CMS OAuth Backends](https://decapcms.org/docs/authentication-backends/)
+- [Decap CMS Authentication Backends](https://decapcms.org/docs/authentication-backends/)
 
 ### Part 3: Test Your Setup
 
