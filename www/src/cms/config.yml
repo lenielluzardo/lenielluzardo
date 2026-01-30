@@ -8,7 +8,7 @@ backend:
   name: github
   repo: lenielluzardo/lenielluzardo
   branch: main
-  base_url: https://cms-oauth-proxy.your-subdomain.workers.dev  # Replace with your Worker URL
+  base_url: https://cms-oauth-proxy.lenielluzardo-dev.workers.dev  # Replace with your Worker URL
   auth_endpoint: /auth
   
 # Alternative backend for local development
