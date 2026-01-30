@@ -1,0 +1,14 @@
+{
+  "$schema": "https://developers.cloudflare.com/pages/platform/build-configuration/",
+  "buildCommand": "npm run build",
+  "buildOutputDirectory": "public",
+  "nodeVersion": "20",
+  "environment": {
+    "NODE_VERSION": "20"
+  },
+  "deployment": {
+    "production": {
+      "branch": "main"
+    }
+  }
+}

@@ -34,3 +34,17 @@ Add a section (where correspond) to always update the AI_AGENT_REPLICATION_PROMP
 Let's say, to clarify, one file will serve to build the project from scratch by any AI agent. And the other will serve as a sort of history and continuation of the work done in project and/or session
 
 ===== done
+
+9. I created a "project-documentation" directory for the prompts and changes and history. Include this in the commit history. Make all the adding, stagins and commiting to github.
+
+10. Then show me again the steps to create the token and sync the repositories please.
+
+===== done
+
+11. Please, check that the sync actions no only syncs for new articles but also for modifications. And if soy make the corresponding changes.
+
+===== done
+
+12. Copilot, based on what you recommended me, let's make the Cloudfare pages + github oauth, but when building the configuration files, leave the ones from netlify as they are, create new files for the configuration with cloudfare and move all configurations for both platforms in their own directories so i can identify all config files related to the platform.
+
+In the files that interact more with the application, don't erase also the current configuration, if you need to disable any existing configuration to avoid conflict, just comment the code and leave a descriptive comment to the purpose of the commented code.
