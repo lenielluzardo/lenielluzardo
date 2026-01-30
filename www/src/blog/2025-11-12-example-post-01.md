@@ -8,7 +8,7 @@ draft: false
 ---
 
 ## Introduction
-
+Update #1
 Modern web development has evolved significantly over the past few years. With new frameworks, tools, and best practices emerging constantly, it can be overwhelming for newcomers to know where to start.
 
 In this article, you'll learn:
