@@ -22,7 +22,7 @@ jobs:
         id: changed-files
         run: |
           # Get list of changed markdown files in blog
-          CHANGED_FILES=$(git diff --name-only HEAD^ HEAD -- 'www/src/blog/**/*.md' | grep -v 'readme.md' || true)
+          CHANGED_FILES=$(git diff --name-only HEAD^ HEAD -- 'www/src/blog/*.md' | grep -v 'readme.md' || true)
           
           if [ -z "$CHANGED_FILES" ]; then
             echo "No blog post changes detected"
