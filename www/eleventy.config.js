@@ -5,20 +5,16 @@ module.exports = function (eleventyConfig) {
     eleventyConfig.addPassthroughCopy("src/style.css");
     eleventyConfig.addPassthroughCopy("src/assets");
     eleventyConfig.addPassthroughCopy("src/blog/assets");
-    eleventyConfig.addPassthroughCopy("src/blog_main/assets");
     eleventyConfig.addPassthroughCopy("site.config.json");
     eleventyConfig.addPassthroughCopy("src/admin.js");
-    eleventyConfig.addPassthroughCopy("src/content-admin.js");
     eleventyConfig.addPassthroughCopy({ "src/cms": "admin/cms" });
 
     // Make site config available globally
     eleventyConfig.addGlobalData("site", siteConfig);
 
-    // Collections for blog posts (from both blog and blog_main folders)
+    // Collections for blog posts
     eleventyConfig.addCollection("posts", function(collectionApi) {
-        const blogPosts = collectionApi.getFilteredByGlob("src/blog/**/*.md");
-        const blogMainPosts = collectionApi.getFilteredByGlob("src/blog_main/**/*.md");
-        const allPosts = [...blogPosts, ...blogMainPosts];
+        const allPosts = collectionApi.getFilteredByGlob("src/blog/**/*.md");
         
         return allPosts
             .filter(post => {
@@ -34,9 +30,7 @@ module.exports = function (eleventyConfig) {
 
     // Collection for all posts including drafts (for admin)
     eleventyConfig.addCollection("allPosts", function(collectionApi) {
-        const blogPosts = collectionApi.getFilteredByGlob("src/blog/**/*.md");
-        const blogMainPosts = collectionApi.getFilteredByGlob("src/blog_main/**/*.md");
-        return [...blogPosts, ...blogMainPosts].sort((a, b) => {
+        return collectionApi.getFilteredByGlob("src/blog/**/*.md").sort((a, b) => {
             return b.date - a.date;
         });
     });

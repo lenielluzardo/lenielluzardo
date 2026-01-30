@@ -22,7 +22,7 @@ A modern, minimalist portfolio and blog site built with Eleventy and Nunjucks.
 - [Eleventy](https://www.11ty.dev/) - Static site generator
 - [Nunjucks](https://mozilla.github.io/nunjucks/) - Templating engine
 - Vanilla CSS with CSS Variables
-- Git submodules for external blog content
+- [Netlify CMS](https://decapcms.org/) - Content management
 
 ## Getting Started
 
@@ -44,12 +44,7 @@ cd lenielluzardo/www
 npm install
 ```
 
-3. Initialize git submodules (for blog content):
-```bash
-git submodule update --init --recursive
-```
-
-4. Start the development server:
+3. Start the development server:
 ```bash
 npm start
 ```
@@ -58,9 +53,7 @@ The site will be available at `http://localhost:8080`
 
 ## Blog Content Management
 
-Blog posts are stored in a separate repository as a git submodule:
-- **Blog Repository**: [lenielluzardo/ll.db.blog](https://github.com/lenielluzardo/ll.db.blog)
-- **Mounted at**: `src/blog/`
+Blog posts are managed in this repository at `src/blog/`. When you create or edit posts here, they are automatically synced to the separate [ll.db.blog](https://github.com/lenielluzardo/ll.db.blog) repository via GitHub Actions.
 
 📖 **[Complete Blog Workflow Guide →](BLOG_WORKFLOW.md)**
 
@@ -69,7 +62,7 @@ Blog posts are stored in a separate repository as a git submodule:
 Using Netlify CMS (Recommended):
 1. Go to `/admin/cms/`
 2. Create new post in "Blog Posts" section
-3. Automatic commit and deploy
+3. Automatic commit, deploy, and sync to ll.db.blog
 
 Using Local Development:
 ```bash
@@ -133,29 +126,18 @@ Access at `/admin/` to manage site features:
 
 ### Content Management
 
-**Two Options Available:**
-
-#### 1. Netlify CMS (Recommended for Production)
+**Netlify CMS (Recommended)**
 - **URL**: `/admin/cms/`
-- **Best for**: Online editing with automatic commits to GitHub
+- **Best for**: Creating and editing content with automatic commits to GitHub
 - **Requirements**: Netlify deployment + GitHub OAuth
 - **Features**: 
   - Full markdown editor
   - Image uploads
   - Draft/publish workflow
   - Direct GitHub commits
-  - No manual file placement needed
+  - Automatic sync to ll.db.blog repository
 
 📖 **[Complete Netlify CMS Setup Guide →](NETLIFY_CMS_SETUP.md)**
-
-#### 2. Local Content Manager
-- **URL**: `/admin/content/`
-- **Best for**: Local development
-- **Features**: 
-  - Create and edit posts/projects
-  - Download generated markdown files
-  - Manual file placement required
-  - Works offline
 
 ### Available Feature Toggles:
 

@@ -1,8 +1,7 @@
 # Netlify CMS (Decap CMS) Configuration
 # 
-# IMPORTANT: Blog posts managed in main repository (not submodule)
-# The git submodule at www/src/blog is for local development
-# CMS will create/edit files directly in main repo to avoid submodule issues
+# Blog posts are managed in main repository at www/src/blog
+# All new posts created here are automatically synced to ll.db.blog via GitHub Actions
 #
 backend:
   name: git-gateway
@@ -25,10 +24,10 @@ public_folder: "/assets/uploads" # The public path for uploaded files
 
 # Collections - Content types
 collections:
-  # Blog Posts Collection - Main repository (CMS editable)
+  # Blog Posts Collection
   - name: "blog"
     label: "Blog Posts"
-    folder: "www/src/blog_main" # Path in main repository (CMS can access)
+    folder: "www/src/blog" # Main repository blog folder
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     preview_path: "blog/{{slug}}"

@@ -1,0 +1,38 @@
+Goal.
+To grow as a professional and be able to work independently.
+Requirements.
+	- Landing page with information about who am I and my services.
+	- A way for clients to contact me and book meetings.
+	- A page to showcase my developer portfolio.
+Landing page.
+Users that enter the landing page should know in a few steps what can I do for them.
+Users should have a clear idea of what they are getting.
+Users should have this information in a few clicks.
+
+
+Landing page content > Section 1:
+Who am I?
+I'm a software developer from Venezuela. I'm currently located in Argentina.
+I can help you build your digital product from the brainstorming stage to having it live on the web.
+Let's work together!
+
+Landing page content > Section 2:
+Which services do I offer?
+Estimation: This involves planning a basic layout of the project and setting a goal to reach.
+Designing: This involves choosing the branding color, creating visual assets such as logos, typography, images, etc.
+Prototyping: Writing the first lines of code so you can see progress as soon as possible.
+Developing: The heavier work — building an actual MVP, including test coverage.
+Deploying: Making the solution available for your customers to consume.
+Tech support: You'll have free and unlimited tech support for a whole year.
+You can choose to start from the beginning or at a certain stage. I can adapt to your needs to meet your requirements. So, what do you say? Shall we get started?
+
+Landing page content > Section 3:
+How do we start?
+Send me an email saying hello, book a call with me or say hi on LinkedIn
+After the first contact we'll set a meeting to start discussing your project requirements.
+Then, with the basic project information, I'll send you a draft budget considering its complexity and the amount of work to be done.
+Finally, once we agree on the terms, it will be just a few clicks and keystrokes to make your ideas a reality 🤩.
+
+Landing page content > Section 3:
+See what people say about me.
+You can see the testimonials of people I've worked with and what they have to say about working with me. You can also see more about my experience and my projects. Finally, if you want to go the extra mile, you can read more about my story.

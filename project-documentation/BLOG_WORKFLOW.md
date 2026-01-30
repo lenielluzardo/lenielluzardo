@@ -1,26 +1,36 @@
 # Blog Content Workflow
 
-This document explains how blog content is managed using a separate Git repository as a submodule.
+This document explains how blog content is managed and automatically synced between repositories.
 
 ## Architecture
 
 ### Repository Structure
 
 - **Main Repository**: `lenielluzardo/lenielluzardo`
-  - Contains the site code, layouts, and configuration
-  - Located at: `d:\d\p\dev\lenielluzardo\`
+  - Contains the site code, layouts, configuration, and blog content
+  - Blog posts stored at: `www/src/blog/`
+  - Located at: `d:\p\dev\lenielluzardo\`
 
-- **Blog Repository**: `lenielluzardo/ll.db.blog` (Git Submodule)
-  - Contains all blog post markdown files
-  - Mounted at: `www/src/blog/`
+- **Blog Repository**: `lenielluzardo/ll.db.blog` (Synced Copy)
+  - Mirror of blog content for backup/portability
+  - Automatically synced via GitHub Actions when main repo is updated
   - Independent Git history
 
 ### Why This Setup?
 
-1. **Separation of Concerns**: Content is separate from code
-2. **Independent History**: Blog changes don't clutter main repo history
-3. **Flexible Permissions**: Can grant content-only access without code access
-4. **Easy Backup**: Blog content can be cloned/backed up independently
+1. **Simplicity**: All content in main repository, easy to edit
+2. **Automatic Sync**: Blog posts automatically copied to ll.db.blog for backup
+3. **CMS Integration**: Netlify CMS works directly with main repo (no submodule issues)
+4. **Backup**: Blog content mirrored in separate repository
+5. **No Submodule Complexity**: Simpler deployment and development workflow
+
+## How It Works
+
+When you create or edit a blog post in the main repository:
+1. Changes are committed to `www/src/blog/` in the main repo
+2. GitHub Actions detects the change
+3. The workflow automatically copies the new/updated post to `ll.db.blog`
+4. Both repositories stay in sync automatically
 
 ## Working with Blog Content
 
@@ -33,13 +43,13 @@ Access the CMS at: `https://wwwlenielluzardo.netlify.app/admin/cms/`
 - Draft/publish workflow
 - Image uploads
 - GitHub authentication
-- Automatic commits to both repositories
+- Automatic commit, deploy, and sync to ll.db.blog
 
 **How it works:**
 1. Log in with your GitHub account via Netlify Identity
 2. Create/edit blog posts in the "Blog Posts" section
-3. CMS commits changes directly to the `ll.db.blog` repository
-4. Main repository automatically updates submodule reference
+3. CMS commits changes to `www/src/blog/` in the main repository
+4. GitHub Actions automatically syncs the post to ll.db.blog
 5. Netlify rebuilds and deploys the site
 
 ### Option 2: Local Development
@@ -49,17 +59,18 @@ Access the CMS at: `https://wwwlenielluzardo.netlify.app/admin/cms/`
 ```bash
 # Clone main repository
 git clone https://github.com/lenielluzardo/lenielluzardo.git
-cd lenielluzardo
+cd lenielluzardo/www
 
-# Initialize and update submodules
-git submodule update --init --recursive
+# Install dependencies
+npm install
 
-# The blog folder is now at www/src/blog/
+# Start development server
+npm start
 ```
 
 #### Creating a New Blog Post
 
-1. Navigate to the blog submodule:
+1. Navigate to the blog folder:
 ```bash
 cd www/src/blog
 ```
@@ -67,14 +78,14 @@ cd www/src/blog
 2. Create a new markdown file with date prefix:
 ```bash
 # Format: YYYY-MM-DD-slug.md
-touch 2026-01-15-my-new-post.md
+touch 2026-01-29-my-new-post.md
 ```
 
 3. Add frontmatter and content:
 ```markdown
 ---
 title: "My Awesome Blog Post"
-date: 2026-01-15
+date: 2026-01-29
 description: "A brief description for SEO and previews"
 tags: ["javascript", "tutorial"]
 layout: article.njk
@@ -86,47 +97,31 @@ draft: false
 Write your blog post content using markdown...
 ```
 
-4. Commit and push to blog repository:
+4. Commit and push to main repository:
 ```bash
-git add .
+cd ../../..  # Back to repo root
+git add www/src/blog/2026-01-29-my-new-post.md
 git commit -m "feat: add new blog post about XYZ"
 git push origin main
 ```
 
-5. Update main repository to reference new submodule commit:
-```bash
-cd ../../..  # Back to main repo root
-git add www/src/blog
-git commit -m "chore: update blog submodule"
-git push origin main
-```
-
-6. Deploy:
-```bash
-cd www
-npm run build
-netlify deploy --prod
-```
+5. GitHub Actions automatically syncs to ll.db.blog and Netlify deploys!
 
 #### Editing Existing Posts
 
 ```bash
-# Navigate to blog submodule
+# Navigate to blog folder
 cd www/src/blog
 
 # Edit the post
-code 2026-01-15-my-new-post.md
+code 2026-01-29-my-new-post.md
 
 # Commit changes
 git add .
 git commit -m "fix: update post content"
 git push origin main
 
-# Update main repo
-cd ../../..
-git add www/src/blog
-git commit -m "chore: update blog submodule"
-git push origin main
+# Automatic sync and deploy happens!
 ```
 
 ## Blog Post Template
@@ -155,90 +150,62 @@ draft: false                   # Optional (default: false)
 5. **Links**: Use relative paths for internal links, full URLs for external
 6. **Conclusion**: Summarize key takeaways
 
-## Submodule Management
+## GitHub Actions Automation
 
-### Updating Blog Submodule
+The repository includes a GitHub Action (`.github/workflows/sync-to-blog-repo.yml`) that:
 
-To pull latest blog posts from the remote repository:
+1. **Triggers** when markdown files in `www/src/blog/` are pushed to main branch
+2. **Detects** which blog posts were added or modified
+3. **Syncs** those posts to the ll.db.blog repository
+4. **Commits** the changes automatically
 
-```bash
-cd www/src/blog
-git pull origin main
-cd ../../..
-git add www/src/blog
-git commit -m "chore: update blog submodule to latest"
-git push origin main
-```
+### Required Setup
 
-### Check Submodule Status
+You need a Personal Access Token (PAT) with repo permissions:
 
-```bash
-# From main repository root
-git submodule status
-
-# Shows commit hash and path
-# - prefix means submodule not initialized
-# + prefix means different commit than expected
-```
-
-### Reset Submodule
-
-If your submodule gets into a weird state:
-
-```bash
-git submodule deinit -f www/src/blog
-git submodule update --init --recursive
-```
+1. Go to GitHub Settings → Developer settings → Personal access tokens → Tokens (classic)
+2. Generate new token with `repo` scope
+3. Add it as a secret named `BLOG_SYNC_TOKEN` in your main repository settings
+4. The workflow will use this token to push to ll.db.blog
 
 ## Netlify Configuration
 
-The `netlify.toml` includes:
+The `netlify.toml` is simplified - no submodule configuration needed:
 
 ```toml
-[build.processing]
-  git_submodules = true
+[build]
+  command = "npm run build"
+  publish = "public"
 ```
 
-This ensures Netlify:
+Netlify simply:
 1. Clones the main repository
-2. Initializes and updates submodules
-3. Builds with all blog content available
+2. Installs dependencies
+3. Builds with Eleventy
+4. Deploys the site
 
 ## Troubleshooting
 
 ### Blog posts not showing up
 
-1. Check submodule is initialized: `git submodule status`
-2. Verify frontmatter is valid YAML
-3. Check `draft: false` in frontmatter
-4. Rebuild: `npm run build`
+1. Verify frontmatter is valid YAML
+2. Check `draft: false` in frontmatter
+3. Rebuild locally: `npm run build`
+4. Check Eleventy config references `blog`
 
-### Submodule shows modified but no changes
+### Sync to ll.db.blog not working
 
-```bash
-cd www/src/blog
-git status
-git reset --hard origin/main
-```
+1. Check GitHub Actions tab for workflow errors
+2. Verify `BLOG_SYNC_TOKEN` secret is set correctly
+3. Ensure token has `repo` scope permissions
+4. Check workflow logs for specific error messages
 
 ### CMS changes not reflecting
 
 1. Check Netlify Identity is enabled
 2. Verify Git Gateway is configured
 3. Check build logs: https://app.netlify.com/projects/wwwlenielluzardo/deploys
-4. Ensure submodule reference is updated in main repo
-
-### Local and remote out of sync
-
-```bash
-# Force sync with remote
-cd www/src/blog
-git fetch origin
-git reset --hard origin/main
-cd ../../..
-git add www/src/blog
-git commit -m "chore: sync blog submodule"
-```
+4. Ensure CMS is pointing to `www/src/blog/` folder
 
 ## Workflow Diagram
 
@@ -247,18 +214,19 @@ git commit -m "chore: sync blog submodule"
 │                  Content Creation                        │
 ├─────────────────────────────────────────────────────────┤
 │                                                          │
-│  Netlify CMS ──────┬────────> ll.db.blog Repository    │
-│                    │                                     │
+│  Netlify CMS ──────┬────────> Main Repository          │
+│                    │          (www/src/blog/)            │
 │  Local Editor ─────┘                                     │
 │                                                          │
 └────────────────────┬────────────────────────────────────┘
                      │
                      ▼
 ┌─────────────────────────────────────────────────────────┐
-│            Main Repository Update                        │
+│            GitHub Actions Trigger                        │
 ├─────────────────────────────────────────────────────────┤
 │                                                          │
-│  Submodule reference updated                            │
+│  Detects changes in blog/*.md                           │
+│  → Syncs files to ll.db.blog repository                │
 │  → Triggers Netlify build                               │
 │                                                          │
 └────────────────────┬────────────────────────────────────┘
@@ -269,7 +237,7 @@ git commit -m "chore: sync blog submodule"
 ├─────────────────────────────────────────────────────────┤
 │                                                          │
 │  1. Clone main repo                                     │
-│  2. Initialize submodules (fetch blog content)          │
+│  2. Install dependencies                                │
 │  3. Run npm run build (Eleventy)                        │
 │  4. Deploy to CDN                                       │
 │                                                          │
@@ -283,36 +251,37 @@ git commit -m "chore: sync blog submodule"
 
 1. **Commit Often**: Make small, focused commits
 2. **Descriptive Messages**: Use conventional commit format
-3. **Test Locally**: Build locally before pushing
+3. **Test Locally**: Build locally before pushing (`npm run build`)
 4. **Review Drafts**: Use `draft: true` for work in progress
 5. **Tag Consistently**: Use lowercase, hyphenated tags
-6. **Backup**: The blog repo is your content backup
+6. **Automatic Backup**: ll.db.blog serves as automatic backup
 
 ## Quick Reference
 
 ```bash
-# Pull latest blog content
-git submodule update --remote www/src/blog
-
 # Create new post
 cd www/src/blog
 touch $(date +%Y-%m-%d)-my-post.md
+# Edit the file...
 
-# Push blog changes
-cd www/src/blog
-git add . && git commit -m "feat: new post" && git push
+# Commit and push (triggers automatic sync)
+git add .
+git commit -m "feat: new post about XYZ"
+git push origin main
 
-# Update main repo
-cd ../../.. && git add www/src/blog
-git commit -m "chore: update blog" && git push
+# Build and test locally
+cd ..
+npm run build
+npm start
 
-# Build and deploy
-cd www && npm run build && netlify deploy --prod
+# Check GitHub Actions
+# Visit: https://github.com/lenielluzardo/lenielluzardo/actions
 ```
 
 ## Support
 
 - **Build Issues**: Check Netlify dashboard logs
 - **Content Issues**: Verify frontmatter and markdown syntax
-- **Submodule Issues**: See troubleshooting section above
+- **Sync Issues**: Check GitHub Actions workflow logs
 - **CMS Access**: Ensure Netlify Identity is configured
+- **Token Issues**: Verify BLOG_SYNC_TOKEN secret has repo permissions

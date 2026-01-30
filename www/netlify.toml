@@ -5,9 +5,6 @@
 [build.environment]
   NODE_VERSION = "20"
 
-[build.processing]
-  git_submodules = true
-
 # Netlify CMS - Enable Identity and Git Gateway
 
 # Protect admin routes with authentication

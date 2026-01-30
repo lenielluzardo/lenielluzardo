@@ -1,5 +1,0 @@
-[submodule "www/src/blog"]
-	path = www/src/blog
-	url =  https://github.com/lenielluzardo/ll.db.blog.git
-	branch = main
-
