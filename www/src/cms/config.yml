@@ -1,13 +1,16 @@
-# Decap CMS Configuration - Netlify Deployment
+# Decap CMS Configuration - GitHub Pages Deployment
 #
 # Blog posts are managed in main repository at www/src/blog
-# Uses Netlify Identity + Git Gateway for authentication
+# Uses GitHub backend with OAuth for authentication
 #
 # Editorial workflow: CMS edits create draft branches/PRs (no build triggered)
-# Merging the PR to main triggers a Netlify build
+# Merging the PR to main triggers a GitHub Actions build + deploy
 backend:
-  name: git-gateway
+  name: github
+  repo: lenielluzardo/lenielluzardo
   branch: main
+  base_url: https://cms-oauth-proxy.lenielluzardo-dev.workers.dev
+  auth_endpoint: /auth
 
 # For local development: run `npx decap-server` then access /admin/cms/
 local_backend: true

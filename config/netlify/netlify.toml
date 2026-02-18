@@ -5,26 +5,19 @@
 [build.environment]
   NODE_VERSION = "20"
 
-# Netlify CMS - Enable Identity and Git Gateway
+# Local dev server configuration
+# Run: npx netlify dev (from www/ directory)
+[dev]
+  command = "npx @11ty/eleventy --serve --port 8080 --quiet"
+  targetPort = 8080
+  publish = "public"
+  autoLaunch = false
 
-# Protect admin routes with authentication
-[[redirects]]
-  from = "/admin/*"
-  to = "/admin/:splat"
-  status = 200
-  force = false
-  conditions = {Role = ["admin"]}
-
-# Allow unauthenticated users to see login page
-[[redirects]]
-  from = "/admin/*"
-  to = "/.netlify/identity/login"
-  status = 302
-  force = false
-
-# Single Page App redirect for client-side routing
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
-  force = false
+# Netlify Identity + Git Gateway for CMS authentication
+# Enable Identity service and Git Gateway in Netlify dashboard:
+#   Site settings → Identity → Enable Identity
+#   Site settings → Identity → Services → Git Gateway → Enable
+#
+# Note: The admin pages are served to everyone, but the CMS itself
+# requires Netlify Identity login to access Git Gateway (write to repo).
+# The real security is in Git Gateway, not in redirect rules.
