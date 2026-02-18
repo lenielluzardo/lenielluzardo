@@ -8,6 +8,7 @@ module.exports = function (eleventyConfig) {
     eleventyConfig.addPassthroughCopy("site.config.json");
     eleventyConfig.addPassthroughCopy("src/admin.js");
     eleventyConfig.addPassthroughCopy({ "src/cms": "admin/cms" });
+    eleventyConfig.addPassthroughCopy("src/CNAME");
 
     // Make site config available globally
     eleventyConfig.addGlobalData("site", siteConfig);
