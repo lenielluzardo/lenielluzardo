@@ -94,30 +94,39 @@ Create a new Cloudflare Worker manually:
 4. Replace the default code with this OAuth proxy code:
 
 ```javascript
-// Simple GitHub OAuth proxy for Decap CMS
+// GitHub OAuth proxy for Decap CMS
+// IMPORTANT: Decap CMS expects { token, provider } NOT GitHub's raw { access_token, token_type, scope }
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
-    
-    // CORS headers
+
     const corsHeaders = {
       'Access-Control-Allow-Origin': '*',
       'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
       'Access-Control-Allow-Headers': 'Content-Type',
     };
-    
+
     if (request.method === 'OPTIONS') {
       return new Response(null, { headers: corsHeaders });
     }
-    
-    // Handle /auth endpoint
+
+    // /auth - Redirect user to GitHub OAuth authorization page
     if (url.pathname === '/auth') {
+      const githubAuthUrl = new URL('https://github.com/login/oauth/authorize');
+      githubAuthUrl.searchParams.set('client_id', env.OAUTH_CLIENT_ID);
+      githubAuthUrl.searchParams.set('scope', 'repo,user');
+      githubAuthUrl.searchParams.set('redirect_uri', `${url.origin}/callback`);
+      return Response.redirect(githubAuthUrl.toString(), 302);
+    }
+
+    // /callback - Exchange code for token and notify CMS via postMessage
+    if (url.pathname === '/callback') {
       const code = url.searchParams.get('code');
       if (!code) {
         return new Response('Missing code parameter', { status: 400 });
       }
-      
-      // Exchange code for token
+
+      // Exchange authorization code for access token
       const tokenResponse = await fetch('https://github.com/login/oauth/access_token', {
         method: 'POST',
         headers: {
@@ -130,14 +139,45 @@ export default {
           code: code,
         }),
       });
-      
+
       const data = await tokenResponse.json();
-      
-      return new Response(JSON.stringify(data), {
-        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-      });
+
+      // Handle GitHub error response
+      if (data.error || !data.access_token) {
+        const errMsg = data.error_description || data.error || 'Unknown error';
+        const content = `<!DOCTYPE html><html><body><script>
+(function() {
+  window.opener.postMessage(
+    "authorization:github:error:" + JSON.stringify({ message: ${JSON.stringify(errMsg)} }),
+    "*"
+  );
+  setTimeout(function() { window.close(); }, 1000);
+})();
+</script><p>Authorization failed: ${errMsg}</p></body></html>`;
+        return new Response(content, { headers: { 'Content-Type': 'text/html' } });
+      }
+
+      // Transform to Decap CMS expected format: { token, provider }
+      // GitHub returns { access_token, token_type, scope } but Decap CMS needs { token, provider }
+      const cmsTokenData = { token: data.access_token, provider: 'github' };
+
+      const content = `<!DOCTYPE html>
+<html><head><title>Authorizing...</title></head>
+<body>
+<script>
+(function() {
+  var data = ${JSON.stringify(cmsTokenData)};
+  var msg = "authorization:github:success:" + JSON.stringify(data);
+  window.opener.postMessage(msg, "*");
+  setTimeout(function() { window.close(); }, 1000);
+})();
+</script>
+<p>Authorized! This window will close automatically.</p>
+</body></html>`;
+
+      return new Response(content, { headers: { 'Content-Type': 'text/html' } });
     }
-    
+
     return new Response('OAuth Proxy for Decap CMS', { headers: corsHeaders });
   }
 };
