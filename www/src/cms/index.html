@@ -3,16 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Content Management System - Cloudflare Pages</title>
-    
-    <!-- CLOUDFLARE PAGES DEPLOYMENT CONFIGURATION -->
-    <!-- Uses GitHub OAuth (no Netlify Identity) -->
-    <!-- Requires OAuth Worker to be deployed - see www/config/cloudflare/DEPLOYMENT.md -->
+    <title>Content Management System</title>
+
+    <!-- Netlify Identity Widget - required for Git Gateway authentication -->
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </head>
 <body>
     <!-- Decap CMS -->
     <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
-    
-    <!-- No additional scripts needed for GitHub OAuth -->
 </body>
 </html>
