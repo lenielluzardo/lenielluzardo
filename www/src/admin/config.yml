@@ -1,32 +1,24 @@
-# Cloudflare Pages + GitHub OAuth Configuration
-# 
-# This is the Decap CMS configuration for Cloudflare Pages deployment
-# Uses GitHub OAuth instead of Netlify Identity
-# 
-# Blog posts are managed in main repository at www/src/blog
-# All new posts created here are automatically synced to ll.db.blog via GitHub Actions
+# Decap CMS Configuration - GitHub Pages Deployment
 #
+# Blog posts are managed in main repository at www/src/blog
+# Uses GitHub backend with OAuth for authentication
+#
+# Editorial workflow: CMS edits create draft branches/PRs (no build triggered)
+# Merging the PR to main triggers a GitHub Actions build + deploy
 backend:
   name: github
-  repo: lenielluzardo/lenielluzardo # Your GitHub repository (owner/repo)
-  branch: main # Branch to update
-  base_url: https://your-oauth-provider.com # Replace with your GitHub OAuth provider URL
-  # For GitHub OAuth, you'll need to set up an OAuth app or use a service like:
-  # - Cloudflare Workers OAuth proxy
-  # - Vercel serverless function
-  # - Netlify Functions (if you want to keep using it for auth only)
-  # - Self-hosted OAuth server
+  repo: lenielluzardo/lenielluzardo
+  branch: main
+  base_url: https://cms-oauth-proxy.lenielluzardo-dev.workers.dev
+  auth_endpoint: /auth
 
-# Alternative backend for local development
-# Uncomment this when developing locally
-# backend:
-#   name: test-repo
-
-# For local development without OAuth
+# For local development: run `npm run dev:cms` from www/ directory
+# (decap-server must run from repo root so file paths resolve correctly)
 local_backend: true
 
-# Publish mode
-publish_mode: editorial_workflow # Enables draft/review workflow
+# Editorial workflow: edits go to draft branches, not directly to main
+# This means CMS edits do NOT trigger builds until you merge the PR
+publish_mode: editorial_workflow
 
 # Media files configuration
 media_folder: "www/src/assets/uploads" # Where uploaded images will be stored (relative to repo root)
@@ -79,34 +71,12 @@ collections:
     files:
       - label: "Site Configuration"
         name: "config"
-        file: "www/site.config.json" # Path relative to repository root
+        file: "www/site.config.json"
         fields:
-          - label: "Features"
-            name: "features"
+          - label: "Pages"
+            name: "pages"
             widget: "object"
             fields:
-              - label: "Blog CTA"
-                name: "blogCTA"
-                widget: "object"
-                fields:
-                  - { label: "Enabled", name: "enabled", widget: "boolean", default: true }
-                  - { label: "Title", name: "title", widget: "string" }
-                  - { label: "Description", name: "description", widget: "text" }
-                  - { label: "Button Text", name: "buttonText", widget: "string" }
-                  - { label: "Button Link", name: "buttonLink", widget: "string" }
-              
-              - label: "Newsletter"
-                name: "newsletter"
-                widget: "object"
-                fields:
-                  - { label: "Enabled", name: "enabled", widget: "boolean", default: true }
-                  - { label: "Title", name: "title", widget: "string" }
-                  - { label: "Description", name: "description", widget: "text" }
-                  - { label: "Placeholder", name: "placeholder", widget: "string" }
-                  - { label: "Button Text", name: "buttonText", widget: "string" }
-              
-              - label: "Recent Posts"
-                name: "recentPosts"
-                widget: "object"
-                fields:
-                  - { label: "Display Count", name: "count", widget: "number", default: 3, value_type: "int" }
+              - { label: "Blog", name: "blog", widget: "boolean", default: true }
+              - { label: "Projects", name: "projects", widget: "boolean", default: true }
+              - { label: "Work with Me", name: "workWithMe", widget: "boolean", default: true }

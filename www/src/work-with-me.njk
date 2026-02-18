@@ -4,6 +4,13 @@ title: Work with Me
 description: Let's collaborate on your next digital product. Professional software development services.
 ---
 
+{% if not site.pages.workWithMe %}
+<section>
+    <h1>Work with Me</h1>
+    <p>This page is currently not available.</p>
+</section>
+{% else %}
+
 <section class="work-hero">
     <h1>Let's Build Something Great Together</h1>
     <p class="lead">
@@ -163,8 +170,8 @@ description: Let's collaborate on your next digital product. Professional softwa
         about what's possible.
     </p>
     <div class="contact-options">
-        <a href="mailto:{{ site.contact.email }}" class="btn">Send an Email</a>
-        <a href="{{ site.contact.linkedin }}" target="_blank" rel="noopener noreferrer" class="btn-outline btn">
+        <a href="mailto:lenielluzardo.dev@gmail.com" class="btn">Send an Email</a>
+        <a href="https://www.linkedin.com/in/lenielluzardo" target="_blank" rel="noopener noreferrer" class="btn-outline btn">
             Connect on LinkedIn
         </a>
     </div>
@@ -216,3 +223,5 @@ description: Let's collaborate on your next digital product. Professional softwa
         </p>
     </div>
 </section>
+
+{% endif %}

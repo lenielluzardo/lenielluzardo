@@ -5,11 +5,13 @@
     <nav>
         <ul id="nav-links">
             <li><a href="/">Home</a></li>
+            {% if site.pages.blog %}
             <li><a href="/blog">Blog</a></li>
-            {% if site.features.recentProjects.enabled %}
+            {% endif %}
+            {% if site.pages.projects %}
             <li><a href="/projects">Projects</a></li>
             {% endif %}
-            {% if site.features.workWithMePage.enabled %}
+            {% if site.pages.workWithMe %}
             <li><a href="/work-with-me">Work with Me</a></li>
             {% endif %}
         </ul>
