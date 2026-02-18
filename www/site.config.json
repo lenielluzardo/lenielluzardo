@@ -2,6 +2,7 @@
   "pages": {
     "blog": true,
     "projects": true,
-    "workWithMe": true
+    "workWithMe": true,
+    "faq": true
   }
 }
