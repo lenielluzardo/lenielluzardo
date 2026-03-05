@@ -9,7 +9,7 @@ backend:
   name: github
   repo: lenielluzardo/lenielluzardo
   branch: main
-  client_id: YOUR_GITHUB_CLIENT_ID
+  client_id: Iv23liPDjQSjoLyvmDn5
 
 # For local development: run `npm run dev:cms` from www/ directory
 # (decap-server must run from repo root so file paths resolve correctly)
