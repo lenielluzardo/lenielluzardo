@@ -1,4 +1,4 @@
-# Context Prompt for Continuing Work on Leniel Luzardo Portfolio CMS
+# Context Prompt for Continuing Work on Leniel Luzardo Portfolio
 
 Use this prompt to restore context when continuing work on this project. This file serves as the **complete project registry** tracking all changes and current state.
 
@@ -6,302 +6,246 @@ Use this prompt to restore context when continuing work on this project. This fi
 
 ## PROJECT CONTEXT
 
-I'm working on a **Professional CMS Portfolio System** built with Eleventy, hosted on Netlify. The project is located at `d:\p\dev\lenielluzardo\` and is fully functional and deployed.
+I'm working on a **Professional Portfolio** built with Eleventy 3.1.2, hosted on GitHub Pages. The project is located at `d:\p\dev\lenielluzardo\` and is fully functional and deployed.
+
+**Domain**: lenielluzardo.dev  
+**Repository**: github.com/lenielluzardo/lenielluzardo  
+**Active branch**: dev  
 
 ---
 
 ## 📋 CHANGE REGISTRY
 
-### ✅ January 29, 2026 - Major Architecture Refactoring (COMPLETED)
+### ✅ January 29, 2026 - Architecture Refactoring
 
-#### Task 1: Remove Custom Content Management System ✅
-- ✅ Deleted custom content-admin system (content-admin.njk, content-admin.js)
-- ✅ Removed `/admin/content/` route and navigation
-- ✅ Simplified admin dashboard to Netlify CMS only
-- **Result**: Single, clean CMS solution
+- Removed custom content-admin system (kept Decap CMS only)
+- Removed git submodule architecture for blog
+- Simplified to single blog folder (`blog/`)
+- Implemented automatic sync TO ll.db.blog via GitHub Actions
+- Renamed `blog_main` → `blog`
+- Created consolidated documentation
 
-#### Task 2: Simplify Blog Architecture & Reverse Sync ✅
-- ✅ Removed git submodule at `www/src/blog/`
-- ✅ Deleted `.gitmodules` file
-- ✅ Created new GitHub Actions workflow: `.github/workflows/sync-to-blog-repo.yml`
-- ✅ Reversed sync direction: Main repo → ll.db.blog (was opposite)
-- ✅ Updated Eleventy config to read from single source
-- ✅ Removed submodule configuration from netlify.toml
-- ✅ Deleted old workflow: `update-blog-submodule.yml`
-- **Result**: Simplified deployment, automatic backup to ll.db.blog
+### ✅ January 30, 2026 - Multi-Platform Deployment
 
-#### Task 3: Rename blog_main to blog ✅
-- ✅ Renamed directory `www/src/blog_main/` → `www/src/blog/`
-- ✅ Updated all configuration files (eleventy.config.js, cms/config.yml, workflow)
-- ✅ Updated all documentation (README, BLOG_WORKFLOW, this file)
-- ✅ Git detected as rename (preserves history)
-- **Result**: Cleaner, more intuitive naming
+- Created platform-specific CMS configs (netlify/, cloudflare/)
+- Deployed site to Cloudflare Pages
+- Set up GitHub OAuth App + Cloudflare Worker proxy
+- ⚠️ CMS auth on Cloudflare still incomplete (see bugs section)
 
-#### Task 4: Consolidate Documentation ✅
-- ✅ Created `PROJECT_CHANGE_REGISTRY.md` with complete change history
-- ✅ Updated this file (CONTINUE_SESSION_PROMPT.md) as main registry
-- **Result**: Centralized project documentation
+### ✅ February 18, 2026 - Major UI Overhaul (TODAY'S SESSION)
+
+**Migrated hosting from Netlify to GitHub Pages:**
+- Simplified codebase, removed Netlify-specific configs
+- Created template repo for reuse
+- Deployed via GitHub Actions to lenielluzardo.dev
+
+**Built card slider system:**
+- Created multi-slider JS with `[data-slider]` attribute support
+- Auto-slide with IntersectionObserver (only animates when visible)
+- Dot navigation, prev/next buttons, hover pause
+- 6 benefit cards ("Why Work with Me") + 6 process steps
+
+**Restructured homepage into partials:**
+- `_includes/hero.njk` — "Let's Build Something Great Together"
+- `_includes/slider-benefits.njk` — 6 benefit cards (Fast Delivery, Professional Process, Full-Stack Expertise, Collaborative Approach, Quality Assured, Ongoing Support)
+- `_includes/services.njk` — 4 detailed service items (Planning, UI/UX, Full-Stack, DevOps)
+- `_includes/slider-process.njk` — 6 process steps (01-06)
+- `_includes/tabs.njk` — Tabbed container wrapping the three sections above
+
+**Created tabbed interface:**
+- Three tabs: "The Person" | "The Services" | "The Process"
+- Tabs fill full viewport height (`calc(100vh - 4rem)`)
+- Mouse wheel scroll on tabs switches between tabs (scroll down → next, up → previous)
+- Click tabs to switch, wrap-around from last to first
+- Panels scroll internally with subtle scrollbar
+
+**Created FAQ page:**
+- `/faq/` with 5 Q&A items
+- Added "Q&A" link to site navigation
+- Toggle in `site.config.json`
+
+**Floating UI elements:**
+- `_includes/social-links.njk` — LinkedIn circle icon, fixed left side, vertically centered (in `base.njk` globally)
+- `_includes/call-to-action.njk` — "Let's work together!" button, sticky positioning
+  - Sticks to bottom of viewport while scrolling
+  - Seamlessly lands in its natural document position (between tabs and footer) when reached
+  - Gradient overlay fades when CTA section enters viewport
+  - CTA included only on homepage (`index.njk`), not global
+
+**Footer updates:**
+- Moved Q&A, testimonials, and about section links from slider-process to footer
+- Added `.footer-nav` section above copyright/social row
 
 ---
 
-## CURRENT STATE (as of January 29, 2026)
+## CURRENT STATE (as of February 18, 2026)
 
 ### ✅ What's Working
-- ✅ Complete Eleventy 3.1.2 static site generator setup
-- ✅ Comprehensive CSS design system (1000+ lines) with dark mode
-- ✅ All core pages: Home, Blog, Projects, Work with Me
-- ✅ Admin dashboard for feature management (authentication protected)
-- ✅ Netlify CMS (Decap CMS) integration at `/admin/cms/`
-- ✅ Simplified single-folder blog system at `src/blog/`
-- ✅ GitHub Actions automatic sync to ll.db.blog for backup
-- ✅ Netlify Identity authentication protecting admin routes
-- ✅ Responsive design with proper text overflow handling
-- ✅ Site deployed at: https://wwwlenielluzardo.netlify.app
-- ✅ Build successful: `npm run build` ✅
+- Complete Eleventy 3.1.2 static site
+- GitHub Pages hosting at lenielluzardo.dev via GitHub Actions
+- Homepage: hero → tabbed interface (3 panels with sliders) → sticky CTA → footer
+- Card sliders with auto-slide, dots, IntersectionObserver
+- Tabbed interface with wheel-scroll switching
+- Sticky CTA with gradient overlay
+- Floating LinkedIn social link
+- FAQ page at /faq/
+- Blog and Projects pages
+- Decap CMS v3.0 at /admin/
+- Dark mode via CSS custom properties
+- Responsive design (768px breakpoint)
+- Git on `dev` branch, pushed to origin
 
 ### 📂 Key Files & Structure
 ```
-www/
-├── eleventy.config.js (collections from blog/)
-├── site.config.json (feature flags)
-├── netlify.toml (build config)
-├── src/
-│   ├── style.css (complete design system)
-│   ├── admin.njk + admin.js (feature toggles)
-│   ├── blog.njk, projects.njk, work-with-me.njk, index.njk
-│   ├── _layouts/ (base, header, footer, article, components)
-│   ├── blog/ (all blog posts, synced to ll.db.blog)
-│   └── cms/ (Netlify CMS config)
-└── .github/workflows/sync-to-blog-repo.yml
+lenielluzardo/
+├── .github/workflows/          # GitHub Actions (Pages deploy, blog sync)
+├── project-documentation/      # This file and other docs
+├── www/
+│   ├── eleventy.config.js      # Collections, filters (64 lines)
+│   ├── site.config.json        # Feature flags (blog, projects, workWithMe, faq)
+│   ├── src/
+│   │   ├── index.njk           # Homepage: hero + tabs + CTA + slider JS
+│   │   ├── style.css           # Complete design system (~1070 lines)
+│   │   ├── blog.njk            # Blog listing page
+│   │   ├── projects.njk        # Projects listing page
+│   │   ├── faq.njk             # FAQ page
+│   │   ├── work-with-me.njk    # Orphaned (content moved to homepage)
+│   │   ├── _includes/
+│   │   │   ├── hero.njk
+│   │   │   ├── tabs.njk        # Tabbed container + tab switching JS
+│   │   │   ├── slider-benefits.njk
+│   │   │   ├── services.njk
+│   │   │   ├── slider-process.njk
+│   │   │   ├── call-to-action.njk  # Sticky CTA + overlay + scroll JS
+│   │   │   └── social-links.njk    # Floating LinkedIn icon
+│   │   ├── _layouts/
+│   │   │   ├── base.njk        # HTML shell: header, main, footer, social-links
+│   │   │   ├── header.njk      # Nav: Home, Blog, Projects, Q&A
+│   │   │   └── footer.njk      # Footer nav links + copyright + social
+│   │   ├── blog/               # Blog posts (markdown)
+│   │   ├── projects/           # Project pages
+│   │   └── admin/              # Decap CMS
+│   └── public/                 # Build output (gitignored)
 ```
 
-### 🔑 Important Architecture Decisions
+### 🔑 Architecture Decisions
 
-1. **Simplified Blog System**: 
-   - All blog posts stored in `src/blog/` in main repository
-   - GitHub Actions automatically syncs posts TO `ll.db.blog` repository for backup
-   - Eleventy reads from `blog/` folder only
-   - Why: Simpler than submodules, CMS works directly with main repo, automatic backup
+1. **Homepage as tabbed interface**: Three main sections (Person/Services/Process) in viewport-height tabs with wheel-scroll switching
+2. **Partials system**: Content split into `_includes/` partials for reusability
+3. **Sticky CTA**: Uses `position: sticky` as direct child of `<main>` for seamless float-to-land behavior
+4. **Social links global, CTA homepage-only**: `social-links.njk` in `base.njk`, `call-to-action.njk` only in `index.njk`
+5. **Card sliders**: `[data-slider]` attribute-driven, multiple sliders per page, IntersectionObserver for performance
+6. **Feature flags**: `site.config.json` controls page visibility
 
-2. **Authentication**:
-   - All admin pages protected by Netlify Identity
-   - Routes: `/admin/`, `/admin/cms/`
-   - Identity widget loaded in base.njk
-
-3. **Automated Blog Sync**:
-   - Workflow: `.github/workflows/sync-to-blog-repo.yml`
-   - When blog post added/edited in main repo → GitHub Actions → syncs to ll.db.blog
-   - Requires BLOG_SYNC_TOKEN secret in main repository (PAT with repo scope)
-   - Netlify automatically rebuilds on main repo changes
-
-4. **Feature Flags**:
-   - All features controlled via `site.config.json`
-   - Toggle-able through admin dashboard
-   - Includes: blogCTA, newsletter, recentPosts, recentProjects, workWithMePage, blogCategories
-
-### 📝 Recent Work
-
-**Latest Article Created**:
-- `2026-01-06-building-professional-cms-with-ai-assistance.md`
-- Chronicles building this system with AI assistance
-- Includes 30 enhancement ideas organized by category
-- Implementation priority guide
-
-**Latest Documentation**:
-- `AI_AGENT_REPLICATION_PROMPT.md` - Complete prompt to rebuild system from scratch (16 phases)
-- `AUTOMATED_BLOG_DEPLOYMENT.md` - GitHub Actions workflow setup guide
-
-**Latest Refactoring (January 29, 2026)**: ✅ COMPLETED
-- ✅ Removed custom content-admin system (kept only Netlify CMS)
-- ✅ Removed git submodule architecture
-- ✅ Simplified to single blog folder (`blog/`)
-- ✅ Implemented automatic sync TO ll.db.blog via GitHub Actions
-- ✅ Simplified Netlify configuration (removed submodule support)
-- ✅ Renamed `blog_main` → `blog` for cleaner naming
-- ✅ Updated all documentation to reflect new architecture
-- ✅ Created `PROJECT_CHANGE_REGISTRY.md` for complete change history
-
-**Latest CSS Fixes**:
-- Added proper text overflow handling to all cards
-- `word-wrap: break-word`, `overflow-wrap: break-word`, `word-break: break-word`
-- Applied to: `.card`, `.benefit-card`, `.service-item`, `.faq-item`
-
-### 🚀 Deployment Info
-
-**Repositories**:
-- Main: `github.com/lenielluzardo/lenielluzardo` (blog posts at www/src/blog/)
-- Blog: `github.com/lenielluzardo/ll.db.blog` (synced backup)
-
-**Netlify**:
-- Site: https://wwwlenielluzardo.netlify.app
-- Build command: `npm run build`
-- Publish directory: `www/public`
-- Identity: enabled with Git Gateway
-
-**GitHub Actions**:
-- Workflow: `.github/workflows/sync-to-blog-repo.yml`
-- ⏳ **NEXT STEP**: Configure BLOG_SYNC_TOKEN secret (Personal Access Token with repo scope)
-- Automatically syncs blog posts from main repo to ll.db.blog
-- ⏳ **NEXT STEP**: Test workflow by adding/editing a blog post
-
-### ⏳ PENDING TASKS
-
-1. **Commit All Changes** - Ready to commit!
-   ```bash
-   git commit -m "refactor: simplify architecture and rename blog folder"
-   git push origin main
-   ```
-
-2. **Configure GitHub Secret** - Required for sync workflow
-   - Create PAT at: https://github.com/settings/tokens
-   - Select `repo` scope
-   - Add as `BLOG_SYNC_TOKEN` at: https://github.com/lenielluzardo/lenielluzardo/settings/secrets/actions
-
-3. **Test Sync Workflow**
-   - Edit a blog post in `www/src/blog/`
-   - Commit and push
-   - Verify it syncs to ll.db.blog
-   - Check: https://github.com/lenielluzardo/lenielluzardo/actions
-
-### 🛠️ Development Commands
-
-```bash
-# Navigate to project
-cd d:\d\p\dev\lenielluzardo\www
-
-# Install dependencies
-npm install
-
-# Start dev server (http://localhost:8080)
-npm start
-
-# Build for production
-npm run build
-
-# Git workflow
-git add .
-git commit -m "message"
-git push origin main
-```
-
-### 🎯 Enhancement Roadmap (from article)
-
-**High Priority**:
-1. Search functionality
-2. Code syntax highlighting
-3. RSS feed
-4. Table of contents
-5. Image optimization
-
-**Medium Priority**:
-6. Related posts
-7. Comments system
-8. Newsletter integration (actual email service)
-9. Analytics
-10. Advanced SEO enhancements
-
-**Low Priority**:
-11. Theme customizer
-12. Multi-language support
-13. PWA features
-14. Scheduled publishing
-15. Testing suite
-
-### ⚠️ Known Considerations
-
-1. **Blog Sync**: Posts are automatically synced to ll.db.blog via GitHub Actions when changes are pushed
-2. **Token Management**: BLOG_SYNC_TOKEN (Personal Access Token) may need renewal - requires repo scope
-3. **CSS Specificity**: Design system uses CSS variables extensively - modify in `:root` and dark mode section
-4. **CMS Setup**: Netlify CMS requires Netlify Identity + Git Gateway to be configured
-
-### � Architecture Diagram
-
-```
-┌─────────────────────────────────────────┐
-│     Content Creation Layer              │
-│  (Netlify CMS or Local Editor)          │
-└──────────────┬──────────────────────────┘
-               ↓
-┌─────────────────────────────────────────┐
-│     Main Repository                     │
-│     www/src/blog/                       │
-│     (Single Source of Truth)            │
-└──────────────┬──────────────────────────┘
-               ↓
-     ┌─────────┴─────────┐
-     ↓                   ↓
-┌────────────┐    ┌──────────────┐
-│ GitHub     │    │ Netlify      │
-│ Actions    │    │ Build        │
-│ Sync       │    │ & Deploy     │
-└─────┬──────┘    └──────────────┘
-      ↓
-┌────────────┐
-│ ll.db.blog │
-│ (Backup)   │
-└────────────┘
-```
-
-### 📝 Important: Updating Project Documentation
-
-**When making significant architecture changes:**
-1. Update this file (CONTINUE_SESSION_PROMPT.md) with the changes
-2. Update AI_AGENT_REPLICATION_PROMPT.md to reflect new architecture
-3. Keep both files in sync for consistency
-
-**Purpose of each file:**
-- **CONTINUE_SESSION_PROMPT.md** (this file): History of changes, current state, how to continue working
-- **AI_AGENT_REPLICATION_PROMPT.md**: Instructions for AI to build the project from scratch in current state
-- **BLOG_WORKFLOW.md**: Detailed workflow for creating and managing blog posts
-
-### �📚 Contact Information (from site.config.json)
-- Email: lenielluzardo.dev@gmail.com
-- LinkedIn: linkedin.com/in/lenielluzardo
-- GitHub: github.com/lenielluzardo
+### CSS Custom Properties (key ones)
+- `--color-accent` — accent color for tabs, CTA, links
+- `--color-bg`, `--color-text`, `--color-text-secondary`, `--color-border`
+- `--space-*` — spacing scale (xs through 3xl)
+- `--text-*` — typography scale
+- `--transition-fast` — animation timing
+- `--border-radius` — consistent rounding
 
 ---
 
-## PROMPT TO USE TOMORROW
+## 🐛 KNOWN ISSUES
+
+1. **CMS Auth on Cloudflare**: OAuth flow completes but CMS doesn't enter authenticated state. Root cause identified (token format mismatch). Fixed Worker code exists but hasn't been redeployed. See old docs for Worker code.
+
+2. **Orphaned work-with-me.njk**: Still exists in `src/` but not linked in navigation. Content moved to homepage partials. Can be deleted.
+
+3. **Duplicate footer CSS**: There are two `/* Footer */` blocks in `style.css` (around lines 404 and 558). The second one (with `.footer-links`, `.footer-nav`) is the active one. The first can be cleaned up.
+
+4. **Blog sync**: GitHub Actions workflow exists but `BLOG_SYNC_TOKEN` secret may need verification.
+
+---
+
+## 🛠️ Development Commands
+
+```bash
+# Navigate to project
+cd d:\p\dev\lenielluzardo\www
+
+# Start dev server (http://localhost:8080)
+npx @11ty/eleventy --serve --port 8080
+
+# Build for production
+npx @11ty/eleventy
+# or
+npm run build
+
+# Clean build
+Remove-Item -Recurse -Force public; npx @11ty/eleventy
+
+# Git (on dev branch)
+git add .
+git commit -m "message"
+git push origin dev
+```
+
+---
+
+## ⏳ IDEAS & REMAINING WORK
+
+### UI Refinements (Immediate)
+- [ ] Clean up duplicate footer CSS blocks
+- [ ] Delete orphaned `work-with-me.njk`
+- [ ] Fine-tune tab panel heights on different screen sizes
+- [ ] Add touch/swipe support to tab switching for mobile
+- [ ] Style refinements: colors, typography, spacing (left for later by user)
+- [ ] Add transition animations when switching tabs
+
+### Content & Pages
+- [ ] Write real content for services, benefits, process steps
+- [ ] Add testimonials page (linked from footer)
+- [ ] Add about page (linked from footer)
+- [ ] Populate blog with real posts
+- [ ] Add project showcases
+
+### Features
+- [ ] Search functionality
+- [ ] Code syntax highlighting for blog
+- [ ] RSS feed
+- [ ] Image optimization pipeline
+- [ ] Analytics integration
+- [ ] Contact form (replace mailto CTA)
+
+### Infrastructure
+- [ ] Redeploy Cloudflare Worker with fixed OAuth token format
+- [ ] Verify blog sync GitHub Action
+- [ ] Set up proper CI/CD testing
+- [ ] Configure custom domain on GitHub Pages if not done
+
+---
+
+## PROMPT TO USE IN NEXT SESSION
 
 **Copy everything below this line when starting a new session:**
 
 ---
 
-Hi! I'm continuing work on my Professional CMS Portfolio built with Eleventy. 
+Hi! I'm continuing work on my portfolio at `d:\p\dev\lenielluzardo\`.
 
-**Project Location**: `d:\p\dev\lenielluzardo\`
+**Stack**: Eleventy 3.1.2, GitHub Pages, Decap CMS, vanilla CSS/JS  
+**Domain**: lenielluzardo.dev  
+**Repository**: github.com/lenielluzardo/lenielluzardo  
+**Branch**: dev  
 
-**Current State**: Fully functional and deployed at https://wwwlenielluzardo.netlify.app
+**Current homepage structure**:
+- Hero section → Tabbed interface (3 tabs filling viewport) → Sticky CTA → Footer
+- Tabs: "The Person" (benefit cards slider), "The Services" (4 service items), "The Process" (process steps slider)
+- Wheel scroll on tabs switches between them
+- Sticky CTA floats at bottom, lands in place when scrolled to
 
-**What's Working**:
-- Complete Eleventy site with blog, projects, work-with-me pages
-- Admin dashboard with feature toggles (auth protected)
-- Netlify CMS at /admin/cms/ for content management
-- Simplified blog system with automatic backup to ll.db.blog
-- GitHub Actions automated blog sync
-- Responsive design with dark mode
+**Key files**:
+- `www/src/index.njk` — homepage with hero, tabs, CTA includes + slider JS
+- `www/src/_includes/tabs.njk` — tab bar + panels + switching JS
+- `www/src/_includes/call-to-action.njk` — sticky CTA + gradient overlay
+- `www/src/style.css` — ~1070 lines, CSS custom properties
+- `www/src/_layouts/base.njk` — HTML shell with social-links global include
 
-**Key Architecture**:
-- `src/blog/` = all blog posts (main source of truth)
-- Posts automatically synced TO ll.db.blog via GitHub Actions
-- Eleventy reads from `blog/` folder
-- All admin routes protected by Netlify Identity
-- Feature flags in `site.config.json`
+**Reference**: See `project-documentation/CONTINUE_SESSION_PROMPT.md` for full project registry.
 
-**Recent Work (January 29, 2026)**:
-- ✅ Removed custom content-admin system (simplified to Netlify CMS only)
-- ✅ Removed git submodule complexity
-- ✅ Implemented automatic sync FROM main repo TO ll.db.blog
-- ✅ Simplified Netlify configuration
-- ✅ Updated all documentation
-
-**Reference Docs in Repo**:
-- CONTINUE_SESSION_PROMPT.md (this file - project state)
-- BLOG_WORKFLOW.md (how to create/manage posts)
-- AI_AGENT_REPLICATION_PROMPT.md (complete system documentation)
-- 2026-01-06 article (enhancement roadmap with 30 ideas)
-
-[If continuing specific work, add here what you want to work on next]
+[Add what you want to work on here]
 
 ---
 

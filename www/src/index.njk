@@ -11,95 +11,76 @@ booking: "/booking",
 linkedin: https://www.linkedin.com/in/lenielluzardo,
 }
 ---
-<div id="homepage-container">
-    <section id="gretting" class="section ">
 
-        <div class="section-content">
+{% include "hero.njk" %}
 
-            <h2>Who am I?</h2>
-            <p>
-                I'm a software developer from Venezuela. I'm currently located in Argentina.
-            </p>
-            <p>
-                I can help you build your digital product from the brainstorming stage to having it live on the web.
-            </p>
-            <a href="mailto:{{ email }}">Let's work together!</a>
-        </div>
-    </section>
+{% include "tabs.njk" %}
 
-    <section id="my-services" class="section">
-        <div class="section-content">
+{% include "call-to-action.njk" %}
 
-            <h2>Which services do I offer?</h2>
-            {# <p>
-                I've been building digital products for several years now.
-                I have worked with large companies that have mature software development cycles,
-                which I incorporate into my services. I can help you with:
-            </p> #}
-            <ol>
-                <li>Estimation: This involves planning a basic layout of the project and setting a goal to reach.</li>
-                <li>Designing: This involves choosing the branding color, creating visual assets such as logos,
-                    typography,
-                    images, etc.</li>
-                <li>Prototyping: Writing the first lines of code so you can see progress as soon as possible.</li>
-                <li>Developing: The heavier work — building an actual MVP, including test coverage.</li>
-                <li>Deploying: Making the solution available for your customers to consume.</li>
-                <li>Tech support: You'll have free and unlimited tech support for a whole year.</li>
-            </ol>
-
-            <p>
-                You can choose to start from the beginning or at a certain stage.
-                I can adapt to your needs to meet your requirements.
-                So, what do you say? Shall we get started?
-            </p>
-        </div>
-    </section>
-
-    <section id="hiring" class="section">
-        
-
-        <div class="section-content">
-            <h2>How do we start?</h2>
-            <ol>
-                <li><a href="mailto:{{ email }}">Send me an email saying <span id="hello">hello</span></a>,
-                    <a href="{{ link.booking }}">book a call with me</a> or
-                    <a href="{{ link.linkedin}}" target="_blank">say hi on LinkedIn</a>
-                </li>
-                <li>After the first contact we'll set a meeting to start discussing your project requirements.</li>
-                <li>Then, with the basic project information, I'll send you a draft budget considering its complexity
-                    and
-                    the amount of work to be done.</li>
-                <li>Finally, once we agree on the terms, it will be just a few clicks and keystrokes to make your ideas
-                    a
-                    reality 🤩.</li>
-            </ol>
-        </div>
-    </section>
-
-    <section id="testimonials" class="section">
-        <div class="section-content">
-
-            You can see the <a href="{{ link.testimonial }}"><span>testimonials of people I've worked with</span></a>
-            and
-            what they have to say about working with me.
-            You can also see more about <a href="{{ link.experience }}">my experience</a> and <a
-                href="{{ link.project}}">my
-                projects</a>.
-            Finally, if you want to go the extra mile, <a href="{{ link.story }}">you can read more about my story.</a>
-        </div>
-    </section>
-</div>
 <script>
-    const scrollContainer = document.getElementById('homepage-container');
+(function () {
+    document.querySelectorAll('[data-slider]').forEach(function (sliderEl) {
+        var track = sliderEl.querySelector('.slider-track');
+        var cards = track.querySelectorAll('.slider-card');
+        var total = cards.length;
+        var prevBtn = sliderEl.querySelector('.slider-btn--prev');
+        var nextBtn = sliderEl.querySelector('.slider-btn--next');
+        var dotsContainer = sliderEl.closest('section').querySelector('.slider-dots');
+        var current = 0;
+        var autoTimer = null;
 
-scrollContainer.addEventListener('scroll', (event) => {
-  // Prevent default vertical scrolling behavior
-  event.preventDefault();
+        // Build dots
+        for (var i = 0; i < total; i++) {
+            (function (idx) {
+                var dot = document.createElement('button');
+                dot.classList.add('slider-dot');
+                dot.setAttribute('aria-label', 'Go to slide ' + (idx + 1));
+                if (idx === 0) dot.classList.add('active');
+                dot.addEventListener('click', function () { goTo(idx); resetAuto(); });
+                dotsContainer.appendChild(dot);
+            })(i);
+        }
+        var dots = dotsContainer.querySelectorAll('.slider-dot');
 
-  // Determine scroll direction and amount
-  const scrollAmount = event.deltaY; // deltaY is typically for vertical scroll, but we'll use it for horizontal
+        function goTo(index) {
+            if (index >= total) index = 0;
+            if (index < 0) index = total - 1;
+            current = index;
+            track.style.transform = 'translateX(-' + (current * 100) + '%)';
+            for (var j = 0; j < dots.length; j++) {
+                dots[j].classList.toggle('active', j === current);
+            }
+        }
 
-  // Adjust scrollLeft property for horizontal scrolling
-  scrollContainer.scrollLeft +=  11.79;
-});
+        function next() { goTo(current + 1); }
+        function prev() { goTo(current - 1); }
+
+        prevBtn.addEventListener('click', function () { prev(); resetAuto(); });
+        nextBtn.addEventListener('click', function () { next(); resetAuto(); });
+
+        sliderEl.addEventListener('mouseenter', stopAuto);
+        sliderEl.addEventListener('mouseleave', function () {
+            if (isVisible) startAuto();
+        });
+
+        function startAuto() { stopAuto(); autoTimer = setInterval(next, 3000); }
+        function stopAuto() { if (autoTimer) { clearInterval(autoTimer); autoTimer = null; } }
+        function resetAuto() { stopAuto(); if (isVisible) startAuto(); }
+
+        // Only auto-slide when the slider is in the viewport
+        var isVisible = false;
+        var observer = new IntersectionObserver(function (entries) {
+            isVisible = entries[0].isIntersecting;
+            if (isVisible) {
+                startAuto();
+            } else {
+                stopAuto();
+            }
+        }, { threshold: 0.3 });
+
+        goTo(0);
+        observer.observe(sliderEl);
+    });
+})();
 </script>

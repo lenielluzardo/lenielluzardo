@@ -4,6 +4,13 @@ title: Projects
 description: Portfolio of software development projects and work
 ---
 
+{% if not site.pages.projects %}
+<section>
+    <h1>Projects</h1>
+    <p>This page is currently not available.</p>
+</section>
+{% else %}
+
 <section>
     <h1>Projects</h1>
     <p>Here are some of the projects I've worked on. Each project showcases different skills and technologies.</p>
@@ -27,4 +34,6 @@ description: Portfolio of software development projects and work
 
 {% if collections.projects.length == 0 %}
 <p class="blog-post-excerpt">Projects will be added soon. Check back later!</p>
+{% endif %}
+
 {% endif %}

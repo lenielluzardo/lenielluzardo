@@ -1,0 +1,28 @@
+<div class="floating-cta-overlay" id="floating-cta-overlay"></div>
+<a href="mailto:lenielluzardo.dev@gmail.com" class="floating-cta" id="floating-cta">
+    Let's work together!
+</a>
+
+<script>
+(function () {
+    var overlay = document.getElementById('floating-cta-overlay');
+    var cta = document.getElementById('floating-cta');
+    if (!overlay || !cta) return;
+
+    var bottomGap = parseFloat(getComputedStyle(cta).bottom) || 16;
+
+    function check() {
+        var rect = cta.getBoundingClientRect();
+        var stuckBottom = window.innerHeight - bottomGap;
+        // When CTA bottom is above its stuck position, it has landed
+        if (rect.bottom < stuckBottom - 2) {
+            overlay.classList.add('floating-cta-overlay--hidden');
+        } else {
+            overlay.classList.remove('floating-cta-overlay--hidden');
+        }
+    }
+
+    window.addEventListener('scroll', check, { passive: true });
+    check();
+})();
+</script>

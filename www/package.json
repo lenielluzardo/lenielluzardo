@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "eleventy --serve",
-    "dev": "netlify dev",
-    "dev:cms": "npx decap-server & netlify dev",
+    "dev:cms": "cd .. && npx decap-server & cd www && npx @11ty/eleventy --serve",
     "build": "eleventy",
     "clean": "rm -rf public",
     "rebuild": "npm run clean && npm run build",
@@ -21,7 +20,6 @@
   "author": "Leniel Luzardo <lenielluzardo.dev@gmail.com>",
   "license": "MIT",
   "devDependencies": {
-    "@11ty/eleventy": "^3.1.2",
-    "netlify-cli": "^23.15.1"
+    "@11ty/eleventy": "^3.1.2"
   }
 }

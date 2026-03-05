@@ -1,0 +1,79 @@
+<div class="tabs" id="main-tabs">
+    <div class="tabs__bar">
+        <button class="tabs__tab tabs__tab--active" data-tab="0">The Person</button>
+        <button class="tabs__tab" data-tab="1">The Services</button>
+        <button class="tabs__tab" data-tab="2">The Process</button>
+    </div>
+
+    <div class="tabs__panels">
+        <!-- Panel 0: The Person (Why Work with Me) -->
+        <div class="tabs__panel tabs__panel--active" data-panel="0">
+            {% include "slider-benefits.njk" %}
+        </div>
+
+        <!-- Panel 1: The Services -->
+        <div class="tabs__panel" data-panel="1">
+            {% include "services.njk" %}
+        </div>
+
+        <!-- Panel 2: The Process -->
+        <div class="tabs__panel" data-panel="2">
+            {% include "slider-process.njk" %}
+        </div>
+    </div>
+</div>
+
+<script>
+(function () {
+    var container = document.getElementById('main-tabs');
+    if (!container) return;
+
+    var tabs = container.querySelectorAll('.tabs__tab');
+    var panels = container.querySelectorAll('.tabs__panel');
+    var currentTab = 0;
+    var switchCooldown = false;
+
+    function activate(index) {
+        if (index >= panels.length) index = 0;
+        if (index < 0) index = panels.length - 1;
+        currentTab = index;
+
+        for (var i = 0; i < tabs.length; i++) {
+            tabs[i].classList.toggle('tabs__tab--active', i === currentTab);
+        }
+        for (var j = 0; j < panels.length; j++) {
+            var isActive = j === currentTab;
+            panels[j].classList.toggle('tabs__panel--active', isActive);
+            if (isActive) {
+                panels[j].scrollTop = 0;
+            }
+        }
+
+        // Brief cooldown to prevent rapid-fire switches
+        switchCooldown = true;
+        setTimeout(function () { switchCooldown = false; }, 500);
+    }
+
+    // Click to switch
+    for (var t = 0; t < tabs.length; t++) {
+        (function (idx) {
+            tabs[idx].addEventListener('click', function () {
+                activate(idx);
+            });
+        })(t);
+    }
+
+    // Wheel scroll switches tabs when hovering over the tabs container
+    container.addEventListener('wheel', function (e) {
+        if (switchCooldown) return;
+        e.preventDefault();
+        if (e.deltaY > 0) {
+            // Scroll down → next tab
+            activate(currentTab + 1);
+        } else if (e.deltaY < 0) {
+            // Scroll up → previous tab
+            activate(currentTab - 1);
+        }
+    }, { passive: false });
+})();
+</script>

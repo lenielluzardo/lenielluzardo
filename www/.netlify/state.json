@@ -1,0 +1,20 @@
+{
+	"geolocation": {
+		"data": {
+			"city": "Capilla del Monte",
+			"country": {
+				"code": "AR",
+				"name": "Argentina"
+			},
+			"subdivision": {
+				"code": "X",
+				"name": "Cordoba"
+			},
+			"timezone": "America/Argentina/Cordoba",
+			"latitude": -30.8495,
+			"longitude": -64.5133,
+			"postalCode": "5184"
+		},
+		"timestamp": 1771441686582
+	}
+}

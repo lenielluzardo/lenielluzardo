@@ -4,42 +4,19 @@ title: Work with Me
 description: Let's collaborate on your next digital product. Professional software development services.
 ---
 
+{% if not site.pages.workWithMe %}
+<section>
+    <h1>Work with Me</h1>
+    <p>This page is currently not available.</p>
+</section>
+{% else %}
+
 <section class="work-hero">
     <h1>Let's Build Something Great Together</h1>
     <p class="lead">
         I help entrepreneurs and businesses turn their ideas into production-ready digital products. 
         With years of experience and a proven process, I'll guide you from concept to launch.
     </p>
-</section>
-
-<section id="why-work">
-    <h2>Why Work with Me?</h2>
-    <div class="benefits-grid">
-        <div class="benefit-card">
-            <h3>🚀 Fast Delivery</h3>
-            <p>Get a working prototype quickly and iterate based on real feedback.</p>
-        </div>
-        <div class="benefit-card">
-            <h3>💼 Professional Process</h3>
-            <p>Enterprise-grade practices from planning through deployment.</p>
-        </div>
-        <div class="benefit-card">
-            <h3>🎨 Full-Stack Expertise</h3>
-            <p>Frontend, backend, design, and DevOps—all covered.</p>
-        </div>
-        <div class="benefit-card">
-            <h3>🤝 Collaborative Approach</h3>
-            <p>Clear communication and transparency throughout the project.</p>
-        </div>
-        <div class="benefit-card">
-            <h3>✅ Quality Assured</h3>
-            <p>Clean code, comprehensive testing, and best practices.</p>
-        </div>
-        <div class="benefit-card">
-            <h3>🛟 Ongoing Support</h3>
-            <p>One full year of complimentary technical support included.</p>
-        </div>
-    </div>
 </section>
 
 <section id="services-detailed">
@@ -106,36 +83,6 @@ description: Let's collaborate on your next digital product. Professional softwa
     </div>
 </section>
 
-<section id="process">
-    <h2>The Process</h2>
-    <ol class="process-steps">
-        <li>
-            <strong>Initial Consultation (Free)</strong>
-            <p>We'll discuss your project, goals, and timeline. No commitment required.</p>
-        </li>
-        <li>
-            <strong>Discovery & Planning</strong>
-            <p>Deep dive into requirements, create detailed specifications and project roadmap.</p>
-        </li>
-        <li>
-            <strong>Proposal & Agreement</strong>
-            <p>Receive a transparent proposal with timeline, deliverables, and pricing.</p>
-        </li>
-        <li>
-            <strong>Development Sprints</strong>
-            <p>Regular progress updates, iterative development, and continuous feedback.</p>
-        </li>
-        <li>
-            <strong>Testing & Refinement</strong>
-            <p>Comprehensive testing, bug fixes, and performance optimization.</p>
-        </li>
-        <li>
-            <strong>Launch & Support</strong>
-            <p>Deploy to production and enjoy one year of complimentary support.</p>
-        </li>
-    </ol>
-</section>
-
 <section id="pricing-info">
     <h2>Pricing</h2>
     <p>
@@ -163,8 +110,8 @@ description: Let's collaborate on your next digital product. Professional softwa
         about what's possible.
     </p>
     <div class="contact-options">
-        <a href="mailto:{{ site.contact.email }}" class="btn">Send an Email</a>
-        <a href="{{ site.contact.linkedin }}" target="_blank" rel="noopener noreferrer" class="btn-outline btn">
+        <a href="mailto:lenielluzardo.dev@gmail.com" class="btn">Send an Email</a>
+        <a href="https://www.linkedin.com/in/lenielluzardo" target="_blank" rel="noopener noreferrer" class="btn-outline btn">
             Connect on LinkedIn
         </a>
     </div>
@@ -216,3 +163,5 @@ description: Let's collaborate on your next digital product. Professional softwa
         </p>
     </div>
 </section>
+
+{% endif %}
