@@ -9,8 +9,7 @@ backend:
   name: github
   repo: lenielluzardo/lenielluzardo
   branch: main
-  base_url: https://cms-oauth-proxy.lenielluzardo-dev.workers.dev
-  auth_endpoint: /auth
+  client_id: YOUR_GITHUB_CLIENT_ID
 
 # For local development: run `npm run dev:cms` from www/ directory
 # (decap-server must run from repo root so file paths resolve correctly)
